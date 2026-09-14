@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T15:14:33.4319819Z",
+  "generatedAt": "2026-09-14T15:54:53.0012569Z",
   "region": "GB",
   "entries": {
     "blade-1998": {
@@ -1683,6 +1683,29 @@
       "manualMatch": true,
       "fetchedAt": "2026-09-14T15:14:32.4593249Z"
     },
+    "spiderman-into-the-spider-verse": {
+      "slug": "spiderman-into-the-spider-verse",
+      "label": "Spiderman: Into the Spider-Verse",
+      "matched": true,
+      "mediaType": "movie",
+      "tmdbId": 324857,
+      "title": "Spider-Man: Into the Spider-Verse",
+      "overview": "Struggling to find his place in the world while juggling school and family, Brooklyn teenager Miles Morales is unexpectedly bitten by a radioactive spider and develops unfathomable powers just like the one and only Spider-Man. While wrestling with the implications of his new abilities, Miles discovers a super collider created by the madman Wilson \"Kingpin\" Fisk, causing others from across the Spider-Verse to be inadvertently transported to his dimension.",
+      "poster": "https://image.tmdb.org/t/p/w500/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg",
+      "releaseDate": "2018-12-06",
+      "tmdbRating": 8.4,
+      "tmdbVoteCount": 17853,
+      "imdbId": "tt4633694",
+      "imdbRating": 8.4,
+      "watch": {
+        "type": "flatrate",
+        "link": "https://www.themoviedb.org/movie/324857-spider-man-into-the-spider-verse/watch?locale=GB",
+        "provider": "Amazon Prime Video",
+        "logo": "https://image.tmdb.org/t/p/w92/gMZdpavHmxFNnLpMHwVxfqeux2g.png"
+      },
+      "manualMatch": true,
+      "fetchedAt": "2026-09-14T15:54:51.9758634Z"
+    },
     "the-punisher-s2-jan-2019": {
       "slug": "the-punisher-s2-jan-2019",
       "label": "The Punisher S2 (Jan 2019)",
@@ -2449,6 +2472,29 @@
       },
       "fetchedAt": "2026-09-14T13:05:58.7224009Z"
     },
+    "spiderman-across-the-spider-verse": {
+      "slug": "spiderman-across-the-spider-verse",
+      "label": "Spiderman: Across the Spider-Verse",
+      "matched": true,
+      "mediaType": "movie",
+      "tmdbId": 569094,
+      "title": "Spider-Man: Across the Spider-Verse",
+      "overview": "After reuniting with Gwen Stacy, Brooklyn’s full-time, friendly neighborhood Spider-Man is catapulted across the Multiverse, where he encounters the Spider Society, a team of Spider-People charged with protecting the Multiverse's very existence. But when the heroes clash on how to handle a new threat, Miles finds himself pitted against the other Spiders and must set out on his own to save those he loves most.",
+      "poster": "https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
+      "releaseDate": "2023-05-31",
+      "tmdbRating": 8.348,
+      "tmdbVoteCount": 9231,
+      "imdbId": "tt9362722",
+      "imdbRating": 8.5,
+      "watch": {
+        "type": "flatrate",
+        "link": "https://www.themoviedb.org/movie/569094-spider-man-across-the-spider-verse/watch?locale=GB",
+        "provider": "Amazon Prime Video",
+        "logo": "https://image.tmdb.org/t/p/w92/gMZdpavHmxFNnLpMHwVxfqeux2g.png"
+      },
+      "manualMatch": true,
+      "fetchedAt": "2026-09-14T15:54:52.3651544Z"
+    },
     "loki-s2-oct-nov-2023": {
       "slug": "loki-s2-oct-nov-2023",
       "label": "Loki S2 (Oct–Nov 2023)",
@@ -3056,6 +3102,24 @@
         "type": "flatrate"
       },
       "fetchedAt": "2026-09-14T13:06:12.0340164Z"
+    },
+    "spiderman-beyond-the-spider-verse": {
+      "slug": "spiderman-beyond-the-spider-verse",
+      "label": "Spiderman: Beyond the Spider-Verse",
+      "matched": true,
+      "mediaType": "movie",
+      "tmdbId": 911916,
+      "title": "Spider-Man: Beyond the Spider-Verse",
+      "overview": "Hunted by Miguel O'Hara's Spider Society and betrayed by his friends, Miles finds himself in the darkest corners of the Spider-Verse in search of a way home. Knowing that his family has been not only fractured but endangered by his calling, it's a race against the clock for Miles to travel across the wildest reaches of time and space to fight for and reunite everything he holds most dear.",
+      "poster": "https://image.tmdb.org/t/p/w500/9KAe39xqyZnv9J4W3DRGdQqX82h.jpg",
+      "releaseDate": "2027-06-17",
+      "tmdbRating": 0.0,
+      "tmdbVoteCount": 0,
+      "imdbId": "tt16360004",
+      "imdbRating": null,
+      "watch": null,
+      "manualMatch": true,
+      "fetchedAt": "2026-09-14T15:54:52.7494324Z"
     },
     "avengers-secret-wars-dec-17-2027": {
       "slug": "avengers-secret-wars-dec-17-2027",
