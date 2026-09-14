@@ -13,6 +13,7 @@
   const OWNER = "JamesWardVP";
   const REPO = "MCUWeb";
   const DATA_PATH = "data/timeline.json";
+  const OVERRIDES_PATH = "data/media-overrides.json";
   const PASSWORD_SHA256 = "f1e99169b05000270f52cf44ce7fc0378e00a503657afb39a0eb5a35812d5fbe";
 
   const $ = id => document.getElementById(id);
@@ -47,7 +48,7 @@
   if (sessionStorage.getItem('mcu-admin') === '1') showApp();
 
   /* ---------------- state ---------------- */
-  const state = { nodes: [], edges: [], staged: [] };
+  const state = { nodes: [], edges: [], overrides: {}, staged: [], timelineDirty: false, overridesDirty: false };
 
   async function loadData(){
     try {
@@ -56,6 +57,10 @@
       const data = await res.json();
       state.nodes = data.nodes;
       state.edges = data.edges;
+      try {
+        const overridesRes = await fetch(OVERRIDES_PATH, { cache: 'no-store' });
+        state.overrides = overridesRes.ok ? await overridesRes.json() : {};
+      } catch { state.overrides = {}; }
       renderEntryList();
       renderLinkSelects();
       renderLinkList();
@@ -66,8 +71,10 @@
     }
   }
 
-  function markDirty(description){
+  function markDirty(description, file){
     state.staged.push(description);
+    if (file === 'overrides') state.overridesDirty = true;
+    else state.timelineDirty = true;
     renderStaged();
   }
 
@@ -151,11 +158,30 @@
     $('f-y').value = n.y;
     $('f-w').value = n.w;
     $('f-h').value = n.h;
+    const ov = state.overrides[id];
+    $('f-match-mode').value = ov ? 'manual' : 'auto';
+    $('f-tmdb-id').value = ov ? ov.tmdbId : '';
+    $('f-tmdb-type').value = ov ? ov.mediaType : (n.format === 'tv' ? 'tv' : 'movie');
+    applyMatchModeVisibility();
     $('entry-save-btn').textContent = 'Save changes';
     $('entry-cancel-btn').hidden = false;
     $('entry-msg').textContent = '';
     window.scrollTo({ top: $('entry-form').offsetTop - 20, behavior: 'smooth' });
   }
+
+  function applyMatchModeVisibility(){
+    const manual = $('f-match-mode').value === 'manual';
+    $('f-tmdb-id-wrap').hidden = !manual;
+    $('f-tmdb-type-wrap').hidden = !manual;
+    $('tmdb-manual-hint').hidden = !manual;
+  }
+  $('f-match-mode').addEventListener('change', applyMatchModeVisibility);
+
+  $('tmdb-search-btn').addEventListener('click', () => {
+    const title = $('f-label').value.trim();
+    if (!title){ $('entry-msg').className = 'msg error'; $('entry-msg').textContent = 'Type a title first.'; return; }
+    window.open(`https://www.themoviedb.org/search?query=${encodeURIComponent(title)}`, '_blank', 'noopener');
+  });
 
   function resetEntryForm(){
     editingId = null;
@@ -167,6 +193,10 @@
     const maxY = state.nodes.length ? Math.max(...state.nodes.map(n => n.y)) : 0;
     $('f-x').value = 0;
     $('f-y').value = maxY + 150;
+    $('f-match-mode').value = 'auto';
+    $('f-tmdb-id').value = '';
+    $('f-tmdb-type').value = 'movie';
+    applyMatchModeVisibility();
     $('entry-form-title').textContent = 'Add entry';
     $('entry-save-btn').textContent = 'Add entry';
     $('entry-cancel-btn').hidden = true;
@@ -190,6 +220,7 @@
     const before = state.edges.length;
     state.edges = state.edges.filter(e => e.source !== id && e.target !== id);
     const removedLinks = before - state.edges.length;
+    if (state.overrides[id]){ delete state.overrides[id]; state.overridesDirty = true; }
     markDirty(`Deleted entry: ${n.label}${removedLinks ? ` (and ${removedLinks} link${removedLinks===1?'':'s'})` : ''}`);
     if (editingId === id) resetEntryForm();
     renderEntryList();
@@ -222,7 +253,9 @@
       msg.className = 'msg error'; msg.textContent = 'Month must be between 1 and 12.'; return;
     }
 
+    let id;
     if (editingId){
+      id = editingId;
       const idx = findNodeIndexById(editingId);
       const n = state.nodes[idx];
       const datesChanged = (n.year !== year || n.month !== month);
@@ -233,7 +266,7 @@
       }
       markDirty(`Edited entry: ${label}`);
     } else {
-      const id = slugify(label);
+      id = slugify(label);
       if (findNodeIndexById(id) !== -1){
         msg.className = 'msg error';
         msg.textContent = 'An entry with this title already exists — adjust the title slightly.';
@@ -242,6 +275,24 @@
       const node = { id, label, format, studio, fill, stroke, datekey: year*12+month, year, month, x, y, w, h };
       state.nodes.splice(findInsertIndex(year, month), 0, node);
       markDirty(`Added entry: ${label}`);
+    }
+
+    // TMDB match mode — Manual writes/updates an override entry keyed by
+    // this node's id; Auto clears one if it existed (falls back to the
+    // refresh script's own title search).
+    const matchMode = $('f-match-mode').value;
+    const tmdbId = parseInt($('f-tmdb-id').value, 10);
+    const tmdbType = $('f-tmdb-type').value;
+    const existingOverride = state.overrides[id];
+    if (matchMode === 'manual' && tmdbId){
+      const changed = !existingOverride || existingOverride.tmdbId !== tmdbId || existingOverride.mediaType !== tmdbType;
+      if (changed){
+        state.overrides[id] = { tmdbId, mediaType: tmdbType };
+        markDirty(`Set manual TMDB match for ${label}: ${tmdbType} ${tmdbId}`, 'overrides');
+      }
+    } else if (existingOverride){
+      delete state.overrides[id];
+      markDirty(`Cleared manual TMDB match for ${label}`, 'overrides');
     }
 
     resetEntryForm();
@@ -329,8 +380,11 @@
   }
   renderStaged();
 
-  function currentJson(){
+  function currentTimelineJson(){
     return JSON.stringify({ nodes: state.nodes, edges: state.edges }, null, 2);
+  }
+  function currentOverridesJson(){
+    return JSON.stringify(state.overrides, null, 2);
   }
 
   async function commitFile(path, content, message, token){
@@ -414,10 +468,13 @@
     msg.textContent = 'Committing…';
     try {
       const message = `Admin: ${state.staged.join('; ').slice(0, 200)}`;
-      await commitFile(DATA_PATH, currentJson(), message, token);
+      if (state.timelineDirty) await commitFile(DATA_PATH, currentTimelineJson(), message, token);
+      if (state.overridesDirty) await commitFile(OVERRIDES_PATH, currentOverridesJson(), message, token);
       msg.className = 'msg ok';
       msg.textContent = 'Committed. GitHub Pages will redeploy the live site in about a minute.';
       state.staged = [];
+      state.timelineDirty = false;
+      state.overridesDirty = false;
       renderStaged();
       pendingToken = token;
       showModal('Committed successfully. GitHub Pages will redeploy the live site in about a minute.');
@@ -431,11 +488,15 @@
   });
 
   $('download-btn').addEventListener('click', () => {
-    const blob = new Blob([currentJson()], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'timeline.json';
-    a.click();
-    URL.revokeObjectURL(a.href);
+    function download(filename, content){
+      const blob = new Blob([content], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+    if (state.timelineDirty) download('timeline.json', currentTimelineJson());
+    if (state.overridesDirty) download('media-overrides.json', currentOverridesJson());
   });
 })();

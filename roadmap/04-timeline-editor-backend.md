@@ -38,6 +38,9 @@ Every edit becomes a git commit — a nice audit trail at this scale, but the re
 - Every add/edit/delete is staged in memory first (nothing touches GitHub until you hit Commit), with a running human-readable log used as the commit message.
 - "Download file instead" is available on the Publish tab as a fallback to committing directly, mirroring RaceDates.
 
-## Not yet tested
+## Since shipped
 
-The actual GitHub commit flow (`commitFile()`) mirrors RaceDates' proven implementation closely (same GET-current-sha-then-PUT pattern) but hasn't been exercised against the live API yet — worth a real test commit with a token before relying on it.
+- **Real commits confirmed working**: the GitHub commit flow has been used for real (live entry edits), not just tested locally.
+
+- **Success confirmation**: committing shows a proper modal dialog (not just small inline text), with an optional "Refresh media data now" button that fires the same `workflow_dispatch` trigger as GitHub's own "Run workflow" button — needs a token with `Actions: Read and write`, separate from the `Contents: Read and write` used for the commit itself.
+- **Manual TMDB matching**: the entry form has an Auto/Manual toggle for [item 3](03-title-detail-enrichment.md)'s matching. Manual writes an entry straight into `data/media-overrides.json` (previously only hand-editable) with a "Search TMDB ↗" helper button; switching back to Auto clears it. Deleting an entry cascades to remove its override too. The Publish tab now commits/downloads `data/timeline.json` and `data/media-overrides.json` independently, only when each actually changed.

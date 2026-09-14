@@ -56,7 +56,9 @@
   #staged-list li{margin-bottom:0.25rem;}
   hr.rule{border:none; border-top:1px solid var(--border); margin:1.1rem 0;}
   .badge{display:inline-block; background:var(--accent); color:#fff; border-radius:10px; padding:0.05rem 0.5rem; font-size:0.72rem; margin-left:0.3rem;}
+  .badge[hidden]{display:none;}
   .modal-overlay{position:fixed; inset:0; background:rgba(20,22,26,0.5); display:flex; align-items:center; justify-content:center; z-index:100; padding:1rem;}
+  .modal-overlay[hidden]{display:none;}
   .modal-box{background:#fff; border-radius:10px; padding:1.6rem; max-width:400px; width:100%; text-align:center; box-shadow:0 16px 48px rgba(0,0,0,0.3);}
   .modal-icon{width:48px; height:48px; border-radius:50%; background:var(--ok); color:#fff; font-size:1.4rem; line-height:48px; margin:0 auto 0.9rem;}
   .modal-box p{margin:0 0 1rem; font-size:0.92rem;}
@@ -137,6 +139,32 @@
             <button type="button" class="secondary" id="match-studio-colors">Match studio colours</button>
           </div>
         </div>
+        <hr class="rule">
+        <p class="hint" style="margin:0 0 0.5rem;">TMDB matching — controls the poster/rating/blurb/streaming button shown on the site. Leave on Auto unless the automatic search picks the wrong title.</p>
+        <div class="row" style="align-items:flex-end;">
+          <div>
+            <label for="f-match-mode">Match mode</label>
+            <select id="f-match-mode">
+              <option value="auto">Auto (search TMDB by title)</option>
+              <option value="manual">Manual (use a specific TMDB page)</option>
+            </select>
+          </div>
+          <div id="f-tmdb-id-wrap">
+            <label for="f-tmdb-id">TMDB ID</label>
+            <input id="f-tmdb-id" type="number" min="1" placeholder="e.g. 24428">
+          </div>
+          <div id="f-tmdb-type-wrap">
+            <label for="f-tmdb-type">Type</label>
+            <select id="f-tmdb-type">
+              <option value="movie">Movie</option>
+              <option value="tv">TV Show</option>
+            </select>
+          </div>
+          <div style="flex:0 0 auto;">
+            <button type="button" class="secondary" id="tmdb-search-btn">Search TMDB ↗</button>
+          </div>
+        </div>
+        <p class="hint" id="tmdb-manual-hint" hidden style="margin:0.4rem 0 0;">Find the ID in the page URL — themoviedb.org/movie/<strong>24428</strong>-the-avengers</p>
         <p class="hint" style="margin:0.6rem 0 0;">Flowchart position (only affects the Flowchart view, not the Timeline):</p>
         <div class="row">
           <div><label for="f-x">X</label><input id="f-x" type="number" step="any"></div>
