@@ -1696,6 +1696,21 @@
       "h": 60
     },
     {
+      "id": "spiderman-across-the-spider-verse",
+      "label": "Spiderman: Across the Spider-Verse",
+      "format": "film",
+      "studio": "Sony — Spider-Man Universe",
+      "fill": "#dae8fc",
+      "stroke": "#6c8ebf",
+      "datekey": 24282,
+      "year": 2023,
+      "month": 6,
+      "x": -970,
+      "y": 5545,
+      "w": 340,
+      "h": 60
+    },
+    {
       "id": "loki-s2-oct-nov-2023",
       "label": "Loki S2 (Oct–Nov 2023)",
       "format": "tv",
@@ -2822,6 +2837,10 @@
     {
       "source": "elektra",
       "target": "deadpool-wolverine-jul-2024"
+    },
+    {
+      "source": "spiderman-into-the-spider-verse",
+      "target": "spiderman-across-the-spider-verse"
     }
   ]
 }
