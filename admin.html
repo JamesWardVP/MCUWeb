@@ -9,7 +9,7 @@
   :root{
     --bg:#f4f5f7; --panel:#ffffff; --border:#d8dce3; --text:#1c2128; --muted:#6b7280;
     --accent:#2451c9; --accent-hover:#1c3ea3; --danger:#c0392b; --danger-hover:#a02f22;
-    --ok:#1b7f4c;
+    --ok:#1b7f4c; --add-accent:#16a34a; --edit-accent:#d97706;
   }
   *{box-sizing:border-box;}
   body{margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif; line-height:1.4;}
@@ -63,6 +63,18 @@
   .modal-icon{width:48px; height:48px; border-radius:50%; background:var(--ok); color:#fff; font-size:1.4rem; line-height:48px; margin:0 auto 0.9rem;}
   .modal-box p{margin:0 0 1rem; font-size:0.92rem;}
   .modal-actions{display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap;}
+
+  /* Add vs Edit are deliberately styled differently so it's never ambiguous
+     which mode a form is in. */
+  .add-panel{border-left:4px solid var(--add-accent); padding-left:1rem;}
+  .add-panel h2{color:#166534;}
+  .edit-panel{border-left:4px solid var(--edit-accent); background:#fffbeb; padding:1rem 1rem 0.2rem; border-radius:0 8px 8px 0; margin-top:1rem;}
+  .edit-panel h2{color:#92400e;}
+
+  .picker-wrap{position:relative; border:1px solid var(--border); border-radius:6px; overflow:hidden; height:340px; background:#161616; touch-action:none;}
+  .picker-svg{width:100%; height:100%; display:block; cursor:crosshair;}
+  .picker-controls{position:absolute; bottom:8px; right:8px; display:flex; gap:0.3rem;}
+  .picker-controls button{padding:0.3rem 0.65rem; font-size:0.8rem;}
 </style>
 </head>
 <body>
@@ -84,100 +96,47 @@
     <p class="msg error" id="lock-msg"></p>
   </div>
 
+  <datalist id="studio-list"></datalist>
+
   <div id="app" hidden>
     <div class="tabs">
-      <button class="tab-btn active" data-tab="entries">Entries</button>
+      <button class="tab-btn active" data-tab="add">Add Entry</button>
+      <button class="tab-btn" data-tab="manage">Manage Entries</button>
       <button class="tab-btn" data-tab="links">Links</button>
       <button class="tab-btn" data-tab="publish">Publish <span class="badge" id="staged-count" hidden>0</span></button>
     </div>
 
-    <section class="card" id="tab-entries">
-      <h2>Entries</h2>
-      <p class="hint">Search to find an entry to edit or delete, or fill the form to add a new one.</p>
+    <section class="card" id="tab-add">
+      <h2>Add a new entry</h2>
+      <p class="hint">Creates a brand-new timeline entry. To change or remove an existing one, use the Manage Entries tab instead.</p>
+      <div class="add-panel">
+        <form id="add-form" autocomplete="off">
+          <div id="add-fields"></div>
+          <div class="row" style="margin-top:1rem;">
+            <button type="submit">Add entry</button>
+          </div>
+          <p class="msg" id="add-msg"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="card" id="tab-manage" hidden>
+      <h2>Manage entries</h2>
+      <p class="hint">Search to find an entry to edit or delete.</p>
       <input id="entry-search" type="search" placeholder="Search entries…" style="margin-bottom:0.8rem">
-      <div id="entry-list" style="max-height:280px; overflow-y:auto; margin-bottom:1rem;"></div>
-      <hr class="rule">
-      <h2 id="entry-form-title">Add entry</h2>
-      <form id="entry-form" autocomplete="off">
-        <label for="f-label">Title</label>
-        <input id="f-label" required>
-        <div class="row">
-          <div>
-            <label for="f-format">Format</label>
-            <select id="f-format">
-              <option value="film">Film</option>
-              <option value="tv">TV Show</option>
-              <option value="special">Special / One-Shot</option>
-            </select>
+      <div id="entry-list" style="max-height:320px; overflow-y:auto;"></div>
+
+      <div class="edit-panel" id="edit-panel" hidden>
+        <h2 id="edit-panel-title">Editing</h2>
+        <form id="edit-form" autocomplete="off">
+          <div id="edit-fields"></div>
+          <div class="row" style="margin-top:1rem;">
+            <button type="submit">Save changes</button>
+            <button type="button" class="secondary" id="edit-cancel-btn">Cancel</button>
           </div>
-          <div>
-            <label for="f-studio">Studio / origin</label>
-            <input id="f-studio" list="studio-list" required>
-            <datalist id="studio-list"></datalist>
-          </div>
-        </div>
-        <div class="row">
-          <div>
-            <label for="f-year">Year</label>
-            <input id="f-year" type="number" min="1900" max="2100" required>
-          </div>
-          <div>
-            <label for="f-month">Month (1–12)</label>
-            <input id="f-month" type="number" min="1" max="12" required>
-          </div>
-        </div>
-        <div class="row">
-          <div>
-            <label for="f-fill">Fill colour</label>
-            <input id="f-fill" type="color" value="#dae8fc">
-          </div>
-          <div>
-            <label for="f-stroke">Stroke colour</label>
-            <input id="f-stroke" type="color" value="#6c8ebf">
-          </div>
-          <div style="flex:0 0 auto; align-self:flex-end;">
-            <button type="button" class="secondary" id="match-studio-colors">Match studio colours</button>
-          </div>
-        </div>
-        <hr class="rule">
-        <p class="hint" style="margin:0 0 0.5rem;">TMDB matching — controls the poster/rating/blurb/streaming button shown on the site. Leave on Auto unless the automatic search picks the wrong title.</p>
-        <div class="row" style="align-items:flex-end;">
-          <div>
-            <label for="f-match-mode">Match mode</label>
-            <select id="f-match-mode">
-              <option value="auto">Auto (search TMDB by title)</option>
-              <option value="manual">Manual (use a specific TMDB page)</option>
-            </select>
-          </div>
-          <div id="f-tmdb-id-wrap">
-            <label for="f-tmdb-id">TMDB ID</label>
-            <input id="f-tmdb-id" type="number" min="1" placeholder="e.g. 24428">
-          </div>
-          <div id="f-tmdb-type-wrap">
-            <label for="f-tmdb-type">Type</label>
-            <select id="f-tmdb-type">
-              <option value="movie">Movie</option>
-              <option value="tv">TV Show</option>
-            </select>
-          </div>
-          <div style="flex:0 0 auto;">
-            <button type="button" class="secondary" id="tmdb-search-btn">Search TMDB ↗</button>
-          </div>
-        </div>
-        <p class="hint" id="tmdb-manual-hint" hidden style="margin:0.4rem 0 0;">Find the ID in the page URL — themoviedb.org/movie/<strong>24428</strong>-the-avengers</p>
-        <p class="hint" style="margin:0.6rem 0 0;">Flowchart position (only affects the Flowchart view, not the Timeline):</p>
-        <div class="row">
-          <div><label for="f-x">X</label><input id="f-x" type="number" step="any"></div>
-          <div><label for="f-y">Y</label><input id="f-y" type="number" step="any"></div>
-          <div><label for="f-w">Width</label><input id="f-w" type="number" step="any" value="340"></div>
-          <div><label for="f-h">Height</label><input id="f-h" type="number" step="any" value="60"></div>
-        </div>
-        <div class="row" style="margin-top:1rem;">
-          <button type="submit" id="entry-save-btn">Add entry</button>
-          <button type="button" class="secondary" id="entry-cancel-btn" hidden>Cancel edit</button>
-        </div>
-        <p class="msg" id="entry-msg"></p>
-      </form>
+          <p class="msg" id="edit-msg"></p>
+        </form>
+      </div>
     </section>
 
     <section class="card" id="tab-links" hidden>

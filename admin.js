@@ -27,6 +27,10 @@
     return label.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
   }
 
+  function escapeHtml(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
   /* ---------------- password gate ---------------- */
   async function tryUnlock(){
     const val = $('password').value;
@@ -49,6 +53,7 @@
 
   /* ---------------- state ---------------- */
   const state = { nodes: [], edges: [], overrides: {}, staged: [], timelineDirty: false, overridesDirty: false };
+  let editingId = null;
 
   async function loadData(){
     try {
@@ -65,7 +70,7 @@
       renderLinkSelects();
       renderLinkList();
       populateStudioList();
-      resetEntryForm(); // recompute the new-entry Y default now real data is loaded
+      resetAddForm(); // rebuilds the add picker + pin itself
     } catch (err) {
       $('entry-list').innerHTML = `<p class="msg error">Failed to load ${DATA_PATH}: ${err.message}</p>`;
     }
@@ -98,21 +103,283 @@
     $('studio-list').innerHTML = studios.map(s => `<option value="${escapeHtml(s)}">`).join('');
   }
 
-  function escapeHtml(s){
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
   /* ---------------- tabs ---------------- */
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b === btn));
-      ['entries','links','publish'].forEach(t => { $('tab-' + t).hidden = (t !== btn.dataset.tab); });
+      ['add','manage','links','publish'].forEach(t => { $('tab-' + t).hidden = (t !== btn.dataset.tab); });
     });
   });
 
-  /* ---------------- entries: list + search ---------------- */
-  let editingId = null;
+  /* ---------------- shared entry-form fields (used by both Add and Edit) ---------------- */
+  function fieldsHtml(prefix){
+    return `
+      <label for="${prefix}-label">Title</label>
+      <input id="${prefix}-label" required>
+      <div class="row">
+        <div>
+          <label for="${prefix}-format">Format</label>
+          <select id="${prefix}-format">
+            <option value="film">Film</option>
+            <option value="tv">TV Show</option>
+            <option value="special">Special / One-Shot</option>
+          </select>
+        </div>
+        <div>
+          <label for="${prefix}-studio">Studio / origin</label>
+          <input id="${prefix}-studio" list="studio-list" required>
+        </div>
+      </div>
+      <div class="row">
+        <div><label for="${prefix}-year">Year</label><input id="${prefix}-year" type="number" min="1900" max="2100" required></div>
+        <div><label for="${prefix}-month">Month (1–12)</label><input id="${prefix}-month" type="number" min="1" max="12" required></div>
+      </div>
+      <div class="row">
+        <div><label for="${prefix}-fill">Fill colour</label><input id="${prefix}-fill" type="color" value="#dae8fc"></div>
+        <div><label for="${prefix}-stroke">Stroke colour</label><input id="${prefix}-stroke" type="color" value="#6c8ebf"></div>
+        <div style="flex:0 0 auto; align-self:flex-end;"><button type="button" class="secondary" id="${prefix}-match-studio-colors">Match studio colours</button></div>
+      </div>
+      <hr class="rule">
+      <p class="hint" style="margin:0 0 0.5rem;">TMDB matching — controls the poster/rating/blurb/streaming button shown on the site. Leave on Auto unless the automatic search picks the wrong title.</p>
+      <div class="row" style="align-items:flex-end;">
+        <div>
+          <label for="${prefix}-match-mode">Match mode</label>
+          <select id="${prefix}-match-mode">
+            <option value="auto">Auto (search TMDB by title)</option>
+            <option value="manual">Manual (use a specific TMDB page)</option>
+          </select>
+        </div>
+        <div id="${prefix}-tmdb-id-wrap">
+          <label for="${prefix}-tmdb-id">TMDB ID</label>
+          <input id="${prefix}-tmdb-id" type="number" min="1" placeholder="e.g. 24428">
+        </div>
+        <div id="${prefix}-tmdb-type-wrap">
+          <label for="${prefix}-tmdb-type">Type</label>
+          <select id="${prefix}-tmdb-type">
+            <option value="movie">Movie</option>
+            <option value="tv">TV Show</option>
+          </select>
+        </div>
+        <div style="flex:0 0 auto;"><button type="button" class="secondary" id="${prefix}-tmdb-search">Search TMDB ↗</button></div>
+      </div>
+      <p class="hint" id="${prefix}-tmdb-manual-hint" hidden style="margin:0.4rem 0 0;">Find the ID in the page URL — themoviedb.org/movie/<strong>24428</strong>-the-avengers</p>
+      <hr class="rule">
+      <p class="hint" style="margin:0 0 0.4rem;">Flowchart position — click the map to place this entry (drag to pan, scroll/pinch to zoom). Only affects the Flowchart view, not the Timeline.</p>
+      <div class="picker-wrap" id="${prefix}-picker-wrap">
+        <svg id="${prefix}-picker-svg" class="picker-svg"></svg>
+        <div class="picker-controls">
+          <button type="button" class="secondary" id="${prefix}-picker-zoom-out">−</button>
+          <button type="button" class="secondary" id="${prefix}-picker-fit">Fit</button>
+          <button type="button" class="secondary" id="${prefix}-picker-zoom-in">+</button>
+        </div>
+      </div>
+      <div class="row" style="margin-top:0.6rem;">
+        <div><label for="${prefix}-x">X</label><input id="${prefix}-x" type="number" step="any"></div>
+        <div><label for="${prefix}-y">Y</label><input id="${prefix}-y" type="number" step="any"></div>
+        <div><label for="${prefix}-w">Width</label><input id="${prefix}-w" type="number" step="any" value="340"></div>
+        <div><label for="${prefix}-h">Height</label><input id="${prefix}-h" type="number" step="any" value="60"></div>
+      </div>
+    `;
+  }
+  $('add-fields').innerHTML = fieldsHtml('add');
+  $('edit-fields').innerHTML = fieldsHtml('edit');
 
+  function applyMatchModeVisibility(prefix){
+    const manual = $(`${prefix}-match-mode`).value === 'manual';
+    $(`${prefix}-tmdb-id-wrap`).hidden = !manual;
+    $(`${prefix}-tmdb-type-wrap`).hidden = !manual;
+    $(`${prefix}-tmdb-manual-hint`).hidden = !manual;
+  }
+
+  function wireFormBehaviors(prefix, msgId){
+    $(`${prefix}-match-mode`).addEventListener('change', () => applyMatchModeVisibility(prefix));
+
+    $(`${prefix}-match-studio-colors`).addEventListener('click', () => {
+      const c = studioColors($(`${prefix}-studio`).value.trim());
+      const msg = $(msgId);
+      if (c){ $(`${prefix}-fill`).value = c.fill; $(`${prefix}-stroke`).value = c.stroke; msg.textContent = ''; }
+      else { msg.className = 'msg error'; msg.textContent = 'No existing studio matches that name exactly.'; }
+    });
+
+    $(`${prefix}-tmdb-search`).addEventListener('click', () => {
+      const title = $(`${prefix}-label`).value.trim();
+      const msg = $(msgId);
+      if (!title){ msg.className = 'msg error'; msg.textContent = 'Type a title first.'; return; }
+      window.open(`https://www.themoviedb.org/search?query=${encodeURIComponent(title)}`, '_blank', 'noopener');
+    });
+  }
+  wireFormBehaviors('add', 'add-msg');
+  wireFormBehaviors('edit', 'edit-msg');
+
+  function collectFormValues(prefix){
+    return {
+      label: $(`${prefix}-label`).value.trim(),
+      format: $(`${prefix}-format`).value,
+      studio: $(`${prefix}-studio`).value.trim(),
+      year: parseInt($(`${prefix}-year`).value, 10),
+      month: parseInt($(`${prefix}-month`).value, 10),
+      fill: $(`${prefix}-fill`).value,
+      stroke: $(`${prefix}-stroke`).value,
+      x: parseFloat($(`${prefix}-x`).value) || 0,
+      y: parseFloat($(`${prefix}-y`).value) || 0,
+      w: parseFloat($(`${prefix}-w`).value) || 340,
+      h: parseFloat($(`${prefix}-h`).value) || 60,
+      matchMode: $(`${prefix}-match-mode`).value,
+      tmdbId: parseInt($(`${prefix}-tmdb-id`).value, 10),
+      tmdbType: $(`${prefix}-tmdb-type`).value
+    };
+  }
+
+  function validateForm(v, msgEl){
+    if (!v.label || !v.studio || !v.year || !v.month){
+      msgEl.className = 'msg error'; msgEl.textContent = 'Title, studio, year and month are required.'; return false;
+    }
+    if (v.month < 1 || v.month > 12){
+      msgEl.className = 'msg error'; msgEl.textContent = 'Month must be between 1 and 12.'; return false;
+    }
+    return true;
+  }
+
+  // TMDB match mode — Manual writes/updates an override entry keyed by this
+  // node's id; Auto clears one if it existed (falls back to the refresh
+  // script's own title search).
+  function applyOverrideChange(id, label, v){
+    const existingOverride = state.overrides[id];
+    if (v.matchMode === 'manual' && v.tmdbId){
+      const changed = !existingOverride || existingOverride.tmdbId !== v.tmdbId || existingOverride.mediaType !== v.tmdbType;
+      if (changed){
+        state.overrides[id] = { tmdbId: v.tmdbId, mediaType: v.tmdbType };
+        markDirty(`Set manual TMDB match for ${label}: ${v.tmdbType} ${v.tmdbId}`, 'overrides');
+      }
+    } else if (existingOverride){
+      delete state.overrides[id];
+      markDirty(`Cleared manual TMDB match for ${label}`, 'overrides');
+    }
+  }
+
+  /* ---------------- visual flowchart-position picker ---------------- */
+  function createPositionPicker(prefix){
+    const svg = $(`${prefix}-picker-svg`);
+    const wrap = $(`${prefix}-picker-wrap`);
+    let vb = { x: -500, y: -500, w: 1000, h: 1000 };
+
+    function computeFullBox(){
+      const PAD = 400;
+      if (!state.nodes.length) return { minX: -500, minY: -500, w: 1000, h: 1000 };
+      const minX = Math.min(...state.nodes.map(n => n.x));
+      const minY = Math.min(...state.nodes.map(n => n.y));
+      const maxX = Math.max(...state.nodes.map(n => n.x + n.w));
+      const maxY = Math.max(...state.nodes.map(n => n.y + n.h));
+      return { minX: minX - PAD, minY: minY - PAD, w: (maxX - minX) + PAD * 2, h: (maxY - minY) + PAD * 2 };
+    }
+
+    function applyViewBox(){
+      svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+    }
+
+    function fit(){
+      const box = computeFullBox();
+      vb = { x: box.minX, y: box.minY, w: box.w, h: box.h };
+      applyViewBox();
+    }
+
+    function rebuild(){
+      let markup = '';
+      state.nodes.forEach(n => {
+        markup += `<rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="4" fill="${n.fill}" stroke="${n.stroke}" stroke-width="4" opacity="0.85"><title>${escapeHtml(n.label)}</title></rect>`;
+      });
+      svg.innerHTML = `<g>${markup}</g><g id="${prefix}-picker-pin"></g>`;
+      fit();
+    }
+
+    function currentWH(){
+      const w = parseFloat($(`${prefix}-w`).value) || 340;
+      const h = parseFloat($(`${prefix}-h`).value) || 60;
+      return { w, h };
+    }
+
+    function setPin(x, y, w, h){
+      const cx = x + w / 2, cy = y + h / 2;
+      const pinLayer = $(`${prefix}-picker-pin`);
+      if (!pinLayer) return;
+      pinLayer.innerHTML = `
+        <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="4" fill="none" stroke="#F2790B" stroke-width="10" stroke-dasharray="14 8"/>
+        <circle cx="${cx}" cy="${cy}" r="16" fill="#F2790B" stroke="#fff" stroke-width="4"/>
+      `;
+    }
+
+    function showPinFromFields(){
+      const x = parseFloat($(`${prefix}-x`).value) || 0;
+      const y = parseFloat($(`${prefix}-y`).value) || 0;
+      const { w, h } = currentWH();
+      setPin(x, y, w, h);
+    }
+
+    function svgPoint(clientX, clientY){
+      const pt = svg.createSVGPoint();
+      pt.x = clientX; pt.y = clientY;
+      const ctm = svg.getScreenCTM();
+      if (!ctm) return { x: 0, y: 0 };
+      const loc = pt.matrixTransform(ctm.inverse());
+      return { x: loc.x, y: loc.y };
+    }
+
+    function zoomAround(factor, px, py){
+      const rect = wrap.getBoundingClientRect();
+      const scaleX = vb.w / rect.width, scaleY = vb.h / rect.height;
+      const dataX = vb.x + px * scaleX, dataY = vb.y + py * scaleY;
+      vb.w *= factor; vb.h *= factor;
+      vb.x = dataX - px * (vb.w / rect.width);
+      vb.y = dataY - py * (vb.h / rect.height);
+      applyViewBox();
+    }
+
+    let dragging = false, dragStart = null, didDrag = false, vbStart = null;
+    wrap.addEventListener('pointerdown', e => {
+      wrap.setPointerCapture(e.pointerId);
+      dragging = true; didDrag = false;
+      dragStart = { x: e.clientX, y: e.clientY };
+      vbStart = { ...vb };
+    });
+    wrap.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const dx = e.clientX - dragStart.x, dy = e.clientY - dragStart.y;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) didDrag = true;
+      if (!didDrag) return;
+      const rect = wrap.getBoundingClientRect();
+      vb.x = vbStart.x - dx * (vb.w / rect.width);
+      vb.y = vbStart.y - dy * (vb.h / rect.height);
+      applyViewBox();
+    });
+    wrap.addEventListener('pointerup', e => {
+      dragging = false;
+      if (!didDrag){
+        const pt = svgPoint(e.clientX, e.clientY);
+        const { w, h } = currentWH();
+        const x = Math.round(pt.x - w / 2), y = Math.round(pt.y - h / 2);
+        $(`${prefix}-x`).value = x;
+        $(`${prefix}-y`).value = y;
+        setPin(x, y, w, h);
+      }
+    });
+    wrap.addEventListener('wheel', e => {
+      e.preventDefault();
+      const rect = wrap.getBoundingClientRect();
+      zoomAround(Math.pow(1.0015, e.deltaY), e.clientX - rect.left, e.clientY - rect.top);
+    }, { passive: false });
+
+    $(`${prefix}-picker-zoom-in`).addEventListener('click', () => zoomAround(0.8, wrap.clientWidth / 2, wrap.clientHeight / 2));
+    $(`${prefix}-picker-zoom-out`).addEventListener('click', () => zoomAround(1.25, wrap.clientWidth / 2, wrap.clientHeight / 2));
+    $(`${prefix}-picker-fit`).addEventListener('click', fit);
+
+    ['x','y','w','h'].forEach(f => $(`${prefix}-${f}`).addEventListener('input', showPinFromFields));
+
+    return { rebuild, showPinFromFields };
+  }
+  const addPicker = createPositionPicker('add');
+  const editPicker = createPositionPicker('edit');
+
+  /* ---------------- entries: list + search ---------------- */
   function renderEntryList(){
     const q = $('entry-search').value.trim().toLowerCase();
     const list = $('entry-list');
@@ -146,70 +413,53 @@
     const n = state.nodes[findNodeIndexById(id)];
     if (!n) return;
     editingId = id;
-    $('entry-form-title').textContent = 'Edit entry';
-    $('f-label').value = n.label;
-    $('f-format').value = n.format;
-    $('f-studio').value = n.studio;
-    $('f-year').value = n.year;
-    $('f-month').value = n.month;
-    $('f-fill').value = n.fill;
-    $('f-stroke').value = n.stroke;
-    $('f-x').value = n.x;
-    $('f-y').value = n.y;
-    $('f-w').value = n.w;
-    $('f-h').value = n.h;
+    $('edit-panel-title').textContent = `Editing: ${n.label}`;
+    $('edit-label').value = n.label;
+    $('edit-format').value = n.format;
+    $('edit-studio').value = n.studio;
+    $('edit-year').value = n.year;
+    $('edit-month').value = n.month;
+    $('edit-fill').value = n.fill;
+    $('edit-stroke').value = n.stroke;
+    $('edit-x').value = n.x;
+    $('edit-y').value = n.y;
+    $('edit-w').value = n.w;
+    $('edit-h').value = n.h;
     const ov = state.overrides[id];
-    $('f-match-mode').value = ov ? 'manual' : 'auto';
-    $('f-tmdb-id').value = ov ? ov.tmdbId : '';
-    $('f-tmdb-type').value = ov ? ov.mediaType : (n.format === 'tv' ? 'tv' : 'movie');
-    applyMatchModeVisibility();
-    $('entry-save-btn').textContent = 'Save changes';
-    $('entry-cancel-btn').hidden = false;
-    $('entry-msg').textContent = '';
-    window.scrollTo({ top: $('entry-form').offsetTop - 20, behavior: 'smooth' });
+    $('edit-match-mode').value = ov ? 'manual' : 'auto';
+    $('edit-tmdb-id').value = ov ? ov.tmdbId : '';
+    $('edit-tmdb-type').value = ov ? ov.mediaType : (n.format === 'tv' ? 'tv' : 'movie');
+    applyMatchModeVisibility('edit');
+    $('edit-msg').textContent = '';
+    $('edit-panel').hidden = false;
+    editPicker.rebuild();
+    editPicker.showPinFromFields();
+    window.scrollTo({ top: $('edit-panel').offsetTop - 20, behavior: 'smooth' });
   }
 
-  function applyMatchModeVisibility(){
-    const manual = $('f-match-mode').value === 'manual';
-    $('f-tmdb-id-wrap').hidden = !manual;
-    $('f-tmdb-type-wrap').hidden = !manual;
-    $('tmdb-manual-hint').hidden = !manual;
-  }
-  $('f-match-mode').addEventListener('change', applyMatchModeVisibility);
-
-  $('tmdb-search-btn').addEventListener('click', () => {
-    const title = $('f-label').value.trim();
-    if (!title){ $('entry-msg').className = 'msg error'; $('entry-msg').textContent = 'Type a title first.'; return; }
-    window.open(`https://www.themoviedb.org/search?query=${encodeURIComponent(title)}`, '_blank', 'noopener');
-  });
-
-  function resetEntryForm(){
+  function closeEditPanel(){
     editingId = null;
-    $('entry-form').reset();
-    $('f-fill').value = '#dae8fc';
-    $('f-stroke').value = '#6c8ebf';
-    $('f-w').value = 340;
-    $('f-h').value = 60;
-    const maxY = state.nodes.length ? Math.max(...state.nodes.map(n => n.y)) : 0;
-    $('f-x').value = 0;
-    $('f-y').value = maxY + 150;
-    $('f-match-mode').value = 'auto';
-    $('f-tmdb-id').value = '';
-    $('f-tmdb-type').value = 'movie';
-    applyMatchModeVisibility();
-    $('entry-form-title').textContent = 'Add entry';
-    $('entry-save-btn').textContent = 'Add entry';
-    $('entry-cancel-btn').hidden = true;
-    $('entry-msg').textContent = '';
+    $('edit-panel').hidden = true;
   }
-  resetEntryForm();
-  $('entry-cancel-btn').addEventListener('click', resetEntryForm);
+  $('edit-cancel-btn').addEventListener('click', closeEditPanel);
 
-  $('match-studio-colors').addEventListener('click', () => {
-    const c = studioColors($('f-studio').value.trim());
-    if (c){ $('f-fill').value = c.fill; $('f-stroke').value = c.stroke; $('entry-msg').textContent = ''; }
-    else { $('entry-msg').className = 'msg error'; $('entry-msg').textContent = 'No existing studio matches that name exactly.'; }
-  });
+  function resetAddForm(){
+    $('add-form').reset();
+    $('add-fill').value = '#dae8fc';
+    $('add-stroke').value = '#6c8ebf';
+    $('add-w').value = 340;
+    $('add-h').value = 60;
+    const maxY = state.nodes.length ? Math.max(...state.nodes.map(n => n.y)) : 0;
+    $('add-x').value = 0;
+    $('add-y').value = maxY + 150;
+    $('add-match-mode').value = 'auto';
+    $('add-tmdb-id').value = '';
+    $('add-tmdb-type').value = 'movie';
+    applyMatchModeVisibility('add');
+    $('add-msg').textContent = '';
+    addPicker.rebuild();
+    addPicker.showPinFromFields();
+  }
 
   function deleteEntry(id){
     const idx = findNodeIndexById(id);
@@ -222,84 +472,67 @@
     const removedLinks = before - state.edges.length;
     if (state.overrides[id]){ delete state.overrides[id]; state.overridesDirty = true; }
     markDirty(`Deleted entry: ${n.label}${removedLinks ? ` (and ${removedLinks} link${removedLinks===1?'':'s'})` : ''}`);
-    if (editingId === id) resetEntryForm();
+    if (editingId === id) closeEditPanel();
     renderEntryList();
     renderLinkSelects();
     renderLinkList();
+    addPicker.rebuild();
+    addPicker.showPinFromFields();
   }
 
-  /* ---------------- entries: add/edit form ---------------- */
-  $('entry-form').addEventListener('submit', e => {
+  /* ---------------- add form ---------------- */
+  $('add-form').addEventListener('submit', e => {
     e.preventDefault();
-    const msg = $('entry-msg');
+    const msg = $('add-msg');
     msg.className = 'msg';
+    const v = collectFormValues('add');
+    if (!validateForm(v, msg)) return;
 
-    const label = $('f-label').value.trim();
-    const format = $('f-format').value;
-    const studio = $('f-studio').value.trim();
-    const year = parseInt($('f-year').value, 10);
-    const month = parseInt($('f-month').value, 10);
-    const fill = $('f-fill').value;
-    const stroke = $('f-stroke').value;
-    const x = parseFloat($('f-x').value) || 0;
-    const y = parseFloat($('f-y').value) || 0;
-    const w = parseFloat($('f-w').value) || 340;
-    const h = parseFloat($('f-h').value) || 60;
-
-    if (!label || !studio || !year || !month){
-      msg.className = 'msg error'; msg.textContent = 'Title, studio, year and month are required.'; return;
+    const id = slugify(v.label);
+    if (findNodeIndexById(id) !== -1){
+      msg.className = 'msg error';
+      msg.textContent = 'An entry with this title already exists — adjust the title slightly.';
+      return;
     }
-    if (month < 1 || month > 12){
-      msg.className = 'msg error'; msg.textContent = 'Month must be between 1 and 12.'; return;
-    }
+    const node = { id, label: v.label, format: v.format, studio: v.studio, fill: v.fill, stroke: v.stroke, datekey: v.year*12+v.month, year: v.year, month: v.month, x: v.x, y: v.y, w: v.w, h: v.h };
+    state.nodes.splice(findInsertIndex(v.year, v.month), 0, node);
+    markDirty(`Added entry: ${v.label}`);
+    applyOverrideChange(id, v.label, v);
 
-    let id;
-    if (editingId){
-      id = editingId;
-      const idx = findNodeIndexById(editingId);
-      const n = state.nodes[idx];
-      const datesChanged = (n.year !== year || n.month !== month);
-      Object.assign(n, { label, format, studio, fill, stroke, year, month, datekey: year*12+month, x, y, w, h });
-      if (datesChanged){
-        state.nodes.splice(idx, 1);
-        state.nodes.splice(findInsertIndex(year, month), 0, n);
-      }
-      markDirty(`Edited entry: ${label}`);
-    } else {
-      id = slugify(label);
-      if (findNodeIndexById(id) !== -1){
-        msg.className = 'msg error';
-        msg.textContent = 'An entry with this title already exists — adjust the title slightly.';
-        return;
-      }
-      const node = { id, label, format, studio, fill, stroke, datekey: year*12+month, year, month, x, y, w, h };
-      state.nodes.splice(findInsertIndex(year, month), 0, node);
-      markDirty(`Added entry: ${label}`);
-    }
-
-    // TMDB match mode — Manual writes/updates an override entry keyed by
-    // this node's id; Auto clears one if it existed (falls back to the
-    // refresh script's own title search).
-    const matchMode = $('f-match-mode').value;
-    const tmdbId = parseInt($('f-tmdb-id').value, 10);
-    const tmdbType = $('f-tmdb-type').value;
-    const existingOverride = state.overrides[id];
-    if (matchMode === 'manual' && tmdbId){
-      const changed = !existingOverride || existingOverride.tmdbId !== tmdbId || existingOverride.mediaType !== tmdbType;
-      if (changed){
-        state.overrides[id] = { tmdbId, mediaType: tmdbType };
-        markDirty(`Set manual TMDB match for ${label}: ${tmdbType} ${tmdbId}`, 'overrides');
-      }
-    } else if (existingOverride){
-      delete state.overrides[id];
-      markDirty(`Cleared manual TMDB match for ${label}`, 'overrides');
-    }
-
-    resetEntryForm();
+    resetAddForm();
     renderEntryList();
     renderLinkSelects();
     msg.className = 'msg ok';
+    msg.textContent = 'Added (not yet published — see the Publish tab).';
+  });
+
+  /* ---------------- edit form ---------------- */
+  $('edit-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const msg = $('edit-msg');
+    msg.className = 'msg';
+    if (!editingId) return;
+    const v = collectFormValues('edit');
+    if (!validateForm(v, msg)) return;
+
+    const idx = findNodeIndexById(editingId);
+    const n = state.nodes[idx];
+    const datesChanged = (n.year !== v.year || n.month !== v.month);
+    Object.assign(n, { label: v.label, format: v.format, studio: v.studio, fill: v.fill, stroke: v.stroke, year: v.year, month: v.month, datekey: v.year*12+v.month, x: v.x, y: v.y, w: v.w, h: v.h });
+    if (datesChanged){
+      state.nodes.splice(idx, 1);
+      state.nodes.splice(findInsertIndex(v.year, v.month), 0, n);
+    }
+    markDirty(`Edited entry: ${v.label}`);
+    applyOverrideChange(editingId, v.label, v);
+
+    renderEntryList();
+    renderLinkSelects();
+    addPicker.rebuild();
+    addPicker.showPinFromFields();
+    msg.className = 'msg ok';
     msg.textContent = 'Saved (not yet published — see the Publish tab).';
+    closeEditPanel();
   });
 
   /* ---------------- links ---------------- */
