@@ -35,7 +35,17 @@
     'Rakuten TV': '#C40058',
     'Google Play Movies': '#4285F4',
     'Microsoft Store': '#107C10',
-    'YouTube': '#FF0000'
+    'YouTube': '#FF0000',
+    'BBC iPlayer': '#BB1919',
+    'ITVX': '#DEEB52',
+    'Channel 4': '#69F0D1',
+    'Paramount Plus': '#0064FF',
+    'Paramount+': '#0064FF',
+    'Discovery Plus': '#5B2E90',
+    'MUBI': '#000000',
+    'Curzon Home Cinema': '#E4002B',
+    'BFI Player': '#001489',
+    'Chili': '#8DC63F'
   };
   const WATCH_VERB = { rent: 'Rent on', buy: 'Buy on', free: 'Watch free on', ads: 'Watch on' };
 
@@ -45,7 +55,9 @@
   // JustWatch's API. Best available alternative: send people to that
   // provider's own search results for the title (one extra click, but lands
   // on the real service), falling back to its homepage/login for services
-  // with no reliable public search URL.
+  // with no reliable public search URL, and a general web search as the
+  // very last resort for a provider name we don't otherwise recognise —
+  // TMDB's own referral page is never used as the destination.
   const PROVIDER_SEARCH_URL = {
     'Netflix': t => `https://www.netflix.com/search?q=${encodeURIComponent(t)}`,
     'Disney Plus': t => `https://www.disneyplus.com/search?q=${encodeURIComponent(t)}`,
@@ -56,7 +68,14 @@
     'Apple TV Store': t => `https://tv.apple.com/search?term=${encodeURIComponent(t)}`,
     'Google Play Movies': t => `https://play.google.com/store/search?q=${encodeURIComponent(t)}&c=movies`,
     'Microsoft Store': t => `https://www.microsoft.com/en-gb/search?q=${encodeURIComponent(t)}`,
-    'YouTube': t => `https://www.youtube.com/results?search_query=${encodeURIComponent(t)}`
+    'YouTube': t => `https://www.youtube.com/results?search_query=${encodeURIComponent(t)}`,
+    'BBC iPlayer': t => `https://www.bbc.co.uk/iplayer/search?q=${encodeURIComponent(t)}`,
+    'ITVX': t => `https://www.itv.com/search?q=${encodeURIComponent(t)}`,
+    'Channel 4': t => `https://www.channel4.com/search?q=${encodeURIComponent(t)}`,
+    'Paramount Plus': t => `https://www.paramountplus.com/search/?query=${encodeURIComponent(t)}`,
+    'Paramount+': t => `https://www.paramountplus.com/search/?query=${encodeURIComponent(t)}`,
+    'MUBI': t => `https://mubi.com/search/films?query=${encodeURIComponent(t)}`,
+    'Chili': t => `https://uk.chili.com/search?q=${encodeURIComponent(t)}`
   };
   const PROVIDER_HOMEPAGE = {
     'Netflix': 'https://www.netflix.com',
@@ -72,15 +91,48 @@
     'Rakuten TV': 'https://www.rakuten.tv',
     'Google Play Movies': 'https://play.google.com/store/movies',
     'Microsoft Store': 'https://www.microsoft.com/en-gb/store/movies-and-tv',
-    'YouTube': 'https://www.youtube.com'
+    'YouTube': 'https://www.youtube.com',
+    'BBC iPlayer': 'https://www.bbc.co.uk/iplayer',
+    'ITVX': 'https://www.itv.com',
+    'Channel 4': 'https://www.channel4.com',
+    'Paramount Plus': 'https://www.paramountplus.com',
+    'Paramount+': 'https://www.paramountplus.com',
+    'Discovery Plus': 'https://www.discoveryplus.com',
+    'MUBI': 'https://mubi.com',
+    'Curzon Home Cinema': 'https://curzonhomecinema.com',
+    'BFI Player': 'https://player.bfi.org.uk',
+    'Chili': 'https://uk.chili.com'
   };
+
+  // JustWatch/TMDB provider names include lots of add-on "channel" variants
+  // (e.g. "HBO Max Amazon Channel", "Paramount+ Apple TV Channel") that
+  // aren't worth listing individually — they're all just accessed through
+  // the parent platform's own app/site, so route them there by pattern.
+  function resolveProviderKey(provider){
+    if(PROVIDER_SEARCH_URL[provider] || PROVIDER_HOMEPAGE[provider]) return provider;
+    if(/amazon channel|amazon video|prime video/i.test(provider)) return 'Amazon Prime Video';
+    if(/apple tv/i.test(provider)) return 'Apple TV';
+    if(/google play/i.test(provider)) return 'Google Play Movies';
+    return null;
+  }
 
   function watchLink(entry){
     const provider = entry.watch.provider;
     const title = entry.title || entry.label;
-    const search = PROVIDER_SEARCH_URL[provider];
-    if(search) return search(title);
-    return PROVIDER_HOMEPAGE[provider] || entry.watch.link;
+    const key = resolveProviderKey(provider);
+    if(key){
+      const search = PROVIDER_SEARCH_URL[key];
+      if(search) return search(title);
+      if(PROVIDER_HOMEPAGE[key]) return PROVIDER_HOMEPAGE[key];
+    }
+    // Unrecognised provider: a general search for where to watch it is a
+    // more useful destination than TMDB's own referral page.
+    return `https://www.google.com/search?q=${encodeURIComponent('watch "' + title + '" on ' + provider)}`;
+  }
+
+  function watchColor(entry){
+    const key = resolveProviderKey(entry.watch.provider);
+    return (key && PROVIDER_COLORS[key]) || PROVIDER_COLORS[entry.watch.provider] || 'var(--panel-raised)';
   }
 
   let mediaCache = null;
@@ -107,7 +159,7 @@
 
     let watchHtml = '';
     if(entry.watch){
-      const color = PROVIDER_COLORS[entry.watch.provider] || 'var(--panel-raised)';
+      const color = watchColor(entry);
       const verb = WATCH_VERB[entry.watch.type] || 'Watch on';
       watchHtml = `
         <a class="watch-btn" style="background:${color}" href="${watchLink(entry)}" target="_blank" rel="noopener noreferrer">
