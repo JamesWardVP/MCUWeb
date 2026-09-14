@@ -2146,6 +2146,21 @@
       "h": 60
     },
     {
+      "id": "spiderman-beyond-the-spider-verse",
+      "label": "Spiderman: Beyond the Spider-Verse",
+      "format": "film",
+      "studio": "Sony — Spider-Man Universe",
+      "fill": "#dae8fc",
+      "stroke": "#6c8ebf",
+      "datekey": 24330,
+      "year": 2027,
+      "month": 6,
+      "x": -974,
+      "y": 5641,
+      "w": 340,
+      "h": 60
+    },
+    {
       "id": "avengers-secret-wars-dec-17-2027",
       "label": "Avengers: Secret Wars (Dec 17, 2027)",
       "format": "film",
@@ -2841,6 +2856,10 @@
     {
       "source": "spiderman-into-the-spider-verse",
       "target": "spiderman-across-the-spider-verse"
+    },
+    {
+      "source": "spiderman-across-the-spider-verse",
+      "target": "spiderman-beyond-the-spider-verse"
     }
   ]
 }
