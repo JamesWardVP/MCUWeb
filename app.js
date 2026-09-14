@@ -39,6 +39,50 @@
   };
   const WATCH_VERB = { rent: 'Rent on', buy: 'Buy on', free: 'Watch free on', ads: 'Watch on' };
 
+  // TMDB's free watch-providers data (sourced from JustWatch) only exposes a
+  // link to TMDB's own referral page, not a direct deep link to the title on
+  // the provider's own site — that's a paid/partner-only feature of
+  // JustWatch's API. Best available alternative: send people to that
+  // provider's own search results for the title (one extra click, but lands
+  // on the real service), falling back to its homepage/login for services
+  // with no reliable public search URL.
+  const PROVIDER_SEARCH_URL = {
+    'Netflix': t => `https://www.netflix.com/search?q=${encodeURIComponent(t)}`,
+    'Disney Plus': t => `https://www.disneyplus.com/search?q=${encodeURIComponent(t)}`,
+    'Amazon Prime Video': t => `https://www.primevideo.com/search/ref=atv_nb_sr?phrase=${encodeURIComponent(t)}`,
+    'Amazon Video': t => `https://www.primevideo.com/search/ref=atv_nb_sr?phrase=${encodeURIComponent(t)}`,
+    'Apple TV Plus': t => `https://tv.apple.com/search?term=${encodeURIComponent(t)}`,
+    'Apple TV': t => `https://tv.apple.com/search?term=${encodeURIComponent(t)}`,
+    'Apple TV Store': t => `https://tv.apple.com/search?term=${encodeURIComponent(t)}`,
+    'Google Play Movies': t => `https://play.google.com/store/search?q=${encodeURIComponent(t)}&c=movies`,
+    'Microsoft Store': t => `https://www.microsoft.com/en-gb/search?q=${encodeURIComponent(t)}`,
+    'YouTube': t => `https://www.youtube.com/results?search_query=${encodeURIComponent(t)}`
+  };
+  const PROVIDER_HOMEPAGE = {
+    'Netflix': 'https://www.netflix.com',
+    'Disney Plus': 'https://www.disneyplus.com',
+    'Amazon Prime Video': 'https://www.primevideo.com',
+    'Amazon Video': 'https://www.primevideo.com',
+    'Apple TV Plus': 'https://tv.apple.com',
+    'Apple TV': 'https://tv.apple.com',
+    'Apple TV Store': 'https://tv.apple.com',
+    'NOW': 'https://www.nowtv.com',
+    'Sky Go': 'https://www.sky.com/skygo',
+    'Sky Store': 'https://www.sky.com/shop/sky-store',
+    'Rakuten TV': 'https://www.rakuten.tv',
+    'Google Play Movies': 'https://play.google.com/store/movies',
+    'Microsoft Store': 'https://www.microsoft.com/en-gb/store/movies-and-tv',
+    'YouTube': 'https://www.youtube.com'
+  };
+
+  function watchLink(entry){
+    const provider = entry.watch.provider;
+    const title = entry.title || entry.label;
+    const search = PROVIDER_SEARCH_URL[provider];
+    if(search) return search(title);
+    return PROVIDER_HOMEPAGE[provider] || entry.watch.link;
+  }
+
   let mediaCache = null;
   const mediaCacheReady = fetch('data/media-cache.json')
     .then(r => r.ok ? r.json() : null)
@@ -66,7 +110,7 @@
       const color = PROVIDER_COLORS[entry.watch.provider] || 'var(--panel-raised)';
       const verb = WATCH_VERB[entry.watch.type] || 'Watch on';
       watchHtml = `
-        <a class="watch-btn" style="background:${color}" href="${entry.watch.link}" target="_blank" rel="noopener noreferrer">
+        <a class="watch-btn" style="background:${color}" href="${watchLink(entry)}" target="_blank" rel="noopener noreferrer">
           <img class="watch-logo" src="${entry.watch.logo}" alt="">
           <span>${verb} ${entry.watch.provider}</span>
         </a>
