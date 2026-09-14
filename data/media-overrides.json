@@ -14,5 +14,9 @@
   "spiderman-into-the-spider-verse": {
     "tmdbId": 324857,
     "mediaType": "movie"
+  },
+  "spiderman-across-the-spider-verse": {
+    "tmdbId": 569094,
+    "mediaType": "movie"
   }
 }
