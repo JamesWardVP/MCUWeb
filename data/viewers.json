@@ -1,0 +1,14 @@
+{
+  "lauren": {
+    "salt": "pUnAReckrt3HTRE7A18qow==",
+    "iv": "03j11bQnzhPA4bPS",
+    "ciphertext": "K2htrOIsGTwOn+1l5AxygP/cfvVHHm6UCc0grxugKirs43RwUvz1WRSxy5ctLXErOAQ8Ex5BBa8=",
+    "iterations": 250000
+  },
+  "james": {
+    "salt": "5zAAi0raAkDVefnbzmujcA==",
+    "iv": "ygr3FkcOu+e3CnGH",
+    "ciphertext": "E8y8t8ykUEotzBrDqJruyi1H+sKmL7v3Z5JZosS0etYuXv77V7VCfUWZh4zStb9rWtFY85kNNC0=",
+    "iterations": 250000
+  }
+}

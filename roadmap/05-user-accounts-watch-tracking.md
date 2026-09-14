@@ -1,35 +1,24 @@
 # User accounts + watch tracking
 
-**Status:** Planned
+**Status:** Shipped
 
-## Goal
+## What it does
 
-Visitors can log in and "tick off" what they've watched. Watched entries show a checkmark and are visually dimmed (lower opacity/brightness) so unwatched vs. watched is obvious at a glance on both the timeline and the flowchart.
+Signed-in viewers can tick off what they've watched, on the timeline cards, the flowchart nodes, and the detail panel. Watched entries dim (`brightness(0.55)`) and show a checkmark, so unwatched-vs-watched reads clearly at a glance. Ticks sync across whatever device/browser that viewer signs into.
 
-## Relationship to item 4
+## How it's built
 
-These are a **different role from the admin**. You create each of the ~10 accounts yourself (no public signup), and when one of them logs in, they should only ever see the watch-tracking UI — never the timeline-edit controls from [item 4](04-timeline-editor-backend.md). The admin page's real write authority is a personal GitHub token pasted at time of use; asking ~10 casual friends/family to each generate their own GitHub token is a much bigger ask than a simple password, so viewer accounts need a lighter-weight mechanism — see open questions below.
+No third-party service (no Cloudflare, no Supabase/Firebase) — everything runs client-side plus two pieces of plain GitHub infrastructure:
 
-## What's settled
+- **A shared private Gist** (not this repo) holds a single JSON object keyed by username: `{ "lauren": ["blade-1998", ...], "james": [...] }`. Ticking something debounces (700ms) and `PATCH`es this Gist directly from the browser — it never touches the repo, so watch-tracking activity never clutters the site's commit history.
+- **One GitHub Personal Access Token, scoped only to `gist`**, does that writing. It cannot touch this repo, `data/timeline.json`, or anything else — a viewer session is technically incapable of writing timeline data, full stop, regardless of what happens to it.
+- **[`data/viewers.json`](../data/viewers.json)** holds one entry per viewer: not a password hash, but that same shared token *encrypted* with a key derived from their password (PBKDF2-SHA256, 250,000 iterations, random salt) via AES-GCM, random IV. A wrong password simply fails to decrypt it — this is real cryptographic gating, not just a client-side string comparison like the admin's password gate. Setting it up required no server either: a small local-only HTML tool (never published, run once by James in his own browser) did the actual encryption, so the plaintext token only ever existed in that one local browser tab and this chat, never in a tool call or the repo.
+- Login is a small widget fixed to the top-right corner of the public site. Once signed in, the session (username + decrypted token) is kept in that browser's `localStorage` so it persists across visits — reasonable here since a `gist`-only token has a narrow blast radius (it can't touch the repo), unlike the admin's token which is deliberately never stored.
 
-- **Role separation is real, not just hidden UI**: whatever mechanism we land on, a viewer account must be technically incapable of writing timeline data, not just missing the button for it in the interface.
-- A tick/checkbox control on each timeline card and flowchart node.
-- Watched entries get reduced brightness/opacity (e.g. `filter: brightness(0.55)`) plus a small checkmark badge, so unwatched-vs-watched reads clearly at a glance.
-- You set up each of the ~10 accounts (e.g. a username + password you choose for them) — no self-service signup.
+## Known trade-off (accepted deliberately)
 
-## Open decision: how do viewer accounts actually persist their ticks?
+Since every viewer's copy decrypts to the *same* underlying token, someone who extracted a decrypted token from one logged-in viewer's browser could technically read/edit another viewer's watched list too (not the timeline — the token still can't touch the repo). Given this is a small family/friends site and the alternative was either a third-party server or each viewer needing their own GitHub account, this was judged an acceptable trade rather than a blocking concern.
 
-This needs solving before building, because it has real security implications:
+## Adding more viewers later
 
-| Option | How it works | Trade-off |
-|---|---|---|
-| **A. Local only (`localStorage`)** | Watched status is saved only in that person's browser — no login needed at all, or login is just a display-name label | Simplest by far, nothing to build server-side — but ticks don't sync across devices, and are lost if they clear browser data |
-| **B. Thin proxy holds the real credential** | A small serverless function (e.g. a free Cloudflare Worker) checks the viewer's password and, if valid, commits their watched-list update using a GitHub token that lives only in the Worker's server-side secrets — never sent to the browser | Real cross-device sync, real password-per-person, and the write credential is never exposed to viewers — but it's one small piece of infrastructure outside GitHub Pages itself (still free, still not Supabase/Firebase) |
-| **C. Give viewers their own scoped GitHub token, like the admin** | Same mechanism as item 4, just a token scoped even more narrowly (e.g. Gist-only) | Keeps everything inside GitHub with zero extra infrastructure, but asking casual users to create a GitHub account and generate a token is a poor fit for "I just want to tick off what I've watched" |
-
-**Leaning:** Option B gives the real password-per-person experience you described (log in, only see tick controls) without ever handing viewers a credential that could write anything beyond their own watched list — worth the one small Worker. Option A is the fallback if cross-device sync isn't actually needed. Happy to go either way — flagging this now so it's decided before we start building item 5, not mid-build.
-
-## Open questions (need your input before building)
-
-1. Do watched-ticks need to sync across devices/browsers, or is "watched status is remembered on whichever device you use" good enough (→ Option A, no backend needed at all)?
-2. If cross-device sync matters: comfortable with one small always-free Cloudflare Worker as the only piece of infrastructure outside GitHub itself (→ Option B)?
+Run the local encryption tool (or ask for it to be regenerated) with the same shared token and the new person's chosen username/password, then add the resulting entry to `data/viewers.json` via the admin flow. No redeploying, no server changes — just one more entry in that file.

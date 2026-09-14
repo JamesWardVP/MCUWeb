@@ -204,6 +204,180 @@
     `;
   }
 
+  // ---------- viewer sign-in + watch tracking ----------
+  // Viewer accounts are hand-provisioned (data/viewers.json) rather than
+  // open signup. There's no server: each viewer's password derives (via
+  // PBKDF2 + AES-GCM, both native Web Crypto) the decryption key for a
+  // shared gist-scoped GitHub token baked into that file at setup time -
+  // a wrong password simply fails to decrypt it. That token can only ever
+  // touch Gists, never this repo, so a viewer can never write timeline
+  // data regardless of what happens to it. Watched status lives in one
+  // shared private Gist (never this repo), keyed by username, so ticking
+  // things never touches the site's own commit history.
+  const WATCHED_GIST_ID = "aee58dbb0a5cb59b5576384c02d5c33b";
+  const VIEWERS_PATH = "data/viewers.json";
+  const SESSION_KEY = "mcu-viewer-session";
+  const GIST_API = `https://api.github.com/gists/${WATCHED_GIST_ID}`;
+
+  function b64ToBytes(b64){ return Uint8Array.from(atob(b64), c => c.charCodeAt(0)); }
+
+  async function decryptToken(entry, password){
+    const salt = b64ToBytes(entry.salt), iv = b64ToBytes(entry.iv), ciphertext = b64ToBytes(entry.ciphertext);
+    const baseKey = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey(
+      { name: 'PBKDF2', salt, iterations: entry.iterations, hash: 'SHA-256' },
+      baseKey, { name: 'AES-GCM', length: 256 }, false, ['decrypt']
+    );
+    const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext);
+    return new TextDecoder().decode(plainBuf);
+  }
+
+  let viewerSession = null;
+  let watchedIds = new Set();
+  let allWatchedData = {};
+  let saveTimer = null;
+
+  function loadSession(){ try { return JSON.parse(localStorage.getItem(SESSION_KEY)); } catch { return null; } }
+  function saveSession(session){ try { localStorage.setItem(SESSION_KEY, JSON.stringify(session)); } catch {} }
+  function clearSession(){ try { localStorage.removeItem(SESSION_KEY); } catch {} }
+
+  async function fetchWatchedData(token){
+    const res = await fetch(GIST_API, { headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const gist = await res.json();
+    const content = gist.files && gist.files['watched.json'] ? gist.files['watched.json'].content : '{}';
+    try { return JSON.parse(content || '{}'); } catch { return {}; }
+  }
+
+  async function saveWatchedData(token, allData){
+    const res = await fetch(GIST_API, {
+      method: 'PATCH',
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ files: { 'watched.json': { content: JSON.stringify(allData) } } })
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+  }
+
+  // Debounced so rapid ticking batches into one Gist write instead of one per click.
+  function scheduleSave(){
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(async () => {
+      if (!viewerSession) return;
+      allWatchedData[viewerSession.username] = [...watchedIds];
+      try { await saveWatchedData(viewerSession.token, allWatchedData); }
+      catch (err) { console.error('Failed to save watched status', err); renderAuthWidget('Could not save just now — will retry on your next tick.'); }
+    }, 700);
+  }
+
+  function isWatched(id){ return watchedIds.has(id); }
+
+  function toggleWatched(id){
+    if (!viewerSession) return;
+    if (watchedIds.has(id)) watchedIds.delete(id); else watchedIds.add(id);
+    scheduleSave();
+    renderTimeline();
+    updateFlowchartVisualState();
+    refreshDetailWatchButton();
+  }
+
+  function refreshDetailWatchButton(){
+    const btn = document.getElementById('detailWatchBtn');
+    if (!viewerSession || selectedIdx === null){ btn.hidden = true; return; }
+    const n = nodes[selectedIdx];
+    btn.hidden = false;
+    const on = isWatched(n.id);
+    btn.className = 'detail-watch-btn' + (on ? ' on' : '');
+    btn.textContent = on ? '✓ Watched' : 'Mark as watched';
+  }
+  document.getElementById('detailWatchBtn').addEventListener('click', () => {
+    if (selectedIdx === null) return;
+    toggleWatched(nodes[selectedIdx].id);
+  });
+
+  async function syncWatchedFromGist(){
+    if (!viewerSession) return;
+    try {
+      allWatchedData = await fetchWatchedData(viewerSession.token);
+      watchedIds = new Set(allWatchedData[viewerSession.username] || []);
+    } catch (err) {
+      console.error('Failed to load watched data', err);
+      watchedIds = new Set();
+    }
+    renderTimeline();
+    updateFlowchartVisualState();
+    refreshDetailWatchButton();
+  }
+
+  async function doLogin(username, password){
+    const uname = username.trim().toLowerCase();
+    const res = await fetch(VIEWERS_PATH, { cache: 'no-cache' });
+    if (!res.ok) throw new Error('Could not load viewer list.');
+    const viewers = await res.json();
+    const entry = viewers[uname];
+    if (!entry) throw new Error('Unknown username.');
+    let token;
+    try { token = await decryptToken(entry, password); }
+    catch { throw new Error('Wrong password.'); }
+    viewerSession = { username: uname, token };
+    saveSession(viewerSession);
+    document.body.classList.add('viewer-active');
+    await syncWatchedFromGist();
+  }
+
+  function doLogout(){
+    viewerSession = null;
+    watchedIds = new Set();
+    allWatchedData = {};
+    clearSession();
+    document.body.classList.remove('viewer-active');
+    renderTimeline();
+    updateFlowchartVisualState();
+    refreshDetailWatchButton();
+    renderAuthWidget();
+  }
+
+  function renderAuthWidget(msg, msgOk){
+    const box = document.getElementById('viewerAuth');
+    if (viewerSession){
+      box.innerHTML = `
+        <div class="signed-in">
+          <span>Signed in: <strong style="color:var(--parchment)">${escapeXml(viewerSession.username)}</strong></span>
+          <button type="button" id="authSignOut">Sign out</button>
+        </div>
+      `;
+      document.getElementById('authSignOut').addEventListener('click', doLogout);
+    } else {
+      box.innerHTML = `
+        <form id="authForm">
+          <input type="text" id="authUser" placeholder="Username" autocomplete="username">
+          <input type="password" id="authPass" placeholder="Password" autocomplete="current-password">
+          <button type="submit">Sign in to track watched</button>
+        </form>
+        ${msg ? `<p class="auth-msg${msgOk ? ' ok' : ''}">${escapeXml(msg)}</p>` : ''}
+      `;
+      document.getElementById('authForm').addEventListener('submit', async e => {
+        e.preventDefault();
+        const u = document.getElementById('authUser').value;
+        const p = document.getElementById('authPass').value;
+        if (!u || !p){ renderAuthWidget('Enter a username and password.'); return; }
+        renderAuthWidget('Signing in…', true);
+        try { await doLogin(u, p); renderAuthWidget(); }
+        catch (err) { renderAuthWidget(err.message); }
+      });
+    }
+  }
+
+  // Resume a saved session, if any, before the first real render.
+  (function initSession(){
+    const saved = loadSession();
+    if (saved && saved.username && saved.token){
+      viewerSession = saved;
+      document.body.classList.add('viewer-active');
+      syncWatchedFromGist();
+    }
+    renderAuthWidget();
+  })();
+
   const FORMAT_META = {
     film:    {label:'Film',    icon: sh => `<svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3" fill="none" stroke="${sh}" stroke-width="2"/></svg>`},
     tv:      {label:'TV Show', icon: sh => `<svg viewBox="0 0 24 24"><polygon points="7,4 17,4 22,12 17,20 7,20 2,12" fill="none" stroke="${sh}" stroke-width="2"/></svg>`},
@@ -352,8 +526,9 @@
       dot.className = 'node-dot';
       row.appendChild(dot);
 
+      const watched = isWatched(n.id);
       const card = document.createElement('div');
-      card.className = 'card';
+      card.className = 'card' + (watched ? ' watched' : '');
       card.style.setProperty('--stroke', n.stroke);
       card.dataset.idx = n.idx;
       card.innerHTML = `
@@ -363,8 +538,12 @@
           <span class="card-meta">${n.studio}</span>
         </span>
         ${n.connCount ? `<span class="conn-count">${n.connCount} link${n.connCount===1?'':'s'}</span>` : ''}
+        <span class="watch-tick${watched?' on':''}" data-watch-id="${n.id}" role="checkbox" aria-checked="${watched}" title="${watched?'Watched':'Mark as watched'}">${watched?'✓':''}</span>
       `;
-      card.addEventListener('click', ()=> selectNode(n.idx));
+      card.addEventListener('click', (e)=>{
+        if(e.target.closest('.watch-tick')){ e.stopPropagation(); toggleWatched(n.id); return; }
+        selectNode(n.idx);
+      });
       row.appendChild(card);
       listEl.appendChild(row);
     });
@@ -505,6 +684,7 @@
     };
     fillList('connOut', n.outConn);
     fillList('connIn', n.inConn);
+    refreshDetailWatchButton();
 
     panel.classList.add('open');
     backdrop.classList.add('open');
@@ -520,6 +700,7 @@
     selectedIdx = null;
     clearTimelineSelectionClasses();
     updateFlowchartVisualState();
+    refreshDetailWatchButton();
     if(currentView === 'timeline') drawArcsForSelection();
   }
 
@@ -667,10 +848,16 @@
         </g>`;
       }
 
-      nodeMarkup += `<g class="fc-node" data-idx="${n.idx}" transform="translate(${n.fx},${n.fy})">
+      const watchTick = `<g class="fc-watch-tick" data-watch-id="${n.id}" transform="translate(14,14)">
+        <circle r="9" fill="${isWatched(n.id)?'#F2790B':'#161616'}" stroke="#F2790B" stroke-width="1.5"/>
+        <text x="0" y="3" text-anchor="middle" font-size="10" fill="#1a1509">${isWatched(n.id)?'✓':''}</text>
+      </g>`;
+
+      nodeMarkup += `<g class="fc-node${isWatched(n.id)?' watched':''}" data-idx="${n.idx}" transform="translate(${n.fx},${n.fy})">
         ${fcShapeMarkup(n.format, n.w, n.h, n.stroke)}
         ${textMarkup}
         ${badge}
+        ${watchTick}
       </g>`;
     });
 
@@ -704,7 +891,8 @@
       const el = fcNodeEls[n.idx];
       if(!el) return;
       const passes = passesFilter(n);
-      let cls = 'fc-node';
+      const watched = isWatched(n.id);
+      let cls = 'fc-node' + (watched ? ' watched' : '');
       let opacity = 1;
       if(selectedIdx !== null){
         if(n.idx === selectedIdx){ cls += ' selected'; }
@@ -714,6 +902,11 @@
       if(!passes) opacity = Math.min(opacity, 0.07);
       el.setAttribute('class', cls);
       el.style.opacity = opacity;
+      const tick = el.querySelector('.fc-watch-tick');
+      if(tick){
+        tick.querySelector('circle').setAttribute('fill', watched ? '#F2790B' : '#161616');
+        tick.querySelector('text').textContent = watched ? '✓' : '';
+      }
     });
     edges.forEach((e,i)=>{
       const el = fcEdgeEls[i];
@@ -844,6 +1037,8 @@
     // itself, so resolve the actual element under the pointer by hand here.
     if(allowClick && wasSingleDrag){
       const el = document.elementFromPoint(e.clientX, e.clientY);
+      const tickEl = el && el.closest && el.closest('.fc-watch-tick');
+      if(tickEl){ toggleWatched(tickEl.dataset.watchId); return; }
       const nodeEl = el && el.closest && el.closest('.fc-node');
       if(nodeEl) selectNode(parseInt(nodeEl.dataset.idx, 10));
     }

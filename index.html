@@ -457,6 +457,52 @@
   }
   .backdrop.open{opacity:1; pointer-events:auto;}
 
+  /* ---------------- VIEWER SIGN-IN + WATCH TRACKING ---------------- */
+  .viewer-auth{
+    position:fixed; top:0.9rem; right:0.9rem; z-index:60;
+    background:var(--panel); border:1px solid var(--hairline-bright); border-radius:6px;
+    padding:0.6rem 0.7rem; font-family:var(--font-mono); font-size:0.72rem; color:var(--muted);
+    box-shadow:0 6px 20px rgba(0,0,0,0.35); max-width:230px;
+  }
+  .viewer-auth form{display:flex; flex-direction:column; gap:0.4rem;}
+  .viewer-auth input{
+    background:var(--void); border:1px solid var(--hairline-bright); color:var(--parchment);
+    font-family:inherit; font-size:0.75rem; padding:0.35rem 0.5rem; border-radius:3px; width:150px;
+  }
+  .viewer-auth button{
+    background:var(--amber); color:#1a1509; border:none; font-family:inherit; font-weight:600;
+    font-size:0.72rem; padding:0.35rem 0.6rem; border-radius:3px; cursor:pointer;
+  }
+  .viewer-auth button:hover{background:var(--amber-bright);}
+  .viewer-auth .signed-in{display:flex; align-items:center; gap:0.5em; flex-wrap:wrap;}
+  .viewer-auth .signed-in button{background:none; border:1px solid var(--hairline-bright); color:var(--muted); padding:0.2rem 0.5rem;}
+  .viewer-auth .signed-in button:hover{color:var(--amber-bright); border-color:var(--amber-bright);}
+  .viewer-auth .auth-msg{color:var(--rust); margin:0.3rem 0 0; font-size:0.68rem;}
+  .viewer-auth .auth-msg.ok{color:var(--amber);}
+
+  .watch-tick{
+    flex:none; width:22px; height:22px; border-radius:50%; border:1.5px solid var(--hairline-bright);
+    background:var(--void); color:transparent; display:none; align-items:center; justify-content:center;
+    cursor:pointer; font-size:0.8rem; line-height:1;
+  }
+  body.viewer-active .watch-tick{display:flex;}
+  .watch-tick:hover{border-color:var(--amber);}
+  .watch-tick.on{background:var(--amber); border-color:var(--amber); color:#1a1509;}
+  .card.watched{filter:brightness(0.55);}
+  .card.watched:hover{filter:brightness(0.7);}
+
+  .fc-watch-tick{display:none; cursor:pointer;}
+  body.viewer-active .fc-watch-tick{display:block;}
+  .fc-node.watched .fc-shape{filter:brightness(0.5);}
+
+  .detail-watch-btn{
+    display:inline-flex; align-items:center; gap:0.5em; margin:0.2rem 0 1rem; padding:0.4rem 0.8rem;
+    background:none; border:1px solid var(--hairline-bright); color:var(--muted);
+    font-family:var(--font-mono); font-size:0.72rem; border-radius:4px; cursor:pointer;
+  }
+  .detail-watch-btn:hover{border-color:var(--amber-bright); color:var(--amber-bright);}
+  .detail-watch-btn.on{background:var(--amber); border-color:var(--amber); color:#1a1509;}
+
   footer{
     padding:2.5rem 6vw 3.5rem;
     border-top:1px solid var(--hairline);
@@ -475,6 +521,8 @@
 </style>
 </head>
 <body>
+
+<div class="viewer-auth" id="viewerAuth"></div>
 
 <header class="hero">
   <div class="hero-eyebrow"><span class="dot"></span>TIME VARIANCE ARCHIVE &nbsp;/&nbsp; CONTINUITY DIVISION &nbsp;/&nbsp; CASE FILE MCU-01</div>
@@ -539,6 +587,7 @@
   <div class="detail-eyebrow" id="detailEyebrow">FORMAT</div>
   <h2 class="detail-title" id="detailTitle">Title</h2>
   <div class="detail-studio"><span class="sw" id="detailSw"></span><span id="detailStudio"></span></div>
+  <button type="button" class="detail-watch-btn" id="detailWatchBtn" hidden></button>
   <div class="media-block" id="mediaBlock" hidden></div>
   <div class="conn-section-title">Follows from</div>
   <ul class="conn-list" id="connIn"></ul>
