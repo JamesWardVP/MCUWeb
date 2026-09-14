@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T15:00:50.1650974Z",
+  "generatedAt": "2026-09-14T15:14:33.4319819Z",
   "region": "GB",
   "entries": {
     "blade-1998": {
@@ -1665,17 +1665,23 @@
       "label": "Runaways S2 (Dec 2018)",
       "matched": true,
       "mediaType": "tv",
-      "tmdbId": 116521,
-      "title": "Runaways",
-      "overview": "While two teenagers disappear from an elite private school, a brutal murder takes place in nearby suburbia. Five different students must now work together to make sense of it all, in order to escape their own haunted pasts.",
-      "poster": "https://image.tmdb.org/t/p/w500/fsPN2EkITbzYh08L7NKAJi4uJdc.jpg",
-      "releaseDate": "2012-08-21",
-      "tmdbRating": 0.0,
-      "tmdbVoteCount": 0,
-      "imdbId": "tt2431088",
-      "imdbRating": 7.7,
-      "watch": null,
-      "fetchedAt": "2026-09-14T13:05:42.5065636Z"
+      "tmdbId": 67466,
+      "title": "Marvel's Runaways",
+      "overview": "Every teenager thinks their parents are evil. What if you found out they actually were? Six diverse teenagers who can barely stand each other must unite against a common foe – their parents.",
+      "poster": "https://image.tmdb.org/t/p/w500/hnHEhbzh0F7kN3Ah1lzRjtQuW16.jpg",
+      "releaseDate": "2017-11-21",
+      "tmdbRating": 7.3,
+      "tmdbVoteCount": 1000,
+      "imdbId": "tt1236246",
+      "imdbRating": 6.8,
+      "watch": {
+        "provider": "Amazon Prime Video",
+        "logo": "https://image.tmdb.org/t/p/w92/gMZdpavHmxFNnLpMHwVxfqeux2g.png",
+        "type": "flatrate",
+        "link": "https://www.themoviedb.org/tv/67466-marvel-s-runaways/watch?locale=GB"
+      },
+      "manualMatch": true,
+      "fetchedAt": "2026-09-14T15:14:32.4593249Z"
     },
     "the-punisher-s2-jan-2019": {
       "slug": "the-punisher-s2-jan-2019",
@@ -1853,17 +1859,23 @@
       "label": "Runaways S3 (Dec 2019)",
       "matched": true,
       "mediaType": "tv",
-      "tmdbId": 116521,
-      "title": "Runaways",
-      "overview": "While two teenagers disappear from an elite private school, a brutal murder takes place in nearby suburbia. Five different students must now work together to make sense of it all, in order to escape their own haunted pasts.",
-      "poster": "https://image.tmdb.org/t/p/w500/fsPN2EkITbzYh08L7NKAJi4uJdc.jpg",
-      "releaseDate": "2012-08-21",
-      "tmdbRating": 0.0,
-      "tmdbVoteCount": 0,
-      "imdbId": "tt2431088",
-      "imdbRating": 7.7,
-      "watch": null,
-      "fetchedAt": "2026-09-14T13:05:46.5431837Z"
+      "tmdbId": 67466,
+      "title": "Marvel's Runaways",
+      "overview": "Every teenager thinks their parents are evil. What if you found out they actually were? Six diverse teenagers who can barely stand each other must unite against a common foe – their parents.",
+      "poster": "https://image.tmdb.org/t/p/w500/hnHEhbzh0F7kN3Ah1lzRjtQuW16.jpg",
+      "releaseDate": "2017-11-21",
+      "tmdbRating": 7.3,
+      "tmdbVoteCount": 1000,
+      "imdbId": "tt1236246",
+      "imdbRating": 6.8,
+      "watch": {
+        "provider": "Amazon Prime Video",
+        "logo": "https://image.tmdb.org/t/p/w92/gMZdpavHmxFNnLpMHwVxfqeux2g.png",
+        "type": "flatrate",
+        "link": "https://www.themoviedb.org/tv/67466-marvel-s-runaways/watch?locale=GB"
+      },
+      "manualMatch": true,
+      "fetchedAt": "2026-09-14T15:14:33.1732615Z"
     },
     "agents-of-s-h-i-e-l-d-s7-may-aug-2020": {
       "slug": "agents-of-s-h-i-e-l-d-s7-may-aug-2020",
