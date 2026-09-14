@@ -1156,6 +1156,21 @@
       "h": 60
     },
     {
+      "id": "spiderman-into-the-spider-verse",
+      "label": "Spiderman: Into the Spider-Verse",
+      "format": "film",
+      "studio": "Sony — Spider-Man Universe",
+      "fill": "#dae8fc",
+      "stroke": "#6c8ebf",
+      "datekey": 24228,
+      "year": 2018,
+      "month": 12,
+      "x": -968,
+      "y": 5464,
+      "w": 340,
+      "h": 60
+    },
+    {
       "id": "the-punisher-s2-jan-2019",
       "label": "The Punisher S2 (Jan 2019)",
       "format": "tv",
