@@ -10,10 +10,9 @@
 # Run this as often as you like (the workflow runs it weekly); it's a
 # no-op for anything not yet due.
 #
-# Manual corrections: add { "<slug>": { "tmdbId": 123, "mediaType": "movie" } }
+# Manual corrections: add { "<node-id>": { "tmdbId": 123, "mediaType": "movie" } }
 # to data/media-overrides.json for any title the automatic search gets
-# wrong or can't find (slug = the lowercased, hyphenated node label, as
-# also stored as "slug" in media-cache.json).
+# wrong or can't find (node-id = that entry's "id" in data/timeline.json).
 #
 # Works on Windows PowerShell 5.1 and pwsh (GitHub Actions ubuntu runners).
 # Usage: powershell -NoProfile -ExecutionPolicy Bypass -File tools\refresh-media-data.ps1
@@ -23,7 +22,7 @@ $ErrorActionPreference = "Stop"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 $root = Split-Path $PSScriptRoot -Parent
-$indexPath = "$root/index.html"
+$timelinePath = "$root/data/timeline.json"
 $cachePath = "$root/data/media-cache.json"
 $overridesPath = "$root/data/media-overrides.json"
 $region = "GB"
@@ -36,12 +35,9 @@ if (-not $omdbKey) { Write-Host "OMDB_API_KEY not set - aborting."; exit 1 }
 
 # ------------------------------------------------------------------- data ---
 
-$html = Get-Content $indexPath -Raw -Encoding UTF8
-$m = [regex]::Match($html, 'const DATA = (\{.*\});', [System.Text.RegularExpressions.RegexOptions]::Singleline)
-if (-not $m.Success) { Write-Host "Could not find DATA in index.html - aborting."; exit 1 }
-$dataObj = $m.Groups[1].Value | ConvertFrom-Json
+$dataObj = Get-Content $timelinePath -Raw -Encoding UTF8 | ConvertFrom-Json
 $nodes = @($dataObj.nodes)
-Write-Host "Loaded $($nodes.Count) timeline entries from index.html."
+Write-Host "Loaded $($nodes.Count) timeline entries from data/timeline.json."
 
 $overrides = @{}
 if (Test-Path $overridesPath) {
@@ -56,12 +52,6 @@ if (Test-Path $cachePath) {
     if ($existingJson.entries) {
         $existingJson.entries.PSObject.Properties | ForEach-Object { $cache[$_.Name] = $_.Value }
     }
-}
-
-function Get-Slug([string]$label) {
-    $s = $label.ToLowerInvariant()
-    $s = $s -replace "[^a-z0-9]+", "-"
-    $s.Trim("-")
 }
 
 # Strips the trailing "(...)" date parenthetical, and — for TV entries only
@@ -263,7 +253,7 @@ $fetched = 0; $skipped = 0; $unmatched = 0
 $resolutionCache = @{}
 
 foreach ($node in $nodes) {
-    $slug = Get-Slug $node.label
+    $slug = $node.id
     $existing = $cache[$slug]
 
     if (-not (Test-Stale $existing)) {

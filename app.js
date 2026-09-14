@@ -1,11 +1,27 @@
 (function(){
-  const nodes = DATA.nodes;   // {label, format, studio, fill, stroke, datekey, year, month, x, y, w, h}
-  const edges = DATA.edges;   // {source, target, dashed}
+  // Timeline/flowchart data lives in data/timeline.json (editable via
+  // admin.html) rather than embedded in this page, so it loads
+  // asynchronously — everything else in this file runs inside init(),
+  // invoked once that fetch resolves.
+  fetch('data/timeline.json')
+    .then(r => { if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(data => init(data))
+    .catch(err => {
+      console.error('Failed to load data/timeline.json', err);
+      document.body.innerHTML = '<p style="color:#EFE6D3;padding:3rem;font-family:sans-serif">Failed to load timeline data. Please refresh the page.</p>';
+    });
+
+  function init(DATA){
+  const nodes = DATA.nodes;   // {id, label, format, studio, fill, stroke, datekey, year, month, x, y, w, h}
+  const edges = DATA.edges;   // {source, target} — source/target are node ids
 
   // ---------- build adjacency ----------
-  nodes.forEach((n,i)=>{ n.idx = i; n.outConn=[]; n.inConn=[]; });
+  // Edges reference nodes by their stable id (not array position), so a
+  // node can be inserted/removed/reordered without corrupting any link.
+  const idToIdx = {};
+  nodes.forEach((n,i)=>{ n.idx = i; n.outConn=[]; n.inConn=[]; idToIdx[n.id] = i; });
   edges.forEach(e=>{
-    const s = nodes[e.source], t = nodes[e.target];
+    const s = nodes[idToIdx[e.source]], t = nodes[idToIdx[e.target]];
     if(!s || !t) return;
     s.outConn.push(t.idx); t.inConn.push(s.idx);
   });
@@ -16,10 +32,9 @@
   // ---------- media detail cache (posters/ratings/blurb/streaming) ----------
   // Populated ahead of time by tools/refresh-media-data.ps1 (via the weekly
   // GitHub Action) from TMDB + OMDb, so the browser never calls either API
-  // directly and no API key ever ships to the client.
-  function slugify(label){
-    return label.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-  }
+  // directly and no API key ever ships to the client. Keyed by node.id
+  // (not the current label) so a later rename via admin.html doesn't
+  // orphan an entry's cached poster/rating/blurb.
 
   const PROVIDER_COLORS = {
     'Netflix': '#E50914',
@@ -148,7 +163,7 @@
 
   function renderMedia(n){
     const block = document.getElementById('mediaBlock');
-    const entry = mediaCache && mediaCache.entries ? mediaCache.entries[slugify(n.label)] : null;
+    const entry = mediaCache && mediaCache.entries ? mediaCache.entries[n.id] : null;
     if(!entry || !entry.matched){ block.hidden = true; block.innerHTML = ''; return; }
 
     const ratings = [];
@@ -619,7 +634,7 @@
 
     let edgeMarkup = '';
     edges.forEach((e,i)=>{
-      const a = nodes[e.source], b = nodes[e.target];
+      const a = nodes[idToIdx[e.source]], b = nodes[idToIdx[e.target]];
       if(!a || !b) return;
       const p = anchorPoints(a, b);
       const d = bezierPath(p);
@@ -698,11 +713,12 @@
     edges.forEach((e,i)=>{
       const el = fcEdgeEls[i];
       if(!el) return;
-      const sPass = passesFilter(nodes[e.source]), tPass = passesFilter(nodes[e.target]);
+      const sIdx = idToIdx[e.source], tIdx = idToIdx[e.target];
+      const sPass = passesFilter(nodes[sIdx]), tPass = passesFilter(nodes[tIdx]);
       let opacity = (sPass && tPass) ? 0.55 : 0.05;
       let active = false;
       if(selectedIdx !== null){
-        if(e.source === selectedIdx || e.target === selectedIdx){
+        if(sIdx === selectedIdx || tIdx === selectedIdx){
           active = true;
           opacity = (sPass && tPass) ? 1 : 0.5;
         } else {
@@ -833,4 +849,5 @@
 
   // ---------- init ----------
   renderTimeline();
+  }
 })();

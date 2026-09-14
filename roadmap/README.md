@@ -7,7 +7,7 @@ Status of planned work on the Sacred Timeline archive, tracked here so the plan 
 | 1 | Fix corrupted "Agents of S.H.I.E.L.D." S5 labels (raw draw.io XML leaking into the timeline) | ✅ Shipped |
 | 2 | Remove the "Variant crossovers" (dashed-link) concept until directness can actually be determined | ✅ Shipped |
 | 3 | [Title detail enrichment](03-title-detail-enrichment.md) — ratings, blurb, poster, streaming link | ✅ Shipped |
-| 4 | [Timeline editor + protected backend](04-timeline-editor-backend.md) — add/edit/remove links without hand-editing JSON | 🔜 Planned |
+| 4 | [Timeline editor + protected backend](04-timeline-editor-backend.md) — add/edit/remove links without hand-editing JSON | ✅ Shipped |
 | 5 | [User accounts + watch tracking](05-user-accounts-watch-tracking.md) — tick off what you've watched | 🔜 Planned |
 | 6 | Shift the accent palette to a more vivid, Miss Minutes-style orange | ✅ Shipped |
 

@@ -1,6 +1,6 @@
 # Timeline editor + protected backend
 
-**Status:** Planned
+**Status:** Shipped
 
 ## Goal
 
@@ -28,7 +28,16 @@ Purely to stop you (or anyone who stumbles on `admin.html`) from landing in the 
 
 Every edit becomes a git commit — a nice audit trail at this scale, but the repo's history will pick up small data-edit commits over time.
 
-## Open questions (need your input before building)
+## What's built
 
-1. OK with edits showing up as individual commits in the repo's history?
-2. Same visual style as the rest of the site, or closer to RaceDates' plainer admin-page look (functional over themed, since only you see it)?
+- [`admin.html`](../admin.html) + [`admin.js`](../admin.js) — a plain functional page (not styled to match the public site, per your preference), password-gated, with tabs for **Entries** (add/edit/delete, searchable), **Links** (add/remove, searchable), and **Publish** (staged-changes summary + commit).
+- The canonical data moved out of `index.html` into [`data/timeline.json`](../data/timeline.json), which `app.js` now fetches on load.
+- **Nodes got stable `id`s** (the same slug used as the media-cache key, e.g. `the-avengers-may-2012`) and **edges now reference those ids instead of raw array position**. This was necessary, not optional: the old array-index scheme would have silently corrupted every link after the first insert/delete/reorder through the editor. Renaming an entry's title in the admin keeps its `id` (and therefore its links and its media-cache poster/rating) intact.
+- New entries are inserted at the chronologically correct position automatically (by year/month), so the Timeline view's ordering never needs manual fixing.
+- A "Match studio colours" button fills in the fill/stroke colour from an existing studio's established colours, since typing hex codes by hand isn't fun.
+- Every add/edit/delete is staged in memory first (nothing touches GitHub until you hit Commit), with a running human-readable log used as the commit message.
+- "Download file instead" is available on the Publish tab as a fallback to committing directly, mirroring RaceDates.
+
+## Not yet tested
+
+The actual GitHub commit flow (`commitFile()`) mirrors RaceDates' proven implementation closely (same GET-current-sha-then-PUT pattern) but hasn't been exercised against the live API yet — worth a real test commit with a token before relying on it.

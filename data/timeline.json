@@ -1,0 +1,2812 @@
+{
+    "nodes":  [
+                  {
+                      "id":  "blade-1998",
+                      "label":  "Blade (1998)",
+                      "format":  "film",
+                      "studio":  "New Line / Marvel Enterprises — Blade Trilogy",
+                      "fill":  "#d9d2e9",
+                      "stroke":  "#674ea7",
+                      "datekey":  23982,
+                      "year":  1998,
+                      "month":  6,
+                      "x":  3580.0,
+                      "y":  5640.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "x-men-2000",
+                      "label":  "X-Men (2000)",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24006,
+                      "year":  2000,
+                      "month":  6,
+                      "x":  2735.0,
+                      "y":  4818.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "spider-man-2002",
+                      "label":  "Spider-Man (2002)",
+                      "format":  "film",
+                      "studio":  "Sony — Spider-Man Universe",
+                      "fill":  "#ead1dc",
+                      "stroke":  "#a64d79",
+                      "datekey":  24030,
+                      "year":  2002,
+                      "month":  6,
+                      "x":  -630.0,
+                      "y":  4920.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "blade-ii-2002",
+                      "label":  "Blade II (2002)",
+                      "format":  "film",
+                      "studio":  "New Line / Marvel Enterprises — Blade Trilogy",
+                      "fill":  "#d9d2e9",
+                      "stroke":  "#674ea7",
+                      "datekey":  24030,
+                      "year":  2002,
+                      "month":  6,
+                      "x":  3580.0,
+                      "y":  5750.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "x2-2003",
+                      "label":  "X2 (2003)",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24042,
+                      "year":  2003,
+                      "month":  6,
+                      "x":  2735.0,
+                      "y":  4918.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "spider-man-2-2004",
+                      "label":  "Spider-Man 2 (2004)",
+                      "format":  "film",
+                      "studio":  "Sony — Spider-Man Universe",
+                      "fill":  "#ead1dc",
+                      "stroke":  "#a64d79",
+                      "datekey":  24054,
+                      "year":  2004,
+                      "month":  6,
+                      "x":  -630.0,
+                      "y":  5040.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "blade-trinity-2004",
+                      "label":  "Blade: Trinity (2004)",
+                      "format":  "film",
+                      "studio":  "New Line / Marvel Enterprises — Blade Trilogy",
+                      "fill":  "#d9d2e9",
+                      "stroke":  "#674ea7",
+                      "datekey":  24054,
+                      "year":  2004,
+                      "month":  6,
+                      "x":  3580.0,
+                      "y":  5858.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "daredevil-2004",
+                      "label":  "Daredevil (2004)",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24054,
+                      "year":  2004,
+                      "month":  6,
+                      "x":  4330.0,
+                      "y":  5758.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "elektra",
+                      "label":  "Elektra",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24061,
+                      "year":  2005,
+                      "month":  1,
+                      "x":  4330.0,
+                      "y":  5858.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "fantastic-four",
+                      "label":  "Fantastic Four",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24067,
+                      "year":  2005,
+                      "month":  7,
+                      "x":  3960.0,
+                      "y":  5758.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "x-men-the-last-stand-2006",
+                      "label":  "X-Men: The Last Stand (2006)",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24078,
+                      "year":  2006,
+                      "month":  6,
+                      "x":  2735.0,
+                      "y":  5018.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "spider-man-3-2007",
+                      "label":  "Spider-Man 3 (2007)",
+                      "format":  "film",
+                      "studio":  "Sony — Spider-Man Universe",
+                      "fill":  "#ead1dc",
+                      "stroke":  "#a64d79",
+                      "datekey":  24090,
+                      "year":  2007,
+                      "month":  6,
+                      "x":  -630.0,
+                      "y":  5150.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "fantastic-four-rise-of-the-silver-surfer",
+                      "label":  "Fantastic Four Rise of the Silver Surfer",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24090,
+                      "year":  2007,
+                      "month":  6,
+                      "x":  3960.0,
+                      "y":  5858.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "iron-man-may-2008",
+                      "label":  "Iron Man (May 2008)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24101,
+                      "year":  2008,
+                      "month":  5,
+                      "x":  280.0,
+                      "y":  1114.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "the-incredible-hulk-jun-2008",
+                      "label":  "The Incredible Hulk (Jun 2008)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24102,
+                      "year":  2008,
+                      "month":  6,
+                      "x":  -90.0,
+                      "y":  1304.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "x-men-origins-wolverine-may-2009",
+                      "label":  "X-Men Origins: Wolverine (May 2009)",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24113,
+                      "year":  2009,
+                      "month":  5,
+                      "x":  3115.0,
+                      "y":  5018.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "iron-man-2-may-2010",
+                      "label":  "Iron Man 2 (May 2010)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24125,
+                      "year":  2010,
+                      "month":  5,
+                      "x":  280.0,
+                      "y":  1210.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "thor-may-2011",
+                      "label":  "Thor (May 2011)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24137,
+                      "year":  2011,
+                      "month":  5,
+                      "x":  280.0,
+                      "y":  1304.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "x-men-first-class-jun-2011",
+                      "label":  "X-Men: First Class (Jun 2011)",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24138,
+                      "year":  2011,
+                      "month":  6,
+                      "x":  3315.0,
+                      "y":  5158.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "captain-america-the-first-avenger-jul-2011",
+                      "label":  "Captain America: The First Avenger (Jul 2011)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24139,
+                      "year":  2011,
+                      "month":  7,
+                      "x":  650.0,
+                      "y":  1304.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "one-shot-the-consultant-sep-2011",
+                      "label":  "One-Shot: The Consultant (Sep 2011)",
+                      "format":  "special",
+                      "studio":  "Marvel Studios — Special / One-Shot",
+                      "fill":  "#ffe6cc",
+                      "stroke":  "#d79b00",
+                      "datekey":  24141,
+                      "year":  2011,
+                      "month":  9,
+                      "x":  -250.0,
+                      "y":  1460.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "one-shot-a-funny-thing-happened-on-the-way-to-thor-s-hammer-oct-2011",
+                      "label":  "One-Shot: A Funny Thing Happened on the Way to Thor\u0027s Hammer (Oct 2011)",
+                      "format":  "special",
+                      "studio":  "Marvel Studios — Special / One-Shot",
+                      "fill":  "#ffe6cc",
+                      "stroke":  "#d79b00",
+                      "datekey":  24142,
+                      "year":  2011,
+                      "month":  10,
+                      "x":  -100.0,
+                      "y":  1600.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "the-avengers-may-2012",
+                      "label":  "The Avengers (May 2012)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24149,
+                      "year":  2012,
+                      "month":  5,
+                      "x":  330.0,
+                      "y":  1600.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "the-amazing-spider-man-jul-2012",
+                      "label":  "The Amazing Spider-Man (Jul 2012)",
+                      "format":  "film",
+                      "studio":  "Sony — Spider-Man Universe",
+                      "fill":  "#ead1dc",
+                      "stroke":  "#a64d79",
+                      "datekey":  24151,
+                      "year":  2012,
+                      "month":  7,
+                      "x":  -1000.0,
+                      "y":  5040.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "one-shot-item-47-sep-2012",
+                      "label":  "One-Shot: Item 47 (Sep 2012)",
+                      "format":  "special",
+                      "studio":  "Marvel Studios — Special / One-Shot",
+                      "fill":  "#ffe6cc",
+                      "stroke":  "#d79b00",
+                      "datekey":  24153,
+                      "year":  2012,
+                      "month":  9,
+                      "x":  -220.0,
+                      "y":  1840.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "iron-man-3-may-2013",
+                      "label":  "Iron Man 3 (May 2013)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24161,
+                      "year":  2013,
+                      "month":  5,
+                      "x":  760.0,
+                      "y":  2220.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "the-wolverine-jul-2013",
+                      "label":  "The Wolverine (Jul 2013)",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24163,
+                      "year":  2013,
+                      "month":  7,
+                      "x":  2925.0,
+                      "y":  5158.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agents-of-s-h-i-e-l-d-s1-eps-1-7-sep-2013-apr-2014",
+                      "label":  "Agents of S.H.I.E.L.D. S1, Eps. 1-7 (Sep 2013–Apr 2014)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24165,
+                      "year":  2013,
+                      "month":  9,
+                      "x":  140.0,
+                      "y":  1840.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agents-of-s-h-i-e-l-d-s1-eps-8-16-sep-2013-apr-2014",
+                      "label":  "Agents of S.H.I.E.L.D. S1, Eps. 8-16 (Sep 2013–Apr 2014)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24165,
+                      "year":  2013,
+                      "month":  9,
+                      "x":  260.0,
+                      "y":  2080.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "one-shot-agent-carter-sep-2013",
+                      "label":  "One-Shot: Agent Carter (Sep 2013)",
+                      "format":  "special",
+                      "studio":  "Marvel Studios — Special / One-Shot",
+                      "fill":  "#ffe6cc",
+                      "stroke":  "#d79b00",
+                      "datekey":  24165,
+                      "year":  2013,
+                      "month":  9,
+                      "x":  770.0,
+                      "y":  1600.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "thor-the-dark-world-nov-2013",
+                      "label":  "Thor: The Dark World (Nov 2013)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24167,
+                      "year":  2013,
+                      "month":  11,
+                      "x":  140.0,
+                      "y":  1960.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "one-shot-all-hail-the-king-feb-2014",
+                      "label":  "One-Shot: All Hail the King (Feb 2014)",
+                      "format":  "special",
+                      "studio":  "Marvel Studios — Special / One-Shot",
+                      "fill":  "#ffe6cc",
+                      "stroke":  "#d79b00",
+                      "datekey":  24170,
+                      "year":  2014,
+                      "month":  2,
+                      "x":  960.0,
+                      "y":  2340.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agents-of-s-h-i-e-l-d-s1-eps-17-22-turn-turn-turn-onward-apr-may-2014",
+                      "label":  "Agents of S.H.I.E.L.D. S1, Eps. 17–22 ‘Turn, Turn, Turn’ onward (Apr–May 2014)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24172,
+                      "year":  2014,
+                      "month":  4,
+                      "x":  -10.0,
+                      "y":  2355.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "captain-america-the-winter-soldier-apr-2014",
+                      "label":  "Captain America: The Winter Soldier (Apr 2014)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24172,
+                      "year":  2014,
+                      "month":  4,
+                      "x":  370.0,
+                      "y":  2220.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "the-amazing-spider-man-2-may-2014",
+                      "label":  "The Amazing Spider-Man 2 (May 2014)",
+                      "format":  "film",
+                      "studio":  "Sony — Spider-Man Universe",
+                      "fill":  "#ead1dc",
+                      "stroke":  "#a64d79",
+                      "datekey":  24173,
+                      "year":  2014,
+                      "month":  5,
+                      "x":  -1000.0,
+                      "y":  5150.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "x-men-days-of-future-past-may-2014",
+                      "label":  "X-Men: Days of Future Past (May 2014)",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24173,
+                      "year":  2014,
+                      "month":  5,
+                      "x":  3115.0,
+                      "y":  5298.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "guardians-of-the-galaxy-aug-2014",
+                      "label":  "Guardians of the Galaxy (Aug 2014)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24176,
+                      "year":  2014,
+                      "month":  8,
+                      "x":  1070.0,
+                      "y":  3410.0,
+                      "w":  340.0,
+                      "h":  40.0
+                  },
+                  {
+                      "id":  "agents-of-s-h-i-e-l-d-s2-eps-1-19-sep-2014-may-2015",
+                      "label":  "Agents of S.H.I.E.L.D. S2, Eps. 1-19 (Sep 2014–May 2015)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24177,
+                      "year":  2014,
+                      "month":  9,
+                      "x":  -10.0,
+                      "y":  2445.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agents-of-s-h-i-e-l-d-s2-eps-20-22-sep-2014-may-2015",
+                      "label":  "Agents of S.H.I.E.L.D. S2, Eps. 20-22 (Sep 2014–May 2015)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24177,
+                      "year":  2014,
+                      "month":  9,
+                      "x":  370.0,
+                      "y":  2730.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agent-carter-s1-jan-mar-2015",
+                      "label":  "Agent Carter S1 (Jan–Mar 2015)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24181,
+                      "year":  2015,
+                      "month":  1,
+                      "x":  770.0,
+                      "y":  1720.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "daredevil-s1-apr-2015",
+                      "label":  "Daredevil S1 (Apr 2015)",
+                      "format":  "tv",
+                      "studio":  "Netflix",
+                      "fill":  "#f8cecc",
+                      "stroke":  "#b85450",
+                      "datekey":  24184,
+                      "year":  2015,
+                      "month":  4,
+                      "x":  2530.0,
+                      "y":  3430.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "avengers-age-of-ultron-may-2015",
+                      "label":  "Avengers: Age of Ultron (May 2015)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24185,
+                      "year":  2015,
+                      "month":  5,
+                      "x":  370.0,
+                      "y":  2600.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "ant-man-jul-2015",
+                      "label":  "Ant-Man (Jul 2015)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24187,
+                      "year":  2015,
+                      "month":  7,
+                      "x":  890.0,
+                      "y":  2860.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agents-of-s-h-i-e-l-d-s3-eps-20-22-sep-2015-may-2016",
+                      "label":  "Agents of S.H.I.E.L.D. S3, Eps. 20-22 (Sep 2015–May 2016)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24189,
+                      "year":  2015,
+                      "month":  9,
+                      "x":  70.0,
+                      "y":  3150.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agents-of-s-h-i-e-l-d-s3-eps-1-19-sep-2015-may-2016",
+                      "label":  "Agents of S.H.I.E.L.D. S3, Eps. 1-19 (Sep 2015–May 2016)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24189,
+                      "year":  2015,
+                      "month":  9,
+                      "x":  370.0,
+                      "y":  2840.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "jessica-jones-s1-nov-2015",
+                      "label":  "Jessica Jones S1 (Nov 2015)",
+                      "format":  "tv",
+                      "studio":  "Netflix",
+                      "fill":  "#f8cecc",
+                      "stroke":  "#b85450",
+                      "datekey":  24191,
+                      "year":  2015,
+                      "month":  11,
+                      "x":  2710.0,
+                      "y":  3556.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agent-carter-s2-jan-mar-2016",
+                      "label":  "Agent Carter S2 (Jan–Mar 2016)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24193,
+                      "year":  2016,
+                      "month":  1,
+                      "x":  770.0,
+                      "y":  1830.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "deadpool-feb-2016",
+                      "label":  "Deadpool (Feb 2016)",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24194,
+                      "year":  2016,
+                      "month":  2,
+                      "x":  3200.0,
+                      "y":  5638.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "daredevil-s2-mar-2016",
+                      "label":  "Daredevil S2 (Mar 2016)",
+                      "format":  "tv",
+                      "studio":  "Netflix",
+                      "fill":  "#f8cecc",
+                      "stroke":  "#b85450",
+                      "datekey":  24195,
+                      "year":  2016,
+                      "month":  3,
+                      "x":  2490.0,
+                      "y":  3680.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "captain-america-civil-war-may-2016",
+                      "label":  "Captain America: Civil War (May 2016)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24197,
+                      "year":  2016,
+                      "month":  5,
+                      "x":  600.0,
+                      "y":  2980.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "x-men-apocalypse-may-2016",
+                      "label":  "X-Men: Apocalypse (May 2016)",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24197,
+                      "year":  2016,
+                      "month":  5,
+                      "x":  3200.0,
+                      "y":  5454.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agents-of-s-h-i-e-l-d-s4-eps-22-sep-2016-may-2017",
+                      "label":  "Agents of S.H.I.E.L.D. S4, Eps. 22 (Sep 2016–May 2017)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24201,
+                      "year":  2016,
+                      "month":  9,
+                      "x":  -180.0,
+                      "y":  3560.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agents-of-s-h-i-e-l-d-s4-eps-1-21-sep-2016-may-2017",
+                      "label":  "Agents of S.H.I.E.L.D. S4, Eps. 1-21 (Sep 2016–May 2017)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24201,
+                      "year":  2016,
+                      "month":  9,
+                      "x":  70.0,
+                      "y":  3250.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "luke-cage-s1-sep-2016",
+                      "label":  "Luke Cage S1 (Sep 2016)",
+                      "format":  "tv",
+                      "studio":  "Netflix",
+                      "fill":  "#f8cecc",
+                      "stroke":  "#b85450",
+                      "datekey":  24201,
+                      "year":  2016,
+                      "month":  9,
+                      "x":  2300.0,
+                      "y":  3840.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "doctor-strange-nov-2016",
+                      "label":  "Doctor Strange (Nov 2016)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24203,
+                      "year":  2016,
+                      "month":  11,
+                      "x":  60.0,
+                      "y":  3390.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "iron-fist-s1-mar-2017",
+                      "label":  "Iron Fist S1 (Mar 2017)",
+                      "format":  "tv",
+                      "studio":  "Netflix",
+                      "fill":  "#f8cecc",
+                      "stroke":  "#b85450",
+                      "datekey":  24207,
+                      "year":  2017,
+                      "month":  3,
+                      "x":  1950.0,
+                      "y":  4000.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "logan-mar-2017",
+                      "label":  "Logan (Mar 2017)",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24207,
+                      "year":  2017,
+                      "month":  3,
+                      "x":  2850.0,
+                      "y":  5838.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "guardians-of-the-galaxy-vol-2-may-2017",
+                      "label":  "Guardians of the Galaxy Vol. 2 (May 2017)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24209,
+                      "year":  2017,
+                      "month":  5,
+                      "x":  1070.0,
+                      "y":  3480.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "spider-man-homecoming-jul-2017",
+                      "label":  "Spider-Man: Homecoming (Jul 2017)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24211,
+                      "year":  2017,
+                      "month":  7,
+                      "x":  850.0,
+                      "y":  3250.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "the-defenders-aug-2017",
+                      "label":  "The Defenders (Aug 2017)",
+                      "format":  "tv",
+                      "studio":  "Netflix",
+                      "fill":  "#f8cecc",
+                      "stroke":  "#b85450",
+                      "datekey":  24212,
+                      "year":  2017,
+                      "month":  8,
+                      "x":  2660.0,
+                      "y":  4000.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "inhumans-sep-2017",
+                      "label":  "Inhumans (Sep 2017)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24213,
+                      "year":  2017,
+                      "month":  9,
+                      "x":  -50.0,
+                      "y":  2590.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "runaways-s1-nov-2017",
+                      "label":  "Runaways S1 (Nov 2017)",
+                      "format":  "tv",
+                      "studio":  "Freeform / Hulu",
+                      "fill":  "#f5f5f5",
+                      "stroke":  "#666666",
+                      "datekey":  24215,
+                      "year":  2017,
+                      "month":  11,
+                      "x":  -1810.0,
+                      "y":  4300.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "thor-ragnarok-nov-2017",
+                      "label":  "Thor: Ragnarok (Nov 2017)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24215,
+                      "year":  2017,
+                      "month":  11,
+                      "x":  200.0,
+                      "y":  3560.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "the-punisher-s1-nov-2017",
+                      "label":  "The Punisher S1 (Nov 2017)",
+                      "format":  "tv",
+                      "studio":  "Netflix",
+                      "fill":  "#f8cecc",
+                      "stroke":  "#b85450",
+                      "datekey":  24215,
+                      "year":  2017,
+                      "month":  11,
+                      "x":  3100.0,
+                      "y":  4170.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agents-of-s-h-i-e-l-d-s5-eps-1-19-dec-2017-may-2018",
+                      "label":  "Agents of S.H.I.E.L.D. S5, Eps. 1-19 (Dec 2017–May 2018)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24216,
+                      "year":  2017,
+                      "month":  12,
+                      "x":  -180.0,
+                      "y":  3650.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agents-of-s-h-i-e-l-d-s5-eps-20-22-dec-2017-may-2018",
+                      "label":  "Agents of S.H.I.E.L.D. S5, Eps. 20-22 (Dec 2017–May 2018)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24216,
+                      "year":  2017,
+                      "month":  12,
+                      "x":  410.0,
+                      "y":  3950.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "black-panther-feb-2018",
+                      "label":  "Black Panther (Feb 2018)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24218,
+                      "year":  2018,
+                      "month":  2,
+                      "x":  480.0,
+                      "y":  3250.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "jessica-jones-s2-mar-2018",
+                      "label":  "Jessica Jones S2 (Mar 2018)",
+                      "format":  "tv",
+                      "studio":  "Netflix",
+                      "fill":  "#f8cecc",
+                      "stroke":  "#b85450",
+                      "datekey":  24219,
+                      "year":  2018,
+                      "month":  3,
+                      "x":  3080.0,
+                      "y":  3690.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "avengers-infinity-war-apr-2018",
+                      "label":  "Avengers: Infinity War (Apr 2018)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24220,
+                      "year":  2018,
+                      "month":  4,
+                      "x":  630.0,
+                      "y":  3810.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "deadpool-2-may-2018",
+                      "label":  "Deadpool 2 (May 2018)",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24221,
+                      "year":  2018,
+                      "month":  5,
+                      "x":  3200.0,
+                      "y":  5748.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "cloak-dagger-s1-jun-2018",
+                      "label":  "Cloak \u0026 Dagger S1 (Jun 2018)",
+                      "format":  "tv",
+                      "studio":  "Freeform / Hulu",
+                      "fill":  "#f5f5f5",
+                      "stroke":  "#666666",
+                      "datekey":  24222,
+                      "year":  2018,
+                      "month":  6,
+                      "x":  -2170.0,
+                      "y":  4300.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "luke-cage-s2-jun-2018",
+                      "label":  "Luke Cage S2 (Jun 2018)",
+                      "format":  "tv",
+                      "studio":  "Netflix",
+                      "fill":  "#f8cecc",
+                      "stroke":  "#b85450",
+                      "datekey":  24222,
+                      "year":  2018,
+                      "month":  6,
+                      "x":  2300.0,
+                      "y":  4170.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "ant-man-and-the-wasp-jul-2018",
+                      "label":  "Ant-Man and the Wasp (Jul 2018)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24223,
+                      "year":  2018,
+                      "month":  7,
+                      "x":  1400.0,
+                      "y":  3810.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "iron-fist-s2-sep-2018",
+                      "label":  "Iron Fist S2 (Sep 2018)",
+                      "format":  "tv",
+                      "studio":  "Netflix",
+                      "fill":  "#f8cecc",
+                      "stroke":  "#b85450",
+                      "datekey":  24225,
+                      "year":  2018,
+                      "month":  9,
+                      "x":  1950.0,
+                      "y":  4170.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "venom-oct-2018",
+                      "label":  "Venom (Oct 2018)",
+                      "format":  "film",
+                      "studio":  "Sony — Spider-Man Universe",
+                      "fill":  "#ead1dc",
+                      "stroke":  "#a64d79",
+                      "datekey":  24226,
+                      "year":  2018,
+                      "month":  10,
+                      "x":  110.0,
+                      "y":  5110.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "daredevil-s3",
+                      "label":  "Daredevil S3",
+                      "format":  "tv",
+                      "studio":  "Netflix",
+                      "fill":  "#f8cecc",
+                      "stroke":  "#b85450",
+                      "datekey":  24226,
+                      "year":  2018,
+                      "month":  10,
+                      "x":  2740.0,
+                      "y":  4170.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "runaways-s2-dec-2018",
+                      "label":  "Runaways S2 (Dec 2018)",
+                      "format":  "tv",
+                      "studio":  "Freeform / Hulu",
+                      "fill":  "#f5f5f5",
+                      "stroke":  "#666666",
+                      "datekey":  24228,
+                      "year":  2018,
+                      "month":  12,
+                      "x":  -1810.0,
+                      "y":  4400.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "the-punisher-s2-jan-2019",
+                      "label":  "The Punisher S2 (Jan 2019)",
+                      "format":  "tv",
+                      "studio":  "Netflix",
+                      "fill":  "#f8cecc",
+                      "stroke":  "#b85450",
+                      "datekey":  24229,
+                      "year":  2019,
+                      "month":  1,
+                      "x":  3100.0,
+                      "y":  4280.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "captain-marvel-mar-2019",
+                      "label":  "Captain Marvel (Mar 2019)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24231,
+                      "year":  2019,
+                      "month":  3,
+                      "x":  1030.0,
+                      "y":  3810.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "cloak-dagger-s2-apr-2019",
+                      "label":  "Cloak \u0026 Dagger S2 (Apr 2019)",
+                      "format":  "tv",
+                      "studio":  "Freeform / Hulu",
+                      "fill":  "#f5f5f5",
+                      "stroke":  "#666666",
+                      "datekey":  24232,
+                      "year":  2019,
+                      "month":  4,
+                      "x":  -2170.0,
+                      "y":  4390.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "avengers-endgame-apr-2019",
+                      "label":  "Avengers: Endgame (Apr 2019)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24232,
+                      "year":  2019,
+                      "month":  4,
+                      "x":  1020.0,
+                      "y":  4260.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agents-of-s-h-i-e-l-d-s6-may-jun-2019",
+                      "label":  "Agents of S.H.I.E.L.D. S6 (May–Jun 2019)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24233,
+                      "year":  2019,
+                      "month":  5,
+                      "x":  410.0,
+                      "y":  4060.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "dark-phoenix-jun-2019",
+                      "label":  "Dark Phoenix (Jun 2019)",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24234,
+                      "year":  2019,
+                      "month":  6,
+                      "x":  3200.0,
+                      "y":  5546.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "jessica-jones-s3-jun-2019",
+                      "label":  "Jessica Jones S3 (Jun 2019)",
+                      "format":  "tv",
+                      "studio":  "Netflix",
+                      "fill":  "#f8cecc",
+                      "stroke":  "#b85450",
+                      "datekey":  24234,
+                      "year":  2019,
+                      "month":  6,
+                      "x":  3460.0,
+                      "y":  4180.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "spider-man-far-from-home-jul-2019",
+                      "label":  "Spider-Man: Far From Home (Jul 2019)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24235,
+                      "year":  2019,
+                      "month":  7,
+                      "x":  -290.0,
+                      "y":  4552.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "runaways-s3-dec-2019",
+                      "label":  "Runaways S3 (Dec 2019)",
+                      "format":  "tv",
+                      "studio":  "Freeform / Hulu",
+                      "fill":  "#f5f5f5",
+                      "stroke":  "#666666",
+                      "datekey":  24240,
+                      "year":  2019,
+                      "month":  12,
+                      "x":  -1810.0,
+                      "y":  4550.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agents-of-s-h-i-e-l-d-s7-may-aug-2020",
+                      "label":  "Agents of S.H.I.E.L.D. S7 (May–Aug 2020)",
+                      "format":  "tv",
+                      "studio":  "ABC",
+                      "fill":  "#e1d5e7",
+                      "stroke":  "#9673a6",
+                      "datekey":  24245,
+                      "year":  2020,
+                      "month":  5,
+                      "x":  410.0,
+                      "y":  4170.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "the-new-mutants-aug-2020",
+                      "label":  "The New Mutants (Aug 2020)",
+                      "format":  "film",
+                      "studio":  "20th Century Fox — Legacy Marvel Films",
+                      "fill":  "#e6b8af",
+                      "stroke":  "#85200c",
+                      "datekey":  24248,
+                      "year":  2020,
+                      "month":  8,
+                      "x":  3580.0,
+                      "y":  5546.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "helstrom-oct-2020",
+                      "label":  "Helstrom (Oct 2020)",
+                      "format":  "tv",
+                      "studio":  "Freeform / Hulu",
+                      "fill":  "#f5f5f5",
+                      "stroke":  "#666666",
+                      "datekey":  24250,
+                      "year":  2020,
+                      "month":  10,
+                      "x":  -460.0,
+                      "y":  400.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "wandavision-jan-mar-2021",
+                      "label":  "WandaVision (Jan–Mar 2021)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24253,
+                      "year":  2021,
+                      "month":  1,
+                      "x":  -1410.0,
+                      "y":  4550.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "the-falcon-and-the-winter-soldier-mar-apr-2021",
+                      "label":  "The Falcon and the Winter Soldier (Mar–Apr 2021)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24255,
+                      "year":  2021,
+                      "month":  3,
+                      "x":  850.0,
+                      "y":  4542.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "loki-s1-jun-jul-2021",
+                      "label":  "Loki S1 (Jun–Jul 2021)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24258,
+                      "year":  2021,
+                      "month":  6,
+                      "x":  2200.0,
+                      "y":  5420.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "black-widow-jul-2021",
+                      "label":  "Black Widow (Jul 2021)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24259,
+                      "year":  2021,
+                      "month":  7,
+                      "x":  1240.0,
+                      "y":  4542.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "what-if-s1-aug-oct-2021",
+                      "label":  "What If...? S1 (Aug–Oct 2021)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Animated",
+                      "fill":  "#fff2cc",
+                      "stroke":  "#d6b656",
+                      "datekey":  24260,
+                      "year":  2021,
+                      "month":  8,
+                      "x":  2210.0,
+                      "y":  5978.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "shang-chi-and-the-legend-of-the-ten-rings-sep-2021",
+                      "label":  "Shang-Chi and the Legend of the Ten Rings (Sep 2021)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24261,
+                      "year":  2021,
+                      "month":  9,
+                      "x":  1610.0,
+                      "y":  4540.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "venom-let-there-be-carnage-oct-2021",
+                      "label":  "Venom: Let There Be Carnage (Oct 2021)",
+                      "format":  "film",
+                      "studio":  "Sony — Spider-Man Universe",
+                      "fill":  "#ead1dc",
+                      "stroke":  "#a64d79",
+                      "datekey":  24262,
+                      "year":  2021,
+                      "month":  10,
+                      "x":  110.0,
+                      "y":  5210.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "eternals-nov-2021",
+                      "label":  "Eternals (Nov 2021)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24263,
+                      "year":  2021,
+                      "month":  11,
+                      "x":  470.0,
+                      "y":  4554.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "hawkeye-nov-dec-2021",
+                      "label":  "Hawkeye (Nov–Dec 2021)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24263,
+                      "year":  2021,
+                      "month":  11,
+                      "x":  1240.0,
+                      "y":  4770.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "spider-man-no-way-home-dec-2021",
+                      "label":  "Spider-Man: No Way Home (Dec 2021)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24264,
+                      "year":  2021,
+                      "month":  12,
+                      "x":  -200.0,
+                      "y":  5360.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "moon-knight-mar-may-2022",
+                      "label":  "Moon Knight (Mar–May 2022)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24267,
+                      "year":  2022,
+                      "month":  3,
+                      "x":  -1010.0,
+                      "y":  506.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "morbius-apr-2022",
+                      "label":  "Morbius (Apr 2022)",
+                      "format":  "film",
+                      "studio":  "Sony — Spider-Man Universe",
+                      "fill":  "#ead1dc",
+                      "stroke":  "#a64d79",
+                      "datekey":  24268,
+                      "year":  2022,
+                      "month":  4,
+                      "x":  -200.0,
+                      "y":  5540.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "doctor-strange-in-the-multiverse-of-madness-may-2022",
+                      "label":  "Doctor Strange in the Multiverse of Madness (May 2022)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24269,
+                      "year":  2022,
+                      "month":  5,
+                      "x":  -575.0,
+                      "y":  5540.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "ms-marvel-jun-jul-2022",
+                      "label":  "Ms. Marvel (Jun–Jul 2022)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24270,
+                      "year":  2022,
+                      "month":  6,
+                      "x":  -650.0,
+                      "y":  4550.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "thor-love-and-thunder-jul-2022",
+                      "label":  "Thor: Love and Thunder (Jul 2022)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24271,
+                      "year":  2022,
+                      "month":  7,
+                      "x":  90.0,
+                      "y":  4554.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "i-am-groot-aug-2022",
+                      "label":  "I Am Groot (Aug 2022)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Animated",
+                      "fill":  "#fff2cc",
+                      "stroke":  "#d6b656",
+                      "datekey":  24272,
+                      "year":  2022,
+                      "month":  8,
+                      "x":  1070.0,
+                      "y":  3570.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "she-hulk-attorney-at-law-aug-oct-2022",
+                      "label":  "She-Hulk: Attorney at Law (Aug–Oct 2022)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24272,
+                      "year":  2022,
+                      "month":  8,
+                      "x":  1610.0,
+                      "y":  4770.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "werewolf-by-night-oct-2022",
+                      "label":  "Werewolf by Night (Oct 2022)",
+                      "format":  "special",
+                      "studio":  "Marvel Studios — Special / One-Shot",
+                      "fill":  "#ffe6cc",
+                      "stroke":  "#d79b00",
+                      "datekey":  24274,
+                      "year":  2022,
+                      "month":  10,
+                      "x":  -1020.0,
+                      "y":  420.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "black-panther-wakanda-forever-nov-2022",
+                      "label":  "Black Panther: Wakanda Forever (Nov 2022)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24275,
+                      "year":  2022,
+                      "month":  11,
+                      "x":  -1030.0,
+                      "y":  4552.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "the-guardians-of-the-galaxy-holiday-special-nov-2022",
+                      "label":  "The Guardians of the Galaxy Holiday Special (Nov 2022)",
+                      "format":  "special",
+                      "studio":  "Marvel Studios — Special / One-Shot",
+                      "fill":  "#ffe6cc",
+                      "stroke":  "#d79b00",
+                      "datekey":  24275,
+                      "year":  2022,
+                      "month":  11,
+                      "x":  90.0,
+                      "y":  4672.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "ant-man-and-the-wasp-quantumania-feb-2023",
+                      "label":  "Ant-Man and the Wasp: Quantumania (Feb 2023)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24278,
+                      "year":  2023,
+                      "month":  2,
+                      "x":  2080.0,
+                      "y":  5638.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "guardians-of-the-galaxy-vol-3-may-2023",
+                      "label":  "Guardians of the Galaxy Vol. 3 (May 2023)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24281,
+                      "year":  2023,
+                      "month":  5,
+                      "x":  90.0,
+                      "y":  4772.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "secret-invasion-jun-jul-2023",
+                      "label":  "Secret Invasion (Jun–Jul 2023)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24282,
+                      "year":  2023,
+                      "month":  6,
+                      "x":  -490.0,
+                      "y":  4690.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "loki-s2-oct-nov-2023",
+                      "label":  "Loki S2 (Oct–Nov 2023)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24286,
+                      "year":  2023,
+                      "month":  10,
+                      "x":  2440.0,
+                      "y":  5852.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "the-marvels-nov-2023",
+                      "label":  "The Marvels (Nov 2023)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24287,
+                      "year":  2023,
+                      "month":  11,
+                      "x":  -490.0,
+                      "y":  4798.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "what-if-s2-dec-2023",
+                      "label":  "What If...? S2 (Dec 2023)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Animated",
+                      "fill":  "#fff2cc",
+                      "stroke":  "#d6b656",
+                      "datekey":  24288,
+                      "year":  2023,
+                      "month":  12,
+                      "x":  2210.0,
+                      "y":  6068.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "echo-jan-2024",
+                      "label":  "Echo (Jan 2024)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24289,
+                      "year":  2024,
+                      "month":  1,
+                      "x":  1470.0,
+                      "y":  4960.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "madame-web-feb-2024",
+                      "label":  "Madame Web (Feb 2024)",
+                      "format":  "film",
+                      "studio":  "Sony — Spider-Man Universe",
+                      "fill":  "#ead1dc",
+                      "stroke":  "#a64d79",
+                      "datekey":  24290,
+                      "year":  2024,
+                      "month":  2,
+                      "x":  -200.0,
+                      "y":  5640.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "x-men-97-s1-mar-2024",
+                      "label":  "X-Men \u002797 S1 (Mar 2024)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Animated",
+                      "fill":  "#fff2cc",
+                      "stroke":  "#d6b656",
+                      "datekey":  24291,
+                      "year":  2024,
+                      "month":  3,
+                      "x":  440.0,
+                      "y":  10130.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "deadpool-wolverine-jul-2024",
+                      "label":  "Deadpool \u0026 Wolverine (Jul 2024)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24295,
+                      "year":  2024,
+                      "month":  7,
+                      "x":  3200.0,
+                      "y":  6058.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "agatha-all-along-sep-oct-2024",
+                      "label":  "Agatha All Along (Sep–Oct 2024)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24297,
+                      "year":  2024,
+                      "month":  9,
+                      "x":  -1760.0,
+                      "y":  4730.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "venom-the-last-dance-oct-2024",
+                      "label":  "Venom: The Last Dance (Oct 2024)",
+                      "format":  "film",
+                      "studio":  "Sony — Spider-Man Universe",
+                      "fill":  "#ead1dc",
+                      "stroke":  "#a64d79",
+                      "datekey":  24298,
+                      "year":  2024,
+                      "month":  10,
+                      "x":  160.0,
+                      "y":  5543.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "kraven-the-hunter-dec-2024",
+                      "label":  "Kraven the Hunter (Dec 2024)",
+                      "format":  "film",
+                      "studio":  "Sony — Spider-Man Universe",
+                      "fill":  "#ead1dc",
+                      "stroke":  "#a64d79",
+                      "datekey":  24300,
+                      "year":  2024,
+                      "month":  12,
+                      "x":  -200.0,
+                      "y":  5730.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "what-if-s3-dec-2024",
+                      "label":  "What If...? S3 (Dec 2024)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Animated",
+                      "fill":  "#fff2cc",
+                      "stroke":  "#d6b656",
+                      "datekey":  24300,
+                      "year":  2024,
+                      "month":  12,
+                      "x":  2210.0,
+                      "y":  6158.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "your-friendly-neighborhood-spider-man-s1-jan-2025",
+                      "label":  "Your Friendly Neighborhood Spider-Man S1 (Jan 2025)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Animated",
+                      "fill":  "#fff2cc",
+                      "stroke":  "#d6b656",
+                      "datekey":  24301,
+                      "year":  2025,
+                      "month":  1,
+                      "x":  390.0,
+                      "y":  10220.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "captain-america-brave-new-world-feb-2025",
+                      "label":  "Captain America: Brave New World (Feb 2025)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24302,
+                      "year":  2025,
+                      "month":  2,
+                      "x":  670.0,
+                      "y":  4772.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "daredevil-born-again-s1-mar-2025",
+                      "label":  "Daredevil: Born Again S1 (Mar 2025)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24303,
+                      "year":  2025,
+                      "month":  3,
+                      "x":  1470.0,
+                      "y":  5070.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "thunderbolts-may-2025",
+                      "label":  "Thunderbolts* (May 2025)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24305,
+                      "year":  2025,
+                      "month":  5,
+                      "x":  910.0,
+                      "y":  4960.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "ironheart-jun-2025",
+                      "label":  "Ironheart (Jun 2025)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24306,
+                      "year":  2025,
+                      "month":  6,
+                      "x":  -1030.0,
+                      "y":  4732.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "the-fantastic-four-first-steps-jul-2025",
+                      "label":  "The Fantastic Four: First Steps (Jul 2025)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24307,
+                      "year":  2025,
+                      "month":  7,
+                      "x":  910.0,
+                      "y":  5070.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "eyes-of-wakanda-aug-2025",
+                      "label":  "Eyes of Wakanda (Aug 2025)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Animated",
+                      "fill":  "#fff2cc",
+                      "stroke":  "#d6b656",
+                      "datekey":  24308,
+                      "year":  2025,
+                      "month":  8,
+                      "x":  580.0,
+                      "y":  10380.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "marvel-zombies-oct-2025",
+                      "label":  "Marvel Zombies (Oct 2025)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Animated",
+                      "fill":  "#fff2cc",
+                      "stroke":  "#d6b656",
+                      "datekey":  24310,
+                      "year":  2025,
+                      "month":  10,
+                      "x":  580.0,
+                      "y":  10460.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "visionquest-2026",
+                      "label":  "VisionQuest (2026)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24318,
+                      "year":  2026,
+                      "month":  6,
+                      "x":  -1410.0,
+                      "y":  4730.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "x-men-97-s2-2026",
+                      "label":  "X-Men \u002797 S2 (2026)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Animated",
+                      "fill":  "#fff2cc",
+                      "stroke":  "#d6b656",
+                      "datekey":  24318,
+                      "year":  2026,
+                      "month":  6,
+                      "x":  270.0,
+                      "y":  10340.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "your-friendly-neighborhood-spider-man-s2-2026",
+                      "label":  "Your Friendly Neighborhood Spider-Man S2 (2026)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Animated",
+                      "fill":  "#fff2cc",
+                      "stroke":  "#d6b656",
+                      "datekey":  24318,
+                      "year":  2026,
+                      "month":  6,
+                      "x":  280.0,
+                      "y":  10410.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "the-punisher-one-last-kill-2026",
+                      "label":  "The Punisher: One Last Kill (2026)",
+                      "format":  "special",
+                      "studio":  "Marvel Studios — Special / One-Shot",
+                      "fill":  "#ffe6cc",
+                      "stroke":  "#d79b00",
+                      "datekey":  24318,
+                      "year":  2026,
+                      "month":  6,
+                      "x":  630.0,
+                      "y":  5440.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "daredevil-born-again-s2-2026",
+                      "label":  "Daredevil: Born Again S2 (2026)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24318,
+                      "year":  2026,
+                      "month":  6,
+                      "x":  1470.0,
+                      "y":  5170.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "wonder-man-2026",
+                      "label":  "Wonder Man (2026)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24318,
+                      "year":  2026,
+                      "month":  6,
+                      "x":  1980.0,
+                      "y":  4770.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "spider-man-brand-new-day-jul-2026",
+                      "label":  "Spider-Man: Brand New Day (Jul 2026)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24319,
+                      "year":  2026,
+                      "month":  7,
+                      "x":  520.0,
+                      "y":  5543.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "avengers-endgame-encore-re-release-sep-25-2026",
+                      "label":  "Avengers: Endgame Encore (re-release, Sep 25 2026)",
+                      "format":  "special",
+                      "studio":  "Marvel Studios — Special / One-Shot",
+                      "fill":  "#ffe6cc",
+                      "stroke":  "#d79b00",
+                      "datekey":  24321,
+                      "year":  2026,
+                      "month":  9,
+                      "x":  1410.0,
+                      "y":  4260.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "avengers-doomsday-dec-18-2026",
+                      "label":  "Avengers: Doomsday (Dec 18, 2026)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24324,
+                      "year":  2026,
+                      "month":  12,
+                      "x":  1040.0,
+                      "y":  6730.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "daredevil-born-again-s3-2027",
+                      "label":  "Daredevil: Born Again S3 (2027)",
+                      "format":  "tv",
+                      "studio":  "Marvel Studios — Disney+ Series",
+                      "fill":  "#d5e8d4",
+                      "stroke":  "#82b366",
+                      "datekey":  24330,
+                      "year":  2027,
+                      "month":  6,
+                      "x":  1470.0,
+                      "y":  5270.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  },
+                  {
+                      "id":  "avengers-secret-wars-dec-17-2027",
+                      "label":  "Avengers: Secret Wars (Dec 17, 2027)",
+                      "format":  "film",
+                      "studio":  "Marvel Studios — Theatrical Film",
+                      "fill":  "#dae8fc",
+                      "stroke":  "#6c8ebf",
+                      "datekey":  24336,
+                      "year":  2027,
+                      "month":  12,
+                      "x":  1040.0,
+                      "y":  6834.0,
+                      "w":  340.0,
+                      "h":  60.0
+                  }
+              ],
+    "edges":  [
+                  {
+                      "source":  "x-men-2000",
+                      "target":  "x2-2003"
+                  },
+                  {
+                      "source":  "blade-ii-2002",
+                      "target":  "blade-trinity-2004"
+                  },
+                  {
+                      "source":  "x2-2003",
+                      "target":  "x-men-the-last-stand-2006"
+                  },
+                  {
+                      "source":  "x-men-the-last-stand-2006",
+                      "target":  "the-wolverine-jul-2013"
+                  },
+                  {
+                      "source":  "iron-man-may-2008",
+                      "target":  "iron-man-2-may-2010"
+                  },
+                  {
+                      "source":  "the-incredible-hulk-jun-2008",
+                      "target":  "one-shot-the-consultant-sep-2011"
+                  },
+                  {
+                      "source":  "the-incredible-hulk-jun-2008",
+                      "target":  "the-avengers-may-2012"
+                  },
+                  {
+                      "source":  "the-incredible-hulk-jun-2008",
+                      "target":  "shang-chi-and-the-legend-of-the-ten-rings-sep-2021"
+                  },
+                  {
+                      "source":  "x-men-origins-wolverine-may-2009",
+                      "target":  "the-wolverine-jul-2013"
+                  },
+                  {
+                      "source":  "iron-man-2-may-2010",
+                      "target":  "thor-may-2011"
+                  },
+                  {
+                      "source":  "thor-may-2011",
+                      "target":  "one-shot-a-funny-thing-happened-on-the-way-to-thor-s-hammer-oct-2011"
+                  },
+                  {
+                      "source":  "x-men-first-class-jun-2011",
+                      "target":  "x-men-days-of-future-past-may-2014"
+                  },
+                  {
+                      "source":  "captain-america-the-first-avenger-jul-2011",
+                      "target":  "the-avengers-may-2012"
+                  },
+                  {
+                      "source":  "captain-america-the-first-avenger-jul-2011",
+                      "target":  "one-shot-agent-carter-sep-2013"
+                  },
+                  {
+                      "source":  "one-shot-the-consultant-sep-2011",
+                      "target":  "one-shot-a-funny-thing-happened-on-the-way-to-thor-s-hammer-oct-2011"
+                  },
+                  {
+                      "source":  "the-avengers-may-2012",
+                      "target":  "one-shot-item-47-sep-2012"
+                  },
+                  {
+                      "source":  "the-avengers-may-2012",
+                      "target":  "iron-man-3-may-2013"
+                  },
+                  {
+                      "source":  "the-avengers-may-2012",
+                      "target":  "agents-of-s-h-i-e-l-d-s1-eps-1-7-sep-2013-apr-2014"
+                  },
+                  {
+                      "source":  "iron-man-3-may-2013",
+                      "target":  "one-shot-all-hail-the-king-feb-2014"
+                  },
+                  {
+                      "source":  "iron-man-3-may-2013",
+                      "target":  "avengers-age-of-ultron-may-2015"
+                  },
+                  {
+                      "source":  "the-wolverine-jul-2013",
+                      "target":  "x-men-days-of-future-past-may-2014"
+                  },
+                  {
+                      "source":  "one-shot-agent-carter-sep-2013",
+                      "target":  "agent-carter-s1-jan-mar-2015"
+                  },
+                  {
+                      "source":  "thor-the-dark-world-nov-2013",
+                      "target":  "agents-of-s-h-i-e-l-d-s1-eps-8-16-sep-2013-apr-2014"
+                  },
+                  {
+                      "source":  "thor-the-dark-world-nov-2013",
+                      "target":  "avengers-age-of-ultron-may-2015"
+                  },
+                  {
+                      "source":  "one-shot-all-hail-the-king-feb-2014",
+                      "target":  "shang-chi-and-the-legend-of-the-ten-rings-sep-2021"
+                  },
+                  {
+                      "source":  "x-men-days-of-future-past-may-2014",
+                      "target":  "x-men-apocalypse-may-2016"
+                  },
+                  {
+                      "source":  "x-men-days-of-future-past-may-2014",
+                      "target":  "logan-mar-2017"
+                  },
+                  {
+                      "source":  "x-men-days-of-future-past-may-2014",
+                      "target":  "avengers-doomsday-dec-18-2026"
+                  },
+                  {
+                      "source":  "guardians-of-the-galaxy-aug-2014",
+                      "target":  "guardians-of-the-galaxy-vol-2-may-2017"
+                  },
+                  {
+                      "source":  "agents-of-s-h-i-e-l-d-s2-eps-1-19-sep-2014-may-2015",
+                      "target":  "avengers-age-of-ultron-may-2015"
+                  },
+                  {
+                      "source":  "agent-carter-s1-jan-mar-2015",
+                      "target":  "agent-carter-s2-jan-mar-2016"
+                  },
+                  {
+                      "source":  "daredevil-s1-apr-2015",
+                      "target":  "jessica-jones-s1-nov-2015"
+                  },
+                  {
+                      "source":  "daredevil-s1-apr-2015",
+                      "target":  "daredevil-s2-mar-2016"
+                  },
+                  {
+                      "source":  "avengers-age-of-ultron-may-2015",
+                      "target":  "agents-of-s-h-i-e-l-d-s2-eps-20-22-sep-2014-may-2015"
+                  },
+                  {
+                      "source":  "avengers-age-of-ultron-may-2015",
+                      "target":  "captain-america-civil-war-may-2016"
+                  },
+                  {
+                      "source":  "ant-man-jul-2015",
+                      "target":  "captain-america-civil-war-may-2016"
+                  },
+                  {
+                      "source":  "jessica-jones-s1-nov-2015",
+                      "target":  "daredevil-s2-mar-2016"
+                  },
+                  {
+                      "source":  "jessica-jones-s1-nov-2015",
+                      "target":  "jessica-jones-s2-mar-2018"
+                  },
+                  {
+                      "source":  "agents-of-s-h-i-e-l-d-s2-eps-1-19-sep-2014-may-2015",
+                      "target":  "inhumans-sep-2017"
+                  },
+                  {
+                      "source":  "agents-of-s-h-i-e-l-d-s3-eps-1-19-sep-2015-may-2016",
+                      "target":  "captain-america-civil-war-may-2016"
+                  },
+                  {
+                      "source":  "agent-carter-s2-jan-mar-2016",
+                      "target":  "captain-america-the-winter-soldier-apr-2014"
+                  },
+                  {
+                      "source":  "deadpool-feb-2016",
+                      "target":  "deadpool-2-may-2018"
+                  },
+                  {
+                      "source":  "daredevil-s2-mar-2016",
+                      "target":  "luke-cage-s1-sep-2016"
+                  },
+                  {
+                      "source":  "daredevil-s2-mar-2016",
+                      "target":  "the-defenders-aug-2017"
+                  },
+                  {
+                      "source":  "daredevil-s2-mar-2016",
+                      "target":  "daredevil-s3"
+                  },
+                  {
+                      "source":  "daredevil-s2-mar-2016",
+                      "target":  "the-punisher-s1-nov-2017"
+                  },
+                  {
+                      "source":  "captain-america-civil-war-may-2016",
+                      "target":  "agents-of-s-h-i-e-l-d-s3-eps-20-22-sep-2015-may-2016"
+                  },
+                  {
+                      "source":  "captain-america-civil-war-may-2016",
+                      "target":  "black-panther-feb-2018"
+                  },
+                  {
+                      "source":  "avengers-age-of-ultron-may-2015",
+                      "target":  "thor-ragnarok-nov-2017"
+                  },
+                  {
+                      "source":  "captain-america-civil-war-may-2016",
+                      "target":  "spider-man-homecoming-jul-2017"
+                  },
+                  {
+                      "source":  "captain-america-civil-war-may-2016",
+                      "target":  "ant-man-and-the-wasp-jul-2018"
+                  },
+                  {
+                      "source":  "luke-cage-s1-sep-2016",
+                      "target":  "iron-fist-s1-mar-2017"
+                  },
+                  {
+                      "source":  "luke-cage-s1-sep-2016",
+                      "target":  "luke-cage-s2-jun-2018"
+                  },
+                  {
+                      "source":  "luke-cage-s1-sep-2016",
+                      "target":  "the-defenders-aug-2017"
+                  },
+                  {
+                      "source":  "agents-of-s-h-i-e-l-d-s4-eps-1-21-sep-2016-may-2017",
+                      "target":  "doctor-strange-nov-2016"
+                  },
+                  {
+                      "source":  "doctor-strange-nov-2016",
+                      "target":  "thor-ragnarok-nov-2017"
+                  },
+                  {
+                      "source":  "logan-mar-2017",
+                      "target":  "deadpool-wolverine-jul-2024"
+                  },
+                  {
+                      "source":  "iron-fist-s1-mar-2017",
+                      "target":  "iron-fist-s2-sep-2018"
+                  },
+                  {
+                      "source":  "guardians-of-the-galaxy-vol-2-may-2017",
+                      "target":  "i-am-groot-aug-2022"
+                  },
+                  {
+                      "source":  "spider-man-homecoming-jul-2017",
+                      "target":  "avengers-infinity-war-apr-2018"
+                  },
+                  {
+                      "source":  "the-defenders-aug-2017",
+                      "target":  "luke-cage-s2-jun-2018"
+                  },
+                  {
+                      "source":  "the-defenders-aug-2017",
+                      "target":  "iron-fist-s2-sep-2018"
+                  },
+                  {
+                      "source":  "the-defenders-aug-2017",
+                      "target":  "daredevil-s3"
+                  },
+                  {
+                      "source":  "the-defenders-aug-2017",
+                      "target":  "jessica-jones-s3-jun-2019"
+                  },
+                  {
+                      "source":  "thor-ragnarok-nov-2017",
+                      "target":  "avengers-infinity-war-apr-2018"
+                  },
+                  {
+                      "source":  "the-punisher-s1-nov-2017",
+                      "target":  "the-punisher-s2-jan-2019"
+                  },
+                  {
+                      "source":  "runaways-s1-nov-2017",
+                      "target":  "runaways-s2-dec-2018"
+                  },
+                  {
+                      "source":  "black-panther-feb-2018",
+                      "target":  "avengers-infinity-war-apr-2018"
+                  },
+                  {
+                      "source":  "jessica-jones-s2-mar-2018",
+                      "target":  "jessica-jones-s3-jun-2019"
+                  },
+                  {
+                      "source":  "jessica-jones-s2-mar-2018",
+                      "target":  "the-defenders-aug-2017"
+                  },
+                  {
+                      "source":  "agents-of-s-h-i-e-l-d-s5-eps-20-22-dec-2017-may-2018",
+                      "target":  "agents-of-s-h-i-e-l-d-s6-may-jun-2019"
+                  },
+                  {
+                      "source":  "agents-of-s-h-i-e-l-d-s5-eps-1-19-dec-2017-may-2018",
+                      "target":  "runaways-s3-dec-2019"
+                  },
+                  {
+                      "source":  "avengers-infinity-war-apr-2018",
+                      "target":  "agents-of-s-h-i-e-l-d-s5-eps-20-22-dec-2017-may-2018"
+                  },
+                  {
+                      "source":  "avengers-infinity-war-apr-2018",
+                      "target":  "avengers-endgame-apr-2019"
+                  },
+                  {
+                      "source":  "deadpool-2-may-2018",
+                      "target":  "deadpool-wolverine-jul-2024"
+                  },
+                  {
+                      "source":  "cloak-dagger-s1-jun-2018",
+                      "target":  "cloak-dagger-s2-apr-2019"
+                  },
+                  {
+                      "source":  "ant-man-and-the-wasp-jul-2018",
+                      "target":  "avengers-endgame-apr-2019"
+                  },
+                  {
+                      "source":  "venom-oct-2018",
+                      "target":  "venom-let-there-be-carnage-oct-2021"
+                  },
+                  {
+                      "source":  "runaways-s2-dec-2018",
+                      "target":  "runaways-s3-dec-2019"
+                  },
+                  {
+                      "source":  "the-punisher-s2-jan-2019",
+                      "target":  "the-punisher-one-last-kill-2026"
+                  },
+                  {
+                      "source":  "cloak-dagger-s2-apr-2019",
+                      "target":  "runaways-s3-dec-2019"
+                  },
+                  {
+                      "source":  "dark-phoenix-jun-2019",
+                      "target":  "deadpool-feb-2016"
+                  },
+                  {
+                      "source":  "dark-phoenix-jun-2019",
+                      "target":  "the-new-mutants-aug-2020"
+                  },
+                  {
+                      "source":  "spider-man-far-from-home-jul-2019",
+                      "target":  "secret-invasion-jun-jul-2023"
+                  },
+                  {
+                      "source":  "spider-man-far-from-home-jul-2019",
+                      "target":  "spider-man-no-way-home-dec-2021"
+                  },
+                  {
+                      "source":  "agents-of-s-h-i-e-l-d-s6-may-jun-2019",
+                      "target":  "agents-of-s-h-i-e-l-d-s7-may-aug-2020"
+                  },
+                  {
+                      "source":  "wandavision-jan-mar-2021",
+                      "target":  "doctor-strange-in-the-multiverse-of-madness-may-2022"
+                  },
+                  {
+                      "source":  "wandavision-jan-mar-2021",
+                      "target":  "agatha-all-along-sep-oct-2024"
+                  },
+                  {
+                      "source":  "wandavision-jan-mar-2021",
+                      "target":  "visionquest-2026"
+                  },
+                  {
+                      "source":  "loki-s1-jun-jul-2021",
+                      "target":  "loki-s2-oct-nov-2023"
+                  },
+                  {
+                      "source":  "loki-s1-jun-jul-2021",
+                      "target":  "ant-man-and-the-wasp-quantumania-feb-2023"
+                  },
+                  {
+                      "source":  "black-widow-jul-2021",
+                      "target":  "hawkeye-nov-dec-2021"
+                  },
+                  {
+                      "source":  "what-if-s1-aug-oct-2021",
+                      "target":  "what-if-s2-dec-2023"
+                  },
+                  {
+                      "source":  "venom-let-there-be-carnage-oct-2021",
+                      "target":  "spider-man-no-way-home-dec-2021"
+                  },
+                  {
+                      "source":  "venom-let-there-be-carnage-oct-2021",
+                      "target":  "venom-the-last-dance-oct-2024"
+                  },
+                  {
+                      "source":  "hawkeye-nov-dec-2021",
+                      "target":  "echo-jan-2024"
+                  },
+                  {
+                      "source":  "hawkeye-nov-dec-2021",
+                      "target":  "thunderbolts-may-2025"
+                  },
+                  {
+                      "source":  "spider-man-no-way-home-dec-2021",
+                      "target":  "doctor-strange-in-the-multiverse-of-madness-may-2022"
+                  },
+                  {
+                      "source":  "spider-man-no-way-home-dec-2021",
+                      "target":  "morbius-apr-2022"
+                  },
+                  {
+                      "source":  "spider-man-no-way-home-dec-2021",
+                      "target":  "venom-the-last-dance-oct-2024"
+                  },
+                  {
+                      "source":  "spider-man-no-way-home-dec-2021",
+                      "target":  "spider-man-brand-new-day-jul-2026"
+                  },
+                  {
+                      "source":  "morbius-apr-2022",
+                      "target":  "madame-web-feb-2024"
+                  },
+                  {
+                      "source":  "doctor-strange-in-the-multiverse-of-madness-may-2022",
+                      "target":  "avengers-doomsday-dec-18-2026"
+                  },
+                  {
+                      "source":  "ms-marvel-jun-jul-2022",
+                      "target":  "secret-invasion-jun-jul-2023"
+                  },
+                  {
+                      "source":  "thor-love-and-thunder-jul-2022",
+                      "target":  "the-guardians-of-the-galaxy-holiday-special-nov-2022"
+                  },
+                  {
+                      "source":  "i-am-groot-aug-2022",
+                      "target":  "avengers-infinity-war-apr-2018"
+                  },
+                  {
+                      "source":  "she-hulk-attorney-at-law-aug-oct-2022",
+                      "target":  "echo-jan-2024"
+                  },
+                  {
+                      "source":  "black-panther-wakanda-forever-nov-2022",
+                      "target":  "ironheart-jun-2025"
+                  },
+                  {
+                      "source":  "the-guardians-of-the-galaxy-holiday-special-nov-2022",
+                      "target":  "guardians-of-the-galaxy-vol-3-may-2023"
+                  },
+                  {
+                      "source":  "guardians-of-the-galaxy-vol-3-may-2023",
+                      "target":  "avengers-doomsday-dec-18-2026"
+                  },
+                  {
+                      "source":  "loki-s2-oct-nov-2023",
+                      "target":  "avengers-doomsday-dec-18-2026"
+                  },
+                  {
+                      "source":  "loki-s2-oct-nov-2023",
+                      "target":  "what-if-s1-aug-oct-2021"
+                  },
+                  {
+                      "source":  "what-if-s2-dec-2023",
+                      "target":  "what-if-s3-dec-2024"
+                  },
+                  {
+                      "source":  "echo-jan-2024",
+                      "target":  "daredevil-born-again-s1-mar-2025"
+                  },
+                  {
+                      "source":  "madame-web-feb-2024",
+                      "target":  "kraven-the-hunter-dec-2024"
+                  },
+                  {
+                      "source":  "deadpool-wolverine-jul-2024",
+                      "target":  "avengers-doomsday-dec-18-2026"
+                  },
+                  {
+                      "source":  "daredevil-born-again-s1-mar-2025",
+                      "target":  "daredevil-born-again-s2-2026"
+                  },
+                  {
+                      "source":  "daredevil-born-again-s2-2026",
+                      "target":  "daredevil-born-again-s3-2027"
+                  },
+                  {
+                      "source":  "the-punisher-one-last-kill-2026",
+                      "target":  "spider-man-brand-new-day-jul-2026"
+                  },
+                  {
+                      "source":  "avengers-doomsday-dec-18-2026",
+                      "target":  "avengers-secret-wars-dec-17-2027"
+                  },
+                  {
+                      "source":  "blade-1998",
+                      "target":  "blade-ii-2002"
+                  },
+                  {
+                      "source":  "x-men-apocalypse-may-2016",
+                      "target":  "dark-phoenix-jun-2019"
+                  },
+                  {
+                      "source":  "blade-trinity-2004",
+                      "target":  "deadpool-wolverine-jul-2024"
+                  },
+                  {
+                      "source":  "fantastic-four",
+                      "target":  "fantastic-four-rise-of-the-silver-surfer"
+                  },
+                  {
+                      "source":  "fantastic-four-rise-of-the-silver-surfer",
+                      "target":  "deadpool-wolverine-jul-2024"
+                  },
+                  {
+                      "source":  "loki-s2-oct-nov-2023",
+                      "target":  "deadpool-wolverine-jul-2024"
+                  },
+                  {
+                      "source":  "one-shot-a-funny-thing-happened-on-the-way-to-thor-s-hammer-oct-2011",
+                      "target":  "one-shot-item-47-sep-2012"
+                  },
+                  {
+                      "source":  "agents-of-s-h-i-e-l-d-s1-eps-1-7-sep-2013-apr-2014",
+                      "target":  "thor-the-dark-world-nov-2013"
+                  },
+                  {
+                      "source":  "agents-of-s-h-i-e-l-d-s1-eps-8-16-sep-2013-apr-2014",
+                      "target":  "captain-america-the-winter-soldier-apr-2014"
+                  },
+                  {
+                      "source":  "captain-america-the-winter-soldier-apr-2014",
+                      "target":  "agents-of-s-h-i-e-l-d-s1-eps-17-22-turn-turn-turn-onward-apr-may-2014"
+                  },
+                  {
+                      "source":  "captain-america-the-winter-soldier-apr-2014",
+                      "target":  "avengers-age-of-ultron-may-2015"
+                  },
+                  {
+                      "source":  "thor-may-2011",
+                      "target":  "the-avengers-may-2012"
+                  },
+                  {
+                      "source":  "agents-of-s-h-i-e-l-d-s1-eps-17-22-turn-turn-turn-onward-apr-may-2014",
+                      "target":  "agents-of-s-h-i-e-l-d-s2-eps-1-19-sep-2014-may-2015"
+                  },
+                  {
+                      "source":  "agents-of-s-h-i-e-l-d-s2-eps-20-22-sep-2014-may-2015",
+                      "target":  "agents-of-s-h-i-e-l-d-s3-eps-1-19-sep-2015-may-2016"
+                  },
+                  {
+                      "source":  "agents-of-s-h-i-e-l-d-s3-eps-20-22-sep-2015-may-2016",
+                      "target":  "agents-of-s-h-i-e-l-d-s4-eps-1-21-sep-2016-may-2017"
+                  },
+                  {
+                      "source":  "agents-of-s-h-i-e-l-d-s4-eps-22-sep-2016-may-2017",
+                      "target":  "agents-of-s-h-i-e-l-d-s5-eps-1-19-dec-2017-may-2018"
+                  },
+                  {
+                      "source":  "doctor-strange-nov-2016",
+                      "target":  "agents-of-s-h-i-e-l-d-s4-eps-22-sep-2016-may-2017"
+                  },
+                  {
+                      "source":  "agents-of-s-h-i-e-l-d-s5-eps-1-19-dec-2017-may-2018",
+                      "target":  "avengers-infinity-war-apr-2018"
+                  },
+                  {
+                      "source":  "captain-marvel-mar-2019",
+                      "target":  "avengers-endgame-apr-2019"
+                  },
+                  {
+                      "source":  "avengers-endgame-apr-2019",
+                      "target":  "loki-s1-jun-jul-2021"
+                  },
+                  {
+                      "source":  "avengers-endgame-apr-2019",
+                      "target":  "shang-chi-and-the-legend-of-the-ten-rings-sep-2021"
+                  },
+                  {
+                      "source":  "avengers-endgame-apr-2019",
+                      "target":  "eternals-nov-2021"
+                  },
+                  {
+                      "source":  "avengers-endgame-apr-2019",
+                      "target":  "black-widow-jul-2021"
+                  },
+                  {
+                      "source":  "avengers-endgame-apr-2019",
+                      "target":  "spider-man-far-from-home-jul-2019"
+                  },
+                  {
+                      "source":  "avengers-endgame-apr-2019",
+                      "target":  "thor-love-and-thunder-jul-2022"
+                  },
+                  {
+                      "source":  "avengers-endgame-apr-2019",
+                      "target":  "black-panther-wakanda-forever-nov-2022"
+                  },
+                  {
+                      "source":  "avengers-endgame-apr-2019",
+                      "target":  "ms-marvel-jun-jul-2022"
+                  },
+                  {
+                      "source":  "avengers-endgame-apr-2019",
+                      "target":  "the-falcon-and-the-winter-soldier-mar-apr-2021"
+                  },
+                  {
+                      "source":  "avengers-endgame-apr-2019",
+                      "target":  "wandavision-jan-mar-2021"
+                  },
+                  {
+                      "source":  "avengers-endgame-apr-2019",
+                      "target":  "avengers-endgame-encore-re-release-sep-25-2026"
+                  },
+                  {
+                      "source":  "shang-chi-and-the-legend-of-the-ten-rings-sep-2021",
+                      "target":  "avengers-doomsday-dec-18-2026"
+                  },
+                  {
+                      "source":  "shang-chi-and-the-legend-of-the-ten-rings-sep-2021",
+                      "target":  "she-hulk-attorney-at-law-aug-oct-2022"
+                  },
+                  {
+                      "source":  "shang-chi-and-the-legend-of-the-ten-rings-sep-2021",
+                      "target":  "wonder-man-2026"
+                  },
+                  {
+                      "source":  "eternals-nov-2021",
+                      "target":  "captain-america-brave-new-world-feb-2025"
+                  },
+                  {
+                      "source":  "ant-man-and-the-wasp-quantumania-feb-2023",
+                      "target":  "loki-s2-oct-nov-2023"
+                  },
+                  {
+                      "source":  "secret-invasion-jun-jul-2023",
+                      "target":  "the-marvels-nov-2023"
+                  },
+                  {
+                      "source":  "daredevil-s3",
+                      "target":  "she-hulk-attorney-at-law-aug-oct-2022"
+                  },
+                  {
+                      "source":  "daredevil-s3",
+                      "target":  "hawkeye-nov-dec-2021"
+                  },
+                  {
+                      "source":  "the-falcon-and-the-winter-soldier-mar-apr-2021",
+                      "target":  "captain-america-brave-new-world-feb-2025"
+                  },
+                  {
+                      "source":  "captain-america-brave-new-world-feb-2025",
+                      "target":  "thunderbolts-may-2025"
+                  },
+                  {
+                      "source":  "thunderbolts-may-2025",
+                      "target":  "the-fantastic-four-first-steps-jul-2025"
+                  },
+                  {
+                      "source":  "the-fantastic-four-first-steps-jul-2025",
+                      "target":  "avengers-doomsday-dec-18-2026"
+                  },
+                  {
+                      "source":  "spider-man-2-2004",
+                      "target":  "spider-man-3-2007"
+                  },
+                  {
+                      "source":  "spider-man-3-2007",
+                      "target":  "spider-man-no-way-home-dec-2021"
+                  },
+                  {
+                      "source":  "the-amazing-spider-man-jul-2012",
+                      "target":  "the-amazing-spider-man-2-may-2014"
+                  },
+                  {
+                      "source":  "the-amazing-spider-man-2-may-2014",
+                      "target":  "spider-man-no-way-home-dec-2021"
+                  },
+                  {
+                      "source":  "daredevil-s3",
+                      "target":  "spider-man-no-way-home-dec-2021"
+                  },
+                  {
+                      "source":  "daredevil-2004",
+                      "target":  "elektra"
+                  },
+                  {
+                      "source":  "elektra",
+                      "target":  "deadpool-wolverine-jul-2024"
+                  }
+              ]
+}

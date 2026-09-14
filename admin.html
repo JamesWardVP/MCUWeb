@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — The Sacred Timeline</title>
+<meta name="robots" content="noindex">
+<style>
+  :root{
+    --bg:#f4f5f7; --panel:#ffffff; --border:#d8dce3; --text:#1c2128; --muted:#6b7280;
+    --accent:#2451c9; --accent-hover:#1c3ea3; --danger:#c0392b; --danger-hover:#a02f22;
+    --ok:#1b7f4c;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif; line-height:1.4;}
+  .container{max-width:980px; margin:0 auto; padding:1.5rem 1.2rem 5rem;}
+  h1{font-size:1.5rem; margin:0 0 0.2rem;}
+  h2{font-size:1.15rem; margin:0 0 0.6rem;}
+  p.hint{color:var(--muted); font-size:0.88rem; margin:0 0 1rem;}
+  .card{background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:1.2rem; margin-bottom:1.2rem;}
+  label{display:block; font-size:0.82rem; font-weight:600; margin:0.6rem 0 0.25rem;}
+  input, select{
+    width:100%; padding:0.5rem 0.6rem; border:1px solid var(--border); border-radius:5px;
+    font-size:0.9rem; background:#fff; color:var(--text); font-family:inherit;
+  }
+  input[type=color]{padding:0.2rem; height:2.4rem;}
+  input:focus, select:focus{outline:2px solid var(--accent); outline-offset:1px;}
+  .row{display:flex; gap:0.8rem; flex-wrap:wrap;}
+  .row > *{flex:1; min-width:140px;}
+  button{
+    font-family:inherit; font-size:0.88rem; font-weight:600; padding:0.55rem 1rem;
+    border-radius:5px; border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer;
+  }
+  button:hover{background:var(--accent-hover);}
+  button.secondary{background:#fff; color:var(--text); border-color:var(--border);}
+  button.secondary:hover{background:#f0f1f3;}
+  button.danger{background:#fff; color:var(--danger); border-color:var(--danger);}
+  button.danger:hover{background:var(--danger); color:#fff;}
+  button:disabled{opacity:0.5; cursor:not-allowed;}
+  .tabs{display:flex; gap:0.4rem; margin-bottom:1rem; flex-wrap:wrap;}
+  .tab-btn{background:#fff; color:var(--text); border:1px solid var(--border); font-weight:600;}
+  .tab-btn.active{background:var(--accent); color:#fff; border-color:var(--accent);}
+  section[hidden]{display:none;}
+  .list-item{
+    display:flex; align-items:center; gap:0.6rem; padding:0.55rem 0.7rem; border:1px solid var(--border);
+    border-radius:5px; margin-bottom:0.4rem; font-size:0.87rem; background:#fbfbfc;
+  }
+  .list-item .info{flex:1; min-width:0;}
+  .list-item .info .t{font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .list-item .info .m{color:var(--muted); font-size:0.78rem;}
+  .list-item button{padding:0.3rem 0.7rem; font-size:0.78rem;}
+  .msg{font-size:0.85rem; margin-top:0.6rem;}
+  .msg.error{color:var(--danger);}
+  .msg.ok{color:var(--ok);}
+  #staged-list{font-size:0.87rem;}
+  #staged-list li{margin-bottom:0.25rem;}
+  hr.rule{border:none; border-top:1px solid var(--border); margin:1.1rem 0;}
+  .badge{display:inline-block; background:var(--accent); color:#fff; border-radius:10px; padding:0.05rem 0.5rem; font-size:0.72rem; margin-left:0.3rem;}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Timeline Admin</h1>
+  <p class="hint">Add, edit, and remove entries and links on The Sacred Timeline. Not linked from the public site.</p>
+
+  <!-- Password gate — a deterrent only, not real security: this is a static
+       site, so the password can't be truly hidden from anyone who views
+       source. The actual write authority is your GitHub token below,
+       pasted at time of use and never stored. -->
+  <div id="lock" class="card">
+    <label for="password">Password</label>
+    <div class="row">
+      <input id="password" type="password" autocomplete="off">
+      <button id="unlock-btn" style="flex:0 0 auto">Unlock</button>
+    </div>
+    <p class="msg error" id="lock-msg"></p>
+  </div>
+
+  <div id="app" hidden>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="entries">Entries</button>
+      <button class="tab-btn" data-tab="links">Links</button>
+      <button class="tab-btn" data-tab="publish">Publish <span class="badge" id="staged-count" hidden>0</span></button>
+    </div>
+
+    <section class="card" id="tab-entries">
+      <h2>Entries</h2>
+      <p class="hint">Search to find an entry to edit or delete, or fill the form to add a new one.</p>
+      <input id="entry-search" type="search" placeholder="Search entries…" style="margin-bottom:0.8rem">
+      <div id="entry-list" style="max-height:280px; overflow-y:auto; margin-bottom:1rem;"></div>
+      <hr class="rule">
+      <h2 id="entry-form-title">Add entry</h2>
+      <form id="entry-form" autocomplete="off">
+        <label for="f-label">Title</label>
+        <input id="f-label" required>
+        <div class="row">
+          <div>
+            <label for="f-format">Format</label>
+            <select id="f-format">
+              <option value="film">Film</option>
+              <option value="tv">TV Show</option>
+              <option value="special">Special / One-Shot</option>
+            </select>
+          </div>
+          <div>
+            <label for="f-studio">Studio / origin</label>
+            <input id="f-studio" list="studio-list" required>
+            <datalist id="studio-list"></datalist>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="f-year">Year</label>
+            <input id="f-year" type="number" min="1900" max="2100" required>
+          </div>
+          <div>
+            <label for="f-month">Month (1–12)</label>
+            <input id="f-month" type="number" min="1" max="12" required>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="f-fill">Fill colour</label>
+            <input id="f-fill" type="color" value="#dae8fc">
+          </div>
+          <div>
+            <label for="f-stroke">Stroke colour</label>
+            <input id="f-stroke" type="color" value="#6c8ebf">
+          </div>
+          <div style="flex:0 0 auto; align-self:flex-end;">
+            <button type="button" class="secondary" id="match-studio-colors">Match studio colours</button>
+          </div>
+        </div>
+        <p class="hint" style="margin:0.6rem 0 0;">Flowchart position (only affects the Flowchart view, not the Timeline):</p>
+        <div class="row">
+          <div><label for="f-x">X</label><input id="f-x" type="number" step="any"></div>
+          <div><label for="f-y">Y</label><input id="f-y" type="number" step="any"></div>
+          <div><label for="f-w">Width</label><input id="f-w" type="number" step="any" value="340"></div>
+          <div><label for="f-h">Height</label><input id="f-h" type="number" step="any" value="60"></div>
+        </div>
+        <div class="row" style="margin-top:1rem;">
+          <button type="submit" id="entry-save-btn">Add entry</button>
+          <button type="button" class="secondary" id="entry-cancel-btn" hidden>Cancel edit</button>
+        </div>
+        <p class="msg" id="entry-msg"></p>
+      </form>
+    </section>
+
+    <section class="card" id="tab-links" hidden>
+      <h2>Add a link</h2>
+      <div class="row">
+        <div>
+          <label for="link-source">From</label>
+          <select id="link-source"></select>
+        </div>
+        <div>
+          <label for="link-target">To</label>
+          <select id="link-target"></select>
+        </div>
+      </div>
+      <button type="button" id="link-add-btn" style="margin-top:0.8rem;">Add link</button>
+      <p class="msg" id="link-msg"></p>
+      <hr class="rule">
+      <h2>Existing links</h2>
+      <input id="link-search" type="search" placeholder="Search links by title…" style="margin-bottom:0.8rem">
+      <div id="link-list" style="max-height:360px; overflow-y:auto;"></div>
+    </section>
+
+    <section class="card" id="tab-publish" hidden>
+      <h2>Publish changes</h2>
+      <div id="staged-list"><p class="hint">Nothing staged yet.</p></div>
+      <div id="publish-controls" hidden>
+        <hr class="rule">
+        <p class="hint">Committing pushes the updated data straight to GitHub, which redeploys the live site automatically (usually under a minute). The token is used only for this request and never stored anywhere — a fine-grained token scoped to just this repo with <strong>Contents: Read and write</strong> is enough.</p>
+        <label for="gh-token">GitHub token</label>
+        <div class="row">
+          <input id="gh-token" type="password" autocomplete="off">
+          <button id="commit-btn" style="flex:0 0 auto">Commit to GitHub</button>
+          <button type="button" class="secondary" id="download-btn" style="flex:0 0 auto">Download file instead</button>
+        </div>
+        <p class="msg" id="publish-msg"></p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
