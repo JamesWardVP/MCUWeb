@@ -3,7 +3,12 @@
   // admin.html) rather than embedded in this page, so it loads
   // asynchronously — everything else in this file runs inside init(),
   // invoked once that fetch resolves.
-  fetch('data/timeline.json')
+  // GitHub Pages serves these with Cache-Control: max-age=600, so a plain
+  // fetch can silently serve a 10-minute-stale copy right after an admin
+  // edit goes live. 'no-cache' forces revalidation on every load (a
+  // conditional GET via ETag) without losing the bandwidth benefit when
+  // the file hasn't actually changed.
+  fetch('data/timeline.json', { cache: 'no-cache' })
     .then(r => { if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(data => init(data))
     .catch(err => {
@@ -156,7 +161,7 @@
   }
 
   let mediaCache = null;
-  const mediaCacheReady = fetch('data/media-cache.json')
+  const mediaCacheReady = fetch('data/media-cache.json', { cache: 'no-cache' })
     .then(r => r.ok ? r.json() : null)
     .catch(() => null)
     .then(d => { mediaCache = d; return d; });
