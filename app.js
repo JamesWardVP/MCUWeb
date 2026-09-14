@@ -60,20 +60,25 @@
   // TMDB's own referral page is never used as the destination.
   const PROVIDER_SEARCH_URL = {
     'Netflix': t => `https://www.netflix.com/search?q=${encodeURIComponent(t)}`,
-    'Disney Plus': t => `https://www.disneyplus.com/search?q=${encodeURIComponent(t)}`,
+    // Disney+ deliberately excluded: its /search path is client-side-routed
+    // only and 404s on a direct hard navigation (confirmed by testing), so
+    // there's no reliable URL beyond the homepage - falls through to
+    // PROVIDER_HOMEPAGE below instead.
     'Amazon Prime Video': t => `https://www.primevideo.com/search/ref=atv_nb_sr?phrase=${encodeURIComponent(t)}`,
     'Amazon Video': t => `https://www.primevideo.com/search/ref=atv_nb_sr?phrase=${encodeURIComponent(t)}`,
     'Apple TV Plus': t => `https://tv.apple.com/search?term=${encodeURIComponent(t)}`,
     'Apple TV': t => `https://tv.apple.com/search?term=${encodeURIComponent(t)}`,
     'Apple TV Store': t => `https://tv.apple.com/search?term=${encodeURIComponent(t)}`,
     'Google Play Movies': t => `https://play.google.com/store/search?q=${encodeURIComponent(t)}&c=movies`,
-    'Microsoft Store': t => `https://www.microsoft.com/en-gb/search?q=${encodeURIComponent(t)}`,
+    // Microsoft Store excluded: its general-site search returns mostly
+    // unrelated Xbox/software results rather than the Movies & TV catalogue
+    // (confirmed by testing) - homepage is the more honest destination.
     'YouTube': t => `https://www.youtube.com/results?search_query=${encodeURIComponent(t)}`,
     'BBC iPlayer': t => `https://www.bbc.co.uk/iplayer/search?q=${encodeURIComponent(t)}`,
-    'ITVX': t => `https://www.itv.com/search?q=${encodeURIComponent(t)}`,
-    'Channel 4': t => `https://www.channel4.com/search?q=${encodeURIComponent(t)}`,
-    'Paramount Plus': t => `https://www.paramountplus.com/search/?query=${encodeURIComponent(t)}`,
-    'Paramount+': t => `https://www.paramountplus.com/search/?query=${encodeURIComponent(t)}`,
+    // ITVX and Channel 4 excluded: both search URLs 404'd on direct
+    // navigation when tested; Paramount+'s ignored the query entirely and
+    // landed on a generic (unsearched) browse page. All three fall back to
+    // their homepage below instead of a broken/misleading link.
     'MUBI': t => `https://mubi.com/search/films?query=${encodeURIComponent(t)}`,
     'Chili': t => `https://uk.chili.com/search?q=${encodeURIComponent(t)}`
   };
