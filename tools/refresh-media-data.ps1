@@ -255,8 +255,20 @@ $resolutionCache = @{}
 foreach ($node in $nodes) {
     $slug = $node.id
     $existing = $cache[$slug]
+    $override = $overrides[$slug]
 
-    if (-not (Test-Stale $existing)) {
+    # A manual override that doesn't match what's already cached - either
+    # freshly set, changed, or cleared since the last run - must be applied
+    # on this run regardless of the staleness cadence below; otherwise a
+    # newly-set (or newly-cleared) override could sit ignored for months.
+    $overrideMismatch = $false
+    if ($override -and $override.tmdbId) {
+        $overrideMismatch = (-not $existing) -or ($existing.tmdbId -ne $override.tmdbId) -or ($existing.mediaType -ne $override.mediaType)
+    } elseif ($existing -and $existing.manualMatch) {
+        $overrideMismatch = $true
+    }
+
+    if (-not $overrideMismatch -and -not (Test-Stale $existing)) {
         $newCache[$slug] = $existing
         $skipped++
         continue
@@ -265,7 +277,6 @@ foreach ($node in $nodes) {
     Write-Host "Refreshing: $($node.label)"
     $entry = $null
     try {
-        $override = $overrides[$slug]
         $match = $null
         if ($override -and $override.tmdbId) {
             $match = @{ id = $override.tmdbId; type = $override.mediaType }
@@ -293,6 +304,7 @@ foreach ($node in $nodes) {
                     tmdbRating = $tmdbEntry.tmdbRating; tmdbVoteCount = $tmdbEntry.tmdbVoteCount
                     imdbId = $tmdbEntry.imdbId; imdbRating = $imdbRating
                     watch = $tmdbEntry.watch
+                    manualMatch = [bool]($override -and $override.tmdbId)
                     fetchedAt = (Get-Date).ToUniversalTime().ToString("o")
                 }
                 $fetched++
