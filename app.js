@@ -3,15 +3,14 @@
   const edges = DATA.edges;   // {source, target, dashed}
 
   // ---------- build adjacency ----------
-  nodes.forEach((n,i)=>{ n.idx = i; n.outSolid=[]; n.inSolid=[]; n.outDash=[]; n.inDash=[]; });
+  nodes.forEach((n,i)=>{ n.idx = i; n.outConn=[]; n.inConn=[]; });
   edges.forEach(e=>{
     const s = nodes[e.source], t = nodes[e.target];
     if(!s || !t) return;
-    if(e.dashed){ s.outDash.push(t.idx); t.inDash.push(s.idx); }
-    else { s.outSolid.push(t.idx); t.inSolid.push(s.idx); }
+    s.outConn.push(t.idx); t.inConn.push(s.idx);
   });
   nodes.forEach(n=>{
-    n.connCount = n.outSolid.length+n.inSolid.length+n.outDash.length+n.inDash.length;
+    n.connCount = n.outConn.length+n.inConn.length;
   });
 
   const FORMAT_META = {
@@ -40,8 +39,7 @@
     <span class="legend-item">${FORMAT_META.film.icon('#9C8D74')}Film — rounded box</span>
     <span class="legend-item">${FORMAT_META.tv.icon('#9C8D74')}TV Show — hexagon</span>
     <span class="legend-item">${FORMAT_META.special.icon('#9C8D74')}Special / One-Shot — parallelogram</span>
-    <span class="legend-item"><span class="legend-line solid"></span>Direct continuity</span>
-    <span class="legend-item"><span class="legend-line dashed"></span>Variant / cameo crossover</span>
+    <span class="legend-item"><span class="legend-line solid"></span>Traced connection</span>
   `;
 
   // ---------- filter chip state ----------
@@ -201,19 +199,17 @@
 
   function applyTimelineSelectionClasses(){
     const n = nodes[selectedIdx];
-    const related = new Set([n.idx, ...n.outSolid, ...n.inSolid, ...n.outDash, ...n.inDash]);
     listEl.querySelectorAll('.card').forEach(c=>{
       const i = parseInt(c.dataset.idx,10);
-      c.classList.remove('selected','dimmed','related-solid','related-dashed');
+      c.classList.remove('selected','dimmed','related');
       if(i === n.idx){ c.classList.add('selected'); }
-      else if(n.outSolid.includes(i) || n.inSolid.includes(i)){ c.classList.add('related-solid'); }
-      else if(n.outDash.includes(i) || n.inDash.includes(i)){ c.classList.add('related-dashed'); }
+      else if(n.outConn.includes(i) || n.inConn.includes(i)){ c.classList.add('related'); }
       else { c.classList.add('dimmed'); }
     });
   }
 
   function clearTimelineSelectionClasses(){
-    listEl.querySelectorAll('.card').forEach(c=>c.classList.remove('selected','dimmed','related-solid','related-dashed'));
+    listEl.querySelectorAll('.card').forEach(c=>c.classList.remove('selected','dimmed','related'));
   }
 
   // ---------- SVG arc drawing (timeline) ----------
@@ -228,10 +224,7 @@
 
     overlaySvg.innerHTML = `<defs>
       <marker id="arrow-solid" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-        <path d="M0,0 L10,5 L0,10 z" fill="#E8A33D"/>
-      </marker>
-      <marker id="arrow-dash" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-        <path d="M0,0 L10,5 L0,10 z" fill="#B5551F"/>
+        <path d="M0,0 L10,5 L0,10 z" fill="#F2790B"/>
       </marker>
     </defs>`;
 
@@ -245,7 +238,7 @@
       return { x: r.right - wrapRect.left, y: r.top - wrapRect.top + r.height/2 };
     }
 
-    function drawEdge(fromIdx, toIdx, dashed){
+    function drawEdge(fromIdx, toIdx){
       const a = cardCenter(fromIdx), b = cardCenter(toIdx);
       if(!a || !b) return;
       const maxBulge = Math.max(40, wrapRect.width * 0.06);
@@ -256,18 +249,15 @@
       const p = document.createElementNS('http://www.w3.org/2000/svg','path');
       p.setAttribute('d', path);
       p.setAttribute('fill','none');
-      p.setAttribute('stroke', dashed ? '#B5551F' : '#E8A33D');
+      p.setAttribute('stroke', '#F2790B');
       p.setAttribute('stroke-width', '2');
-      if(dashed) p.setAttribute('stroke-dasharray','6 5');
-      p.setAttribute('marker-end', dashed ? 'url(#arrow-dash)' : 'url(#arrow-solid)');
+      p.setAttribute('marker-end', 'url(#arrow-solid)');
       p.setAttribute('opacity','0.85');
       overlaySvg.appendChild(p);
     }
 
-    n.outSolid.forEach(t=> drawEdge(n.idx, t, false));
-    n.inSolid.forEach(s=> drawEdge(s, n.idx, false));
-    n.outDash.forEach(t=> drawEdge(n.idx, t, true));
-    n.inDash.forEach(s=> drawEdge(s, n.idx, true));
+    n.outConn.forEach(t=> drawEdge(n.idx, t));
+    n.inConn.forEach(s=> drawEdge(s, n.idx));
   }
 
   window.addEventListener('resize', ()=>{
@@ -296,9 +286,9 @@
     }
   }
 
-  function connItem(idx, dashed){
+  function connItem(idx){
     const li = document.createElement('li');
-    li.className = 'conn-item' + (dashed ? ' dashed-conn' : '');
+    li.className = 'conn-item';
     li.textContent = nodes[idx].label;
     li.addEventListener('click', ()=> selectNode(idx));
     return li;
@@ -311,16 +301,14 @@
     document.getElementById('detailStudio').textContent = n.studio;
     document.getElementById('detailSw').style.background = n.stroke;
 
-    const fillList = (elId, arr, dashed) => {
+    const fillList = (elId, arr) => {
       const ul = document.getElementById(elId);
       ul.innerHTML='';
       if(arr.length===0){ const li=document.createElement('li'); li.className='conn-empty'; li.textContent='None on record.'; ul.appendChild(li); return; }
-      arr.forEach(i=> ul.appendChild(connItem(i, dashed)));
+      arr.forEach(i=> ul.appendChild(connItem(i)));
     };
-    fillList('connSolidOut', n.outSolid, false);
-    fillList('connSolidIn', n.inSolid, false);
-    fillList('connDashOut', n.outDash, true);
-    fillList('connDashIn', n.inDash, true);
+    fillList('connOut', n.outConn);
+    fillList('connIn', n.inConn);
 
     panel.classList.add('open');
     backdrop.classList.add('open');
@@ -450,8 +438,7 @@
     ctx.font = `500 ${FONT_SIZE}px 'IBM Plex Sans', Arial, sans-serif`;
 
     let defs = `<defs>
-      <marker id="fc-arrow-solid" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E8A33D"/></marker>
-      <marker id="fc-arrow-dash" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B5551F"/></marker>
+      <marker id="fc-arrow-solid" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#F2790B"/></marker>
     </defs>`;
 
     let edgeMarkup = '';
@@ -460,7 +447,7 @@
       if(!a || !b) return;
       const p = anchorPoints(a, b);
       const d = bezierPath(p);
-      edgeMarkup += `<path data-i="${i}" class="fc-edge ${e.dashed?'dashed':'solid'}" d="${d}" marker-end="url(${e.dashed?'#fc-arrow-dash':'#fc-arrow-solid'})"></path>`;
+      edgeMarkup += `<path data-i="${i}" class="fc-edge" d="${d}" marker-end="url(#fc-arrow-solid)"></path>`;
     });
 
     let nodeMarkup = '';
@@ -512,11 +499,10 @@
 
   function updateFlowchartVisualState(){
     if(!fcBuilt) return;
-    let relatedSolid = null, relatedDash = null;
+    let related = null;
     if(selectedIdx !== null){
       const n = nodes[selectedIdx];
-      relatedSolid = new Set([...n.outSolid, ...n.inSolid]);
-      relatedDash = new Set([...n.outDash, ...n.inDash]);
+      related = new Set([...n.outConn, ...n.inConn]);
     }
     nodes.forEach(n=>{
       const el = fcNodeEls[n.idx];
@@ -526,8 +512,7 @@
       let opacity = 1;
       if(selectedIdx !== null){
         if(n.idx === selectedIdx){ cls += ' selected'; }
-        else if(relatedSolid.has(n.idx)){ cls += ' related-solid'; }
-        else if(relatedDash.has(n.idx)){ cls += ' related-dashed'; }
+        else if(related.has(n.idx)){ cls += ' related'; }
         else { opacity = 0.14; }
       }
       if(!passes) opacity = Math.min(opacity, 0.07);
