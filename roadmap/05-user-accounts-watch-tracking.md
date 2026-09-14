@@ -8,30 +8,28 @@ Visitors can log in and "tick off" what they've watched. Watched entries show a 
 
 ## Relationship to item 4
 
-Since accounts here are hand-provisioned by you (not open signup) and there are only a handful of people, this reuses the same GitHub-native idea as the [timeline editor](04-timeline-editor-backend.md) rather than standing up Supabase/Firebase: access is controlled by who you've given a token to, and the "backend" is the GitHub API.
+These are a **different role from the admin**. You create each of the ~10 accounts yourself (no public signup), and when one of them logs in, they should only ever see the watch-tracking UI — never the timeline-edit controls from [item 4](04-timeline-editor-backend.md). The admin page's real write authority is a personal GitHub token pasted at time of use; asking ~10 casual friends/family to each generate their own GitHub token is a much bigger ask than a simple password, so viewer accounts need a lighter-weight mechanism — see open questions below.
 
-## Chosen approach: GitHub-native, no external service
+## What's settled
 
-Each person already has a token (see item 4) identifying them via their GitHub account — no separate signup/login system needed. The only design choice is *where* their watched list lives:
-
-| Option | Pros | Cons |
-|---|---|---|
-| **Private Gist per user** (recommended) | Keeps the noise out of the main repo entirely; a Gist is just as reachable via the GitHub API with the same token | One extra concept (Gists vs repo files) |
-| **`watched/<username>.json` file in the repo** | Reuses exactly the same code path as item 4's edits — one system total | Every tick/untick becomes a commit to the main repo; ticking through 140+ entries would flood the commit history |
-
-**Recommendation:** Gists — watch-tracking will generate far more frequent writes (every checkbox click) than timeline edits, and shouldn't clutter the site's own git history.
-
-## Data model
-
-Each user's Gist holds a small JSON object: `{ "nodeIndex": true, ... }` (or an array of watched node ids). Fetched once on login, kept in memory, and written back to the Gist on each toggle (debounced slightly so rapid clicking doesn't spam API calls).
-
-## UI
-
+- **Role separation is real, not just hidden UI**: whatever mechanism we land on, a viewer account must be technically incapable of writing timeline data, not just missing the button for it in the interface.
 - A tick/checkbox control on each timeline card and flowchart node.
-- Watched entries get reduced brightness/opacity (e.g. `filter: brightness(0.55)`) plus a small checkmark badge, so the "what's left" state reads clearly from a glance across the whole archive.
-- "Login" is the same paste-your-token flow as item 4 — though a person who should only track watches (not edit the timeline) can use a token scoped to Gists only, without repo contents access.
+- Watched entries get reduced brightness/opacity (e.g. `filter: brightness(0.55)`) plus a small checkmark badge, so unwatched-vs-watched reads clearly at a glance.
+- You set up each of the ~10 accounts (e.g. a username + password you choose for them) — no self-service signup.
+
+## Open decision: how do viewer accounts actually persist their ticks?
+
+This needs solving before building, because it has real security implications:
+
+| Option | How it works | Trade-off |
+|---|---|---|
+| **A. Local only (`localStorage`)** | Watched status is saved only in that person's browser — no login needed at all, or login is just a display-name label | Simplest by far, nothing to build server-side — but ticks don't sync across devices, and are lost if they clear browser data |
+| **B. Thin proxy holds the real credential** | A small serverless function (e.g. a free Cloudflare Worker) checks the viewer's password and, if valid, commits their watched-list update using a GitHub token that lives only in the Worker's server-side secrets — never sent to the browser | Real cross-device sync, real password-per-person, and the write credential is never exposed to viewers — but it's one small piece of infrastructure outside GitHub Pages itself (still free, still not Supabase/Firebase) |
+| **C. Give viewers their own scoped GitHub token, like the admin** | Same mechanism as item 4, just a token scoped even more narrowly (e.g. Gist-only) | Keeps everything inside GitHub with zero extra infrastructure, but asking casual users to create a GitHub account and generate a token is a poor fit for "I just want to tick off what I've watched" |
+
+**Leaning:** Option B gives the real password-per-person experience you described (log in, only see tick controls) without ever handing viewers a credential that could write anything beyond their own watched list — worth the one small Worker. Option A is the fallback if cross-device sync isn't actually needed. Happy to go either way — flagging this now so it's decided before we start building item 5, not mid-build.
 
 ## Open questions (need your input before building)
 
-1. Should everyone with a token be able to *both* edit the timeline and track watches, or should some of your ~10 people get a watch-tracking-only token (no edit rights)?
-2. Gists (recommended — keeps the repo's commit history clean) or a JSON file per user committed to the repo (simpler, reuses item 4's exact mechanism)?
+1. Do watched-ticks need to sync across devices/browsers, or is "watched status is remembered on whichever device you use" good enough (→ Option A, no backend needed at all)?
+2. If cross-device sync matters: comfortable with one small always-free Cloudflare Worker as the only piece of infrastructure outside GitHub itself (→ Option B)?

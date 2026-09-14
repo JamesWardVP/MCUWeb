@@ -13,6 +13,76 @@
     n.connCount = n.outConn.length+n.inConn.length;
   });
 
+  // ---------- media detail cache (posters/ratings/blurb/streaming) ----------
+  // Populated ahead of time by tools/refresh-media-data.ps1 (via the weekly
+  // GitHub Action) from TMDB + OMDb, so the browser never calls either API
+  // directly and no API key ever ships to the client.
+  function slugify(label){
+    return label.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  }
+
+  const PROVIDER_COLORS = {
+    'Netflix': '#E50914',
+    'Disney Plus': '#113CCF',
+    'Amazon Prime Video': '#00A8E1',
+    'Amazon Video': '#00A8E1',
+    'Apple TV Plus': '#000000',
+    'Apple TV': '#000000',
+    'Apple TV Store': '#000000',
+    'NOW': '#00B5B0',
+    'Sky Go': '#0072C9',
+    'Sky Store': '#0072C9',
+    'Rakuten TV': '#C40058',
+    'Google Play Movies': '#4285F4',
+    'Microsoft Store': '#107C10',
+    'YouTube': '#FF0000'
+  };
+  const WATCH_VERB = { rent: 'Rent on', buy: 'Buy on', free: 'Watch free on', ads: 'Watch on' };
+
+  let mediaCache = null;
+  const mediaCacheReady = fetch('data/media-cache.json')
+    .then(r => r.ok ? r.json() : null)
+    .catch(() => null)
+    .then(d => { mediaCache = d; return d; });
+
+  function renderMedia(n){
+    const block = document.getElementById('mediaBlock');
+    const entry = mediaCache && mediaCache.entries ? mediaCache.entries[slugify(n.label)] : null;
+    if(!entry || !entry.matched){ block.hidden = true; block.innerHTML = ''; return; }
+
+    const ratings = [];
+    if(typeof entry.tmdbRating === 'number' && entry.tmdbRating > 0){
+      ratings.push(`<span class="rating-badge rating-tmdb">TMDB ${entry.tmdbRating.toFixed(1)}</span>`);
+    }
+    if(typeof entry.imdbRating === 'number'){
+      ratings.push(`<span class="rating-badge rating-imdb">IMDb ${entry.imdbRating.toFixed(1)}</span>`);
+    }
+    if(ratings.length === 0){
+      ratings.push(`<span class="rating-badge rating-none">Not yet rated</span>`);
+    }
+
+    let watchHtml = '';
+    if(entry.watch){
+      const color = PROVIDER_COLORS[entry.watch.provider] || 'var(--panel-raised)';
+      const verb = WATCH_VERB[entry.watch.type] || 'Watch on';
+      watchHtml = `
+        <a class="watch-btn" style="background:${color}" href="${entry.watch.link}" target="_blank" rel="noopener noreferrer">
+          <img class="watch-logo" src="${entry.watch.logo}" alt="">
+          <span>${verb} ${entry.watch.provider}</span>
+        </a>
+        <p class="media-attribution">Streaming data provided by JustWatch.</p>
+      `;
+    }
+
+    block.hidden = false;
+    block.innerHTML = `
+      ${entry.poster ? `<div class="media-poster-wrap"><img class="media-poster" src="${entry.poster}" alt="${entry.title} poster" loading="lazy"></div>` : ''}
+      <div class="media-ratings">${ratings.join('')}</div>
+      ${entry.overview ? `<p class="media-overview">${entry.overview}</p>` : ''}
+      ${watchHtml}
+    `;
+  }
+
   const FORMAT_META = {
     film:    {label:'Film',    icon: sh => `<svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3" fill="none" stroke="${sh}" stroke-width="2"/></svg>`},
     tv:      {label:'TV Show', icon: sh => `<svg viewBox="0 0 24 24"><polygon points="7,4 17,4 22,12 17,20 7,20 2,12" fill="none" stroke="${sh}" stroke-width="2"/></svg>`},
@@ -300,6 +370,11 @@
     document.getElementById('detailTitle').textContent = n.label;
     document.getElementById('detailStudio').textContent = n.studio;
     document.getElementById('detailSw').style.background = n.stroke;
+
+    const mediaBlock = document.getElementById('mediaBlock');
+    mediaBlock.hidden = true;
+    mediaBlock.innerHTML = '';
+    mediaCacheReady.then(() => { if(selectedIdx === idx) renderMedia(n); });
 
     const fillList = (elId, arr) => {
       const ul = document.getElementById(elId);

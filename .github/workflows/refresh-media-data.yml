@@ -1,0 +1,40 @@
+# MCUWeb — scheduled media data refresh
+# Runs the PowerShell pipeline weekly: fetches ratings, posters, blurbs and
+# streaming availability from TMDB/OMDb into data/media-cache.json. The
+# script's own per-entry staleness check (see tools/refresh-media-data.ps1)
+# means most weeks this is a no-op for most entries - only titles actually
+# due for a recheck trigger an API call. Commits only when something changed.
+name: Refresh media data
+
+on:
+  schedule:
+    - cron: "40 3 * * 1"   # weekly, Monday 03:40 UTC
+  workflow_dispatch: {}     # allow manual runs from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Refresh media cache (TMDB + OMDb)
+        shell: pwsh
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
+        run: ./tools/refresh-media-data.ps1
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "mcuweb-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/media-cache.json
+          if git diff --cached --quiet; then
+            echo "No data changes."
+          else
+            git commit -m "Automated media data refresh"
+            git push
+          fi

@@ -419,6 +419,38 @@
   .conn-item:hover{background:#2b2216;}
   .conn-empty{font-family:var(--font-mono); font-size:0.75rem; color:var(--muted); font-style:italic;}
 
+  /* ---------------- MEDIA BLOCK (poster/ratings/blurb/streaming) ---------------- */
+  .media-block{margin:1rem 0 0.2rem;}
+  .media-poster-wrap{position:relative; margin-bottom:1rem; overflow:hidden; border-radius:4px; border:1px solid var(--hairline-bright);}
+  .media-poster-wrap::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(180deg, rgba(242,121,11,0.22), rgba(19,16,9,0.4) 88%);
+    mix-blend-mode:multiply;
+  }
+  .media-poster{
+    width:100%; display:block;
+    filter:sepia(0.35) saturate(1.5) hue-rotate(-8deg) contrast(1.08) brightness(0.9);
+  }
+  .media-ratings{display:flex; gap:0.5rem; margin-bottom:0.9rem; flex-wrap:wrap;}
+  .rating-badge{
+    font-family:var(--font-mono); font-size:0.72rem; padding:0.3rem 0.6rem;
+    border:1px solid var(--hairline-bright); border-radius:3px; color:var(--parchment);
+    background:var(--panel-raised);
+  }
+  .rating-badge.rating-tmdb{border-color:var(--amber); color:var(--amber-bright);}
+  .rating-badge.rating-imdb{border-color:#F5C518; color:#F5C518;}
+  .rating-badge.rating-none{color:var(--muted); font-style:italic;}
+  .media-overview{font-size:0.88rem; line-height:1.55; color:var(--parchment); margin:0 0 1rem;}
+  .watch-btn{
+    display:flex; align-items:center; gap:0.6rem; padding:0.6rem 0.9rem;
+    border-radius:4px; text-decoration:none; color:#fff; font-family:var(--font-sans);
+    font-size:0.85rem; font-weight:600; margin-bottom:0.4rem; border:1px solid rgba(255,255,255,0.15);
+    transition:filter .15s;
+  }
+  .watch-btn:hover{filter:brightness(1.15);}
+  .watch-logo{width:24px; height:24px; border-radius:4px; background:#fff; object-fit:contain; padding:2px; flex:none;}
+  .media-attribution{font-family:var(--font-mono); font-size:0.65rem; color:var(--muted); margin:0 0 1.2rem;}
+
   .backdrop{
     position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:45;
     opacity:0; pointer-events:none; transition:opacity .25s;
@@ -507,6 +539,7 @@
   <div class="detail-eyebrow" id="detailEyebrow">FORMAT</div>
   <h2 class="detail-title" id="detailTitle">Title</h2>
   <div class="detail-studio"><span class="sw" id="detailSw"></span><span id="detailStudio"></span></div>
+  <div class="media-block" id="mediaBlock" hidden></div>
   <div class="conn-section-title">Leads into</div>
   <ul class="conn-list" id="connOut"></ul>
   <div class="conn-section-title">Follows from</div>
