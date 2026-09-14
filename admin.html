@@ -56,6 +56,11 @@
   #staged-list li{margin-bottom:0.25rem;}
   hr.rule{border:none; border-top:1px solid var(--border); margin:1.1rem 0;}
   .badge{display:inline-block; background:var(--accent); color:#fff; border-radius:10px; padding:0.05rem 0.5rem; font-size:0.72rem; margin-left:0.3rem;}
+  .modal-overlay{position:fixed; inset:0; background:rgba(20,22,26,0.5); display:flex; align-items:center; justify-content:center; z-index:100; padding:1rem;}
+  .modal-box{background:#fff; border-radius:10px; padding:1.6rem; max-width:400px; width:100%; text-align:center; box-shadow:0 16px 48px rgba(0,0,0,0.3);}
+  .modal-icon{width:48px; height:48px; border-radius:50%; background:var(--ok); color:#fff; font-size:1.4rem; line-height:48px; margin:0 auto 0.9rem;}
+  .modal-box p{margin:0 0 1rem; font-size:0.92rem;}
+  .modal-actions{display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap;}
 </style>
 </head>
 <body>
@@ -172,7 +177,7 @@
       <div id="staged-list"><p class="hint">Nothing staged yet.</p></div>
       <div id="publish-controls" hidden>
         <hr class="rule">
-        <p class="hint">Committing pushes the updated data straight to GitHub, which redeploys the live site automatically (usually under a minute). The token is used only for this request and never stored anywhere — a fine-grained token scoped to just this repo with <strong>Contents: Read and write</strong> is enough.</p>
+        <p class="hint">Committing pushes the updated data straight to GitHub, which redeploys the live site automatically (usually under a minute). The token is used only for this request and never stored anywhere — a fine-grained token scoped to just this repo with <strong>Contents: Read and write</strong> is enough. If you also want to use the "Refresh media data now" option after committing (fetches ratings/poster/blurb for anything you just added, instead of waiting for the weekly schedule), your token needs <strong>Actions: Read and write</strong> too.</p>
         <label for="gh-token">GitHub token</label>
         <div class="row">
           <input id="gh-token" type="password" autocomplete="off">
@@ -182,6 +187,18 @@
         <p class="msg" id="publish-msg"></p>
       </div>
     </section>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-overlay" hidden>
+  <div class="modal-box">
+    <div class="modal-icon">✓</div>
+    <p id="modal-message"></p>
+    <div class="modal-actions">
+      <button type="button" id="modal-refresh-btn">Refresh media data now</button>
+      <button type="button" class="secondary" id="modal-close-btn">Close</button>
+    </div>
+    <p class="msg" id="modal-submsg"></p>
   </div>
 </div>
 

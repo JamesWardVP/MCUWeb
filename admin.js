@@ -352,6 +352,59 @@
     return putRes.json();
   }
 
+  // Fires the same workflow_dispatch trigger as the "Run workflow" button on
+  // GitHub's Actions tab — reuses the just-used token, so it only works if
+  // that token also has "Actions: Read and write" (Contents alone isn't
+  // enough for this endpoint).
+  async function triggerWorkflow(workflowFile, token){
+    const url = `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${workflowFile}/dispatches`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ref: 'main' })
+    });
+    if (!res.ok){
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.message || `Trigger failed (HTTP ${res.status})`);
+    }
+  }
+
+  /* ---------------- success modal ---------------- */
+  let pendingToken = null; // held only transiently, for the optional "refresh now" click; cleared on modal close
+
+  function showModal(message){
+    $('modal-message').textContent = message;
+    $('modal-submsg').className = 'msg';
+    $('modal-submsg').textContent = '';
+    $('modal-refresh-btn').disabled = false;
+    $('modal-refresh-btn').textContent = 'Refresh media data now';
+    $('modal-overlay').hidden = false;
+  }
+  function closeModal(){
+    $('modal-overlay').hidden = true;
+    pendingToken = null;
+  }
+  $('modal-close-btn').addEventListener('click', closeModal);
+  $('modal-overlay').addEventListener('click', e => { if (e.target.id === 'modal-overlay') closeModal(); });
+
+  $('modal-refresh-btn').addEventListener('click', async () => {
+    const submsg = $('modal-submsg');
+    if (!pendingToken){ closeModal(); return; }
+    $('modal-refresh-btn').disabled = true;
+    submsg.className = 'msg';
+    submsg.textContent = 'Triggering…';
+    try {
+      await triggerWorkflow('refresh-media-data.yml', pendingToken);
+      submsg.className = 'msg ok';
+      submsg.textContent = 'Triggered — check the Actions tab on GitHub for progress (usually a minute or two).';
+      $('modal-refresh-btn').textContent = 'Triggered ✓';
+    } catch (err) {
+      submsg.className = 'msg error';
+      submsg.textContent = 'Failed: ' + err.message + ' — your token may need "Actions: Read and write" permission too.';
+      $('modal-refresh-btn').disabled = false;
+    }
+  });
+
   $('commit-btn').addEventListener('click', async () => {
     const token = $('gh-token').value.trim();
     const msg = $('publish-msg');
@@ -366,6 +419,8 @@
       msg.textContent = 'Committed. GitHub Pages will redeploy the live site in about a minute.';
       state.staged = [];
       renderStaged();
+      pendingToken = token;
+      showModal('Committed successfully. GitHub Pages will redeploy the live site in about a minute.');
     } catch (err) {
       msg.className = 'msg error';
       msg.textContent = 'Failed: ' + err.message;
