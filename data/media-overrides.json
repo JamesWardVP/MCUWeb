@@ -10,5 +10,9 @@
   "runaways-s2-dec-2018": {
     "tmdbId": 67466,
     "mediaType": "tv"
+  },
+  "spiderman-into-the-spider-verse": {
+    "tmdbId": 324857,
+    "mediaType": "movie"
   }
 }
