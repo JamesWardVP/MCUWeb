@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-12T11:17:57.2467133Z",
+  "generatedAt": "2026-10-19T09:17:05.2014244Z",
   "region": "GB",
   "entries": {
     "blade-1998": {
@@ -1394,7 +1394,8 @@
       "imdbId": null,
       "imdbRating": null,
       "watch": null,
-      "fetchedAt": "2026-09-14T13:05:36.4275247Z"
+      "manualMatch": false,
+      "fetchedAt": "2026-10-19T09:17:01.2268631Z"
     },
     "agents-of-s-h-i-e-l-d-s5-eps-1-19-dec-2017-may-2018": {
       "slug": "agents-of-s-h-i-e-l-d-s5-eps-1-19-dec-2017-may-2018",
@@ -1721,7 +1722,8 @@
       "imdbId": null,
       "imdbRating": null,
       "watch": null,
-      "fetchedAt": "2026-09-14T13:05:42.8123744Z"
+      "manualMatch": false,
+      "fetchedAt": "2026-10-19T09:17:01.6216828Z"
     },
     "captain-marvel-mar-2019": {
       "slug": "captain-marvel-mar-2019",
@@ -2916,14 +2918,15 @@
       "tmdbId": 213375,
       "title": "VisionQuest",
       "overview": "With a bounty on his head, Vision must confront his nature and resist Ultron's influence to survive.",
-      "poster": "https://image.tmdb.org/t/p/w500/xK27l5uwaVyZSlENWnmLlWwDQNS.jpg",
-      "releaseDate": "2026-10-14",
-      "tmdbRating": 0.0,
-      "tmdbVoteCount": 0,
+      "poster": "https://image.tmdb.org/t/p/w500/WGyAyBPncfuu8MZhLY9RtfZPM0.jpg",
+      "releaseDate": "2026-10-13",
+      "tmdbRating": 8.841,
+      "tmdbVoteCount": 107,
       "imdbId": "tt23112594",
       "imdbRating": null,
       "watch": null,
-      "fetchedAt": "2026-09-14T13:06:07.9744472Z"
+      "manualMatch": false,
+      "fetchedAt": "2026-10-19T09:17:02.5334044Z"
     },
     "x-men-97-s2-2026": {
       "slug": "x-men-97-s2-2026",
@@ -2974,17 +2977,18 @@
       "overview": "As Frank Castle searches for meaning beyond revenge, an unexpected force pulls him back into the fight.",
       "poster": "https://image.tmdb.org/t/p/w500/qQclTgLMDvGBuUBFGHRipxkEwWR.jpg",
       "releaseDate": "2026-05-12",
-      "tmdbRating": 8.277,
-      "tmdbVoteCount": 2215,
+      "tmdbRating": 8.257,
+      "tmdbVoteCount": 2346,
       "imdbId": "tt36042156",
       "imdbRating": null,
       "watch": {
-        "link": "https://www.themoviedb.org/movie/1439930-the-punisher-one-last-kill/watch?locale=GB",
-        "provider": "Disney Plus",
         "logo": "https://image.tmdb.org/t/p/w92/5eZ872CghnHFLB1j8grszbrx0dx.png",
-        "type": "flatrate"
+        "type": "flatrate",
+        "link": "https://www.themoviedb.org/movie/1439930-the-punisher-one-last-kill/watch?locale=GB",
+        "provider": "Disney Plus"
       },
-      "fetchedAt": "2026-09-14T13:06:09.3072504Z"
+      "manualMatch": false,
+      "fetchedAt": "2026-10-19T09:17:03.1601423Z"
     },
     "daredevil-born-again-s2-2026": {
       "slug": "daredevil-born-again-s2-2026",
@@ -3040,29 +3044,24 @@
       "overview": "Fighting crime full-time as Spider-Man in a world that doesn't remember him—and the pressure of seeing his old friends move on without him—sparks a change in Peter Parker he may not have the power to control. But that transformation might also be the only thing that can stop a shocking new threat to the city and those he loves - a powerful villain no one can even see.",
       "poster": "https://image.tmdb.org/t/p/w500/bjiS5ipwxb9JFy3XRRN4OAilSeX.jpg",
       "releaseDate": "2026-07-29",
-      "tmdbRating": 7.848,
-      "tmdbVoteCount": 2659,
+      "tmdbRating": 8.468,
+      "tmdbVoteCount": 5723,
       "imdbId": "tt22084616",
-      "imdbRating": 8.1,
-      "watch": null,
-      "fetchedAt": "2026-09-14T13:06:10.7476231Z"
+      "imdbRating": 8.0,
+      "watch": {
+        "logo": "https://image.tmdb.org/t/p/w92/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+        "type": "rent",
+        "link": "https://www.themoviedb.org/movie/969681-spider-man-brand-new-day/watch?locale=GB",
+        "provider": "Apple TV Store"
+      },
+      "manualMatch": false,
+      "fetchedAt": "2026-10-19T09:17:03.7820079Z"
     },
     "avengers-endgame-encore-re-release-sep-25-2026": {
       "slug": "avengers-endgame-encore-re-release-sep-25-2026",
       "label": "Avengers: Endgame Encore (re-release, Sep 25 2026)",
-      "matched": true,
-      "mediaType": "movie",
-      "tmdbId": 1769545,
-      "title": "Avengers Endgame: Encore",
-      "overview": "The epic conclusion to the Infinity Saga returns to theaters as Avengers Endgame:Encore. After devastating events wiped out half the world's population, the remaining heroes struggle to move forward. Ultimately, they must come together to restore order and harmony in the universe and bring their loved ones back in a dramatic showdown against Thanos",
-      "poster": "https://image.tmdb.org/t/p/w500/olqtXZyE2TS5z1ODi2pmwd4OkqH.jpg",
-      "releaseDate": "",
-      "tmdbRating": 0.0,
-      "tmdbVoteCount": 0,
-      "imdbId": null,
-      "imdbRating": null,
-      "watch": null,
-      "fetchedAt": "2026-09-14T13:06:11.1369916Z"
+      "matched": false,
+      "fetchedAt": "2026-10-19T09:17:04.3272017Z"
     },
     "avengers-doomsday-dec-18-2026": {
       "slug": "avengers-doomsday-dec-18-2026",
@@ -3072,14 +3071,15 @@
       "tmdbId": 1003596,
       "title": "Avengers: Doomsday",
       "overview": "Beloved heroes from three distinct universes are set on a deadly collision course and face an existential threat unlike anything they've ever encountered.",
-      "poster": "https://image.tmdb.org/t/p/w500/cWXtJhrlruF8CeYuaBGE8vdj3Q9.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/jzPwsojjFStf5lR5Nm07w2hH56G.jpg",
       "releaseDate": "2026-12-16",
       "tmdbRating": 0.0,
       "tmdbVoteCount": 0,
       "imdbId": "tt21357150",
       "imdbRating": null,
       "watch": null,
-      "fetchedAt": "2026-09-14T13:06:11.5902219Z"
+      "manualMatch": false,
+      "fetchedAt": "2026-10-19T09:17:04.9497324Z"
     },
     "daredevil-born-again-s3-2027": {
       "slug": "daredevil-born-again-s3-2027",
